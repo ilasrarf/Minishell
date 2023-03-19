@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/18 00:44:14 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/03/19 18:15:59 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,7 @@ char					*ft_strdup(const char *str);
 void					*ft_calloc(size_t count, size_t size);
 void					ft_bzero(void *s, size_t n);
 void					*ft_memset(void *s, int c, size_t n);
-
+char	*ft_strjoin(char const *s1, char const *s2);
+// parsing
+t_lexer    *ft_parser(t_lexer *lex);
 #endif

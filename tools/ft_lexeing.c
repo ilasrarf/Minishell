@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:57:32 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/18 00:53:48 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/03/19 17:51:28 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,6 @@ int	ft_check_quotes(char *str)
 
 void	ft_lexer(char *str, t_lexer **lex)
 {
-	char	*holder;
-
-	holder = str;
 	while (*str)
 	{
 		if (!ft_check_herdoc_fm(str) && *str != ' ' && *str != '\''

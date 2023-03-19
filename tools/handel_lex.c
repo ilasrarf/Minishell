@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 18:37:52 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/19 15:54:03 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/03/19 17:55:40 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	ft_handel_herdoc_fm(t_lexer **lex, char **str)
 	}
 	else if ((*str)[i] == '>')
 	{
-		ft_lstadd_back(lex, ft_lstnew(ft_strdup(">"),0000));
+		ft_lstadd_back(lex, ft_lstnew(ft_strdup(">"),'o',0));
 		i++;
 	}
 	*str += i;
@@ -85,7 +85,7 @@ void	ft_handel_qoutes(t_lexer **lex, char **str)
 		i++;
 		while ((*str)[i] != '"')
 			i++;
-		ft_lstadd_back(lex, ft_lstnew(ft_substr(*str, 1, i - 1),'w',1));
+		ft_lstadd_back(lex, ft_lstnew(ft_substr(*str, 1, i - 1),'w',2));
 		i++;
 	}
 	else
