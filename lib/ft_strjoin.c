@@ -1,27 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/23 17:49:44 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/18 00:48:53 by ilasrarf         ###   ########.fr       */
+/*   Created: 2022/10/17 22:08:15 by ilasrarf          #+#    #+#             */
+/*   Updated: 2023/03/19 18:30:44 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_lexer	*ft_lstnew(void *word, char type, int in_quotes)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	t_lexer	*n1;
+	char	*alloc;
+	size_t	i;
+	size_t	j;
 
-	n1 = ft_calloc(1, sizeof(t_lexer));
-	if (n1)
+	if (!s1 || !s2)
+		return (0);
+	i = 0;
+	j = 0;
+	alloc = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!alloc)
+		return (0);
+	while (s1[i])
 	{
-		n1->word = word;
-		n1->type = type;
-		n1->in_quotes = in_quotes;
+		alloc[i] = s1[i];
+		i++;
 	}
-	return (n1);
+	while (s2[j])
+	{
+		alloc[i] = s2[j];
+		j++;
+		i++;
+	}
+	free((void *)s1);
+	alloc[i] = '\0';
+	return (alloc);
 }
