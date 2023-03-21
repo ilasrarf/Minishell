@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 18:37:52 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/19 17:55:40 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/03/21 02:00:36 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,18 @@
 void	ft_handel_char(t_lexer **lex, char **str)
 {
 	int	i;
+	char *hold;
 
+	hold = ft_strdup("");
 	i = 0;
 	while ((*str)[i] && !ft_check_herdoc_fm(*str + i) && (*str)[i] != ' '
-		&& (*str)[i] != '\'' && (*str)[i] != '"' && (*str)[i] != '|'
-		&& (*str)[i] != '$')
+		&& (*str)[i] != '|' && (*str)[i] != '$')
+	{
+		if((*str)[i] != '"' && (*str)[i] != '\'')
+			hold = ft_strjoin_char(hold , (*str)[i]);
 		i++;
-	ft_lstadd_back(lex, ft_lstnew(ft_substr(*str, 0, i),'w',0));
+	}
+	ft_lstadd_back(lex, ft_lstnew(hold,'w',0));
 	*str += i;
 }
 

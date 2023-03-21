@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 19:47:06 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/20 19:00:10 by ilasrarf         ###   ########.fr       */
+/*   Created: 2022/10/23 22:31:09 by ilasrarf          #+#    #+#             */
+/*   Updated: 2023/03/21 02:27:41 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	*ft_strdup(const char *str)
+void	ft_lstdelone(t_parser *lst)
 {
-	char	*alloc;
-	size_t	i;
-	size_t	str_len;
+	int i;
 
-	str_len = ft_strlen(str);
 	i = 0;
-	alloc = (char *)malloc((str_len + 1) * sizeof(char));
-	if (!alloc)
-		return (0);
-	return (ft_memcpy(alloc, str, str_len + 1));
+	if (!lst)
+		return ;
+	while (lst->args[i])
+	{
+		free(lst->args[i]);
+		i++;
+	}
+	free(lst->args);
+	free(lst);
+}
+
+void	ft_lstdelone_lex(t_lexer *lst)
+{
+	if (!lst)
+		return ;
+	free(lst->word);
+	free(lst);
 }
