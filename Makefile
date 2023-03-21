@@ -6,7 +6,7 @@
 #    By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 18:13:02 by ilasrarf          #+#    #+#              #
-#    Updated: 2023/03/19 18:16:41 by ilasrarf         ###   ########.fr        #
+#    Updated: 2023/03/20 22:09:57 by ilasrarf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,13 @@ SRC = minishell.c \
 	  lib/ft_calloc.c \
 	  lib/ft_bzero.c \
 	  lib/ft_memset.c \
-	  lib/ft_strjoin.c\
+	  lib/ft_strjoin.c \
+	  lib/ft_lst_new_prs.c \
+	  lib/ft_lstadd_back_prs.c \
 	  parsing/ft_parser.c \
+	  lib/ft_lstdelone.c \
+	  lib/ft_lstclear.c \
+	  
 	  
 
 SRC_O =  ${SRC:.c=.o}
