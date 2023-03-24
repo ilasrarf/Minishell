@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/21 01:56:09 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/03/23 23:43:45 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+# include <fcntl.h>
 
 typedef struct s_lexeing
 {
@@ -33,9 +34,9 @@ typedef struct s_parser
 	char			**args;
 	char			*in_red;
 	char			*out_red;
+	int				*fd;
 	struct s_parser *next;
 }					t_parser;
-
 
 // lexer functions
 int		ft_check_quotes(char *str);
@@ -60,14 +61,17 @@ void	*ft_calloc(size_t count, size_t size);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memset(void *s, int c, size_t n);
 char	*ft_strjoin(char *s1, char *s2);
-t_parser	*ft_lst_new_prs(char **str);
+t_parser	*ft_lst_new_prs(char **str, char *in , char *out, int *fd);
 void	ft_lstadd_back_prs(t_parser **lst, t_parser *new);
 void	ft_lstclear(t_parser **lst);
 void	ft_lstdelone(t_parser *lst);
 void	ft_lstdelone_lex(t_lexer *lst);
 void	ft_lstclear_lex(t_lexer **lst);
 char	*ft_strjoin_char(char *s1, char s2);
+int	ft_strcmp(char *s1, char *s2);
 
 // parsing
 void    ft_parser(t_lexer *lex, t_parser **prs);
+int		ft_check_in_out_snt(t_lexer *lex);
+int 	ft_count_heredoc(t_lexer *lex);
 #endif

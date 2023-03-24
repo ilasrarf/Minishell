@@ -6,7 +6,7 @@
 #    By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 18:13:02 by ilasrarf          #+#    #+#              #
-#    Updated: 2023/03/20 22:09:57 by ilasrarf         ###   ########.fr        #
+#    Updated: 2023/03/21 22:22:33 by ilasrarf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,8 @@ SRC = minishell.c \
 	  parsing/ft_parser.c \
 	  lib/ft_lstdelone.c \
 	  lib/ft_lstclear.c \
+	  lib/ft_strcmp.c \
+	  parsing/prs_tools.c \
 	  
 	  
 
@@ -38,7 +40,7 @@ SRC_O =  ${SRC:.c=.o}
 
 NAME = minishell
 CC = cc
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g
 RM = rm -rf
 
 all: ${NAME}

@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/21 02:25:38 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/03/23 23:54:22 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(void)
 	char	*holder;
 	t_lexer	*lex;
 	t_parser *prs;
-	
+
 	prs = NULL;
 	while (1)
 	{
@@ -39,7 +39,6 @@ int	main(void)
 		// 	printf("%c \n", lex->type);
 		// 	lex = lex->next;
 		// }
-		
 		free(holder);
 		ft_parser(lex, &prs);
 	}

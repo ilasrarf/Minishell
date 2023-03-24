@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lst_new_prs.c                                   :+:      :+:    :+:   */
+/*   ft_strcmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/20 20:47:57 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/23 23:43:06 by ilasrarf         ###   ########.fr       */
+/*   Created: 2022/10/08 11:23:49 by ilasrarf          #+#    #+#             */
+/*   Updated: 2023/03/21 21:22:50 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_parser	*ft_lst_new_prs(char **str, char *in , char *out, int *fd)
+int	ft_strcmp(char *s1, char *s2)
 {
-    t_parser *n1;
-    
-    n1 = malloc(sizeof(t_parser));
-	if (n1)
-    {
-        n1->args = str;
-        n1->in_red = in;
-        n1->out_red = out;
-        n1->fd = fd;
-        n1->next = NULL;
-    }
-	return (n1);
+	size_t			i;
+	unsigned char	*ss1;
+	unsigned char	*ss2;
+
+	ss1 = (unsigned char *)s1;
+	ss2 = (unsigned char *)s2;
+	i = 0;
+	while ((ss1[i] != '\0' || ss2[i] != '\0'))
+	{
+		if (ss1[i] < ss2[i])
+			return (-1);
+		else if (ss1[i] > ss2[i])
+			return (1);
+		i++;
+	}
+	return (0);
 }
