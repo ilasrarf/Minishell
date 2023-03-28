@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 18:37:52 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/21 19:09:43 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/03/28 01:35:03 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,18 @@ void	ft_handel_var(t_lexer **lex, char **str)
 	}
 	else
 	{
-		while ((*str)[i] && ft_isalpha((*str)[i]))
+		if (ft_isdigit((*str)[i]))
+		{
 			i++;
-		ft_lstadd_back(lex, ft_lstnew(ft_substr(*str, 0, i), 'v', 0));
+			ft_lstadd_back(lex, ft_lstnew(ft_substr(*str, 0, i), 'v', 0));
+		}
+		else
+		{
+			while ((*str)[i] && ft_isalpha((*str)[i]))
+				i++;
+			ft_lstadd_back(lex, ft_lstnew(ft_substr(*str, 0, i), 'v', 0));
+		}
+		
 	}
 	*str += i;
 }
@@ -88,7 +97,7 @@ void	ft_handel_qoutes(t_lexer **lex, char **str)
 	if ((*str)[i] == '"')
 	{
 		i++;
-		while ((*str)[i] != '"')
+		while ((*str)[i] && (*str)[i] != '"')
 			i++;
 		ft_lstadd_back(lex, ft_lstnew(ft_substr(*str, 1, i - 1), 'w', 2));
 		i++;
@@ -96,7 +105,7 @@ void	ft_handel_qoutes(t_lexer **lex, char **str)
 	else
 	{
 		i++;
-		while ((*str)[i] != '\'')
+		while ((*str)[i] && (*str)[i] != '\'')
 			i++;
 		ft_lstadd_back(lex, ft_lstnew(ft_substr(*str, 1, i - 1), 'w', 1));
 		i++;

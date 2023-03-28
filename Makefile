@@ -6,7 +6,7 @@
 #    By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 18:13:02 by ilasrarf          #+#    #+#              #
-#    Updated: 2023/03/21 22:22:33 by ilasrarf         ###   ########.fr        #
+#    Updated: 2023/03/27 00:06:53 by ilasrarf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRC = minishell.c \
 	  lib/ft_substr.c \
 	  lib/ft_lstnew.c \
 	  lib/ft_lstadd_back.c \
+	  lib/ft_itoa.c \
 	  lib/ft_strdup.c \
 	  lib/ft_strlen.c \
 	  lib/ft_memcpy.c \
@@ -31,15 +32,17 @@ SRC = minishell.c \
 	  parsing/ft_parser.c \
 	  lib/ft_lstdelone.c \
 	  lib/ft_lstclear.c \
+	  lib/ft_putstr_fd.c \
 	  lib/ft_strcmp.c \
 	  parsing/prs_tools.c \
+	  parsing/prs_tools1.c \
 	  
 	  
 
 SRC_O =  ${SRC:.c=.o}
 
 NAME = minishell
-CC = cc
+CC = cc -g 
 FLAGS = -Wall -Werror -Wextra -g
 RM = rm -rf
 

@@ -6,128 +6,118 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:23:37 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/24 00:29:08 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/03/28 02:06:11 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_count_arg(t_lexer *lex)
+int	ft_out_open(t_lexer **lex, char **out_red)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (lex)
-	{
-		if ((lex->word[0] == '|' && lex->in_quotes == 0))
-			return (i - j);
-		if (lex->word[0] != ' ')
-			i++;
-		if (ft_check_herdoc_fm(lex->word))
-			j++;
-		lex = lex->next;
-	}
-	return (i - j);
+	*lex = (*lex)->next;
+	if (!ft_strcmp((*lex)->word, " "))
+		*lex = (*lex)->next;
+	free(*out_red);
+	*out_red = ft_strdup((*lex)->word);
+	return (open((*lex)->word, O_CREAT | O_RDWR, 0777));
 }
 
-
-
-int    *ft_fill_heredoc_fm(t_lexer **lex, char **in_red, char **out_red, int n)
+int	ft_fill_heredoc_fm(t_lexer **lex, int *in, int *out)
 {
-    static int	i;
-	static int	*fd;
-
-	if (!fd)
-		fd = ft_calloc(n + 1, sizeof(int));
-	if (!ft_strcmp((*lex)->word, ">"))
+	if (!ft_strcmp((*lex)->word, "<"))
 	{
-		*lex = (*lex)->next;
+		(*lex) = (*lex)->next;
 		if (!ft_strcmp((*lex)->word, " "))
-			*lex = (*lex)->next;
-		if (n == 1 || i == n)
-			*out_red = ft_strdup((*lex)->word);
-		fd[i] = open((*lex)->word, O_CREAT | O_RDWR, 0777);
+			(*lex) = (*lex)->next;
+		*in = open((*lex)->word, O_RDONLY, 0777);
 	}
-	else
+	else if (!ft_strcmp((*lex)->word, ">"))
 	{
-		*lex = (*lex)->next;
-		if (*lex && !ft_strcmp((*lex)->word, " "))	
-			*lex = (*lex)->next;
-		if (n == 1)
-			*in_red = ft_strdup((*lex)->word);
-		else if (i == n && n != 1)
-		fd[i] = open((*lex)->word, O_CREAT | O_RDWR, 0777);
+		(*lex) = (*lex)->next;
+		if (!ft_strcmp((*lex)->word, " "))
+			(*lex) = (*lex)->next;
+		*out = open((*lex)->word, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	}
-	i++;
-	return (fd);
+	else if (!ft_strcmp((*lex)->word, ">>"))
+	{
+		(*lex) = (*lex)->next;
+		if (!ft_strcmp((*lex)->word, " "))
+			(*lex) = (*lex)->next;
+		*out = open((*lex)->word, O_WRONLY | O_CREAT, 0777);
+	}
+	if (*lex)
+		(*lex) = (*lex)->next;
+	ft_check_next_fd(*lex, *in, *out);
+	return (0);
 }
 
-void	ft_fill_args(t_lexer *lex, t_parser **prs)
+int	ft_fill_args(t_lexer *lex, t_parser **prs, char **env)
 {
 	int		i;
-	int		j;
 	char	**str;
-	static char	*in;
-	static char	*out;
-	int		*fd;
+	int		in;
+	int		out;
+	int		hdc;
 
 	i = ft_count_arg(lex);
-	str = ft_calloc(i + 1 , sizeof(char *));
-	i = ft_count_heredoc(lex);
-	j = 0;
+	str = ft_calloc(i + 1, sizeof(char *));
+	i = 0;
+	in = 0;
+	out = 1;
+	hdc = -1;
 	while (lex)
 	{
-		if (!ft_strcmp(lex->word, "|") && lex->in_quotes == 0)
+		if (lex && !ft_strcmp(lex->word, "|") && lex->in_quotes == 0)
 			break ;
-        if (!ft_strcmp(lex->word, ">") || !ft_strcmp(lex->word, "<"))
-        	fd = ft_fill_heredoc_fm(&lex, &in, &out, i);
-		else if (lex && ft_strcmp(lex->word, " "))
+		if (lex && (!ft_strcmp(lex->word, ">") || !ft_strcmp(lex->word, "<")
+				|| !ft_strcmp(lex->word, ">>")))
+			ft_fill_heredoc_fm(&lex, &in, &out);
+		if (lex && !ft_strcmp(lex->word, "<<"))
+			ft_use_heredoc(&lex, &hdc);
+		if (lex && lex->type == 'v')
+			str[i] = ft_hendel_var(&lex, env);
+		if (lex && lex->type == 'w')
 		{
-			str[j] = ft_strdup(lex->word);
-			j++;
+			str[i] = ft_strdup(lex->word);
+			i++;
 		}
 		if (lex)
 			lex = lex->next;
 	}
-	ft_lstadd_back_prs(prs, ft_lst_new_prs(str,in ,out, fd));
+	ft_lstadd_back_prs(prs, ft_lst_new_prs(str, in, out, hdc));
 	if (lex && !ft_strcmp(lex->word, "|"))
 	{
 		lex = lex->next;
-		ft_fill_args(lex, prs);
+		str = NULL;
+		ft_fill_args(lex, prs, env);
 	}
+	return (0);
 }
 
-void	ft_parser(t_lexer *lex, t_parser **prs)
+void	ft_parser(t_lexer *lex, t_parser **prs, char **env)
 {
 	t_parser	*holder;
 
 	*prs = NULL;
-	if(!ft_check_in_out_snt(lex))
+	if (!ft_check_in_out_snt(lex))
 		return ;
-	ft_fill_args(lex, prs);
+	ft_fill_args(lex, prs, env);
 	holder = (*prs);
-	int			i;
-	while (holder)
-	{
-		i = 0;
-		while (holder->args[i])
-		{
-			printf("args -> %s\n", holder->args[i]);
-			i++;
-		}
-		printf("in -> %s\n", holder->in_red);
-		printf("out -> %s\n", holder->out_red);
-		i = 0;
-		while (holder->fd[i])
-		{
-			printf("fd -> %d\n", holder->fd[i]);
-			i++;
-		}
-		printf("---------\n");
-		holder = holder->next;
-	}
-	// ft_lstclear_lex(&lex);
-	// ft_lstclear(prs);
+	int			i = 0;
+	printf("\n-------------\n");
+	while(holder)
+    {
+        i = 0;
+        while (holder->args[i])
+        {
+            printf("%s\n",holder->args[i]);
+            i++;
+        }
+		printf("in %i\n", holder->in_red);
+		printf("out %i\n", holder->out_red);
+		printf("heredoc %i\n", holder->heredoc);
+        holder = holder->next;
+    }
+	ft_lstclear_lex(&lex);
+	ft_lstclear(prs);
 }
