@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prs_tools1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:12:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/28 02:20:56 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/03/28 06:44:26 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,12 @@ void	ft_check_next_fd(t_lexer *lex, int in, int out)
 	}
 }
 
-void	ft_norm_herdoc(char *str, char *del, char *hold, int fd)
+void	ft_norm_herdoc(t_lexer *lex, char **env, char *hold, int fd)
 {
-	while (ft_strcmp(str, del))
+	char *str;
+
+	str = NULL;
+	while (ft_strcmp(str, lex->word))
 	{
 		str = readline("\e[91mheredoc>  \e[0m");
 		if (!str)
@@ -36,17 +39,22 @@ void	ft_norm_herdoc(char *str, char *del, char *hold, int fd)
 			close(fd);
 			return ;
 		}
-		if (ft_strcmp(str, del))
-			ft_putstr_fd(str, fd);
+		if (lex->in_quotes == 0 && ft_strchr(str, '$'))
+		{
+			ft_putstr_fd(ft_hendel_var(str, env), fd);
+		}
+		else if (ft_strcmp(str, lex->word))
+			ft_putstr_fd(str, fd); 
 		free(str);
 	}
 }
-char	*ft_hendel_var(t_lexer **lex, char **av)
+char	*ft_hendel_var(char *val, char **av)
 {
     int i;
 
     i = 0;
-    while (av[i] && strncmp(av[i], (*lex)->word, 4))
+    while (av[i] && strncmp(av[i], val + 1, ft_strlen(val) - 1))
         i++;
-    return av[i];
+	printf("%s\n",val);
+    return av[i] + ft_strlen(val);
 }

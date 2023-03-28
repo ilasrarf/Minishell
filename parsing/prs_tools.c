@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prs_tools.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:16:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/28 02:00:30 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/03/28 06:09:07 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_check_in_out_snt(t_lexer *lex)
 		{
 			if (lex->next && !ft_strcmp(lex->next->word, " "))
 				lex = lex->next;
-			if (!lex->next || (lex->next->type != 'w'))
+			if (!lex->next || (lex->next->type != 'w' && lex->next->type != 'v'))
 			{
 				printf("syntax error near unexpected token `%s'\n", lex->word);
 				ft_lstclear_lex(&lex);
@@ -78,10 +78,8 @@ void	ft_inial(t_norm *var, t_lexer *lex)
 	var->j = 0;
 }
 
-void	ft_use_heredoc(t_lexer **lex, int *fd)
+void	ft_use_heredoc(t_lexer **lex, char **env, int *fd)
 {
-	char		*del;
-	char		*str;
 	char		*hold;
 	static int	i;
 
@@ -93,13 +91,11 @@ void	ft_use_heredoc(t_lexer **lex, int *fd)
 		hold = ft_strjoin("/tmp/heredoc_", ft_itoa(i));
 	}
 	*lex = (*lex)->next;
-	str = NULL;
 	if (!ft_strcmp((*lex)->word, " "))
 		*lex = (*lex)->next;
-	del = (*lex)->word;
 	*fd = open(hold, O_RDWR | O_CREAT, 0777);
 	i++;
-	ft_norm_herdoc(str, del, hold, *fd);
+	ft_norm_herdoc(*lex, env, hold, *fd);
 	free(hold);
 	if (*lex)
 		(*lex) = (*lex)->next;

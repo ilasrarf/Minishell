@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:23:37 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/28 02:06:11 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/03/28 06:44:57 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ int	ft_fill_args(t_lexer *lex, t_parser **prs, char **env)
 				|| !ft_strcmp(lex->word, ">>")))
 			ft_fill_heredoc_fm(&lex, &in, &out);
 		if (lex && !ft_strcmp(lex->word, "<<"))
-			ft_use_heredoc(&lex, &hdc);
+			ft_use_heredoc(&lex, env, &hdc);
 		if (lex && lex->type == 'v')
-			str[i] = ft_hendel_var(&lex, env);
+			str[i] = ft_hendel_var(lex->word, env);
 		if (lex && lex->type == 'w')
 		{
 			str[i] = ft_strdup(lex->word);
@@ -110,7 +110,7 @@ void	ft_parser(t_lexer *lex, t_parser **prs, char **env)
         i = 0;
         while (holder->args[i])
         {
-            printf("%s\n",holder->args[i]);
+            printf("ARGS: %s\n",holder->args[i]);
             i++;
         }
 		printf("in %i\n", holder->in_red);
@@ -118,6 +118,6 @@ void	ft_parser(t_lexer *lex, t_parser **prs, char **env)
 		printf("heredoc %i\n", holder->heredoc);
         holder = holder->next;
     }
-	ft_lstclear_lex(&lex);
-	ft_lstclear(prs);
+	// ft_lstclear_lex(&lex);
+	// ft_lstclear(prs);
 }

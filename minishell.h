@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/28 02:04:30 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/03/28 06:44:39 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void					ft_lstclear_lex(t_lexer **lst);
 char					*ft_strjoin_char(char *s1, char s2);
 int						ft_strcmp(char *s1, char *s2);
 void					ft_putstr_fd(char const *s, int fd);
+int						ft_strchr(char *str, char c);
 
 // parsing
 void					ft_parser(t_lexer *lex, t_parser **prs, char **env);
@@ -90,9 +91,8 @@ int						ft_check_in_out_snt(t_lexer *lex);
 int						ft_count_heredoc(t_lexer *lex);
 int						ft_count_arg(t_lexer *lex);
 void					ft_inial(t_norm *var, t_lexer *lex);
-void					ft_use_heredoc(t_lexer **lex, int *fd);
+void					ft_use_heredoc(t_lexer **lex, char **env, int *fd);
 void					ft_check_next_fd(t_lexer *lex, int in, int out);
-void					ft_norm_herdoc(char *str, char *del, char *hold,
-							int fd);
-char	*ft_hendel_var(t_lexer **lex, char **av);
+void					ft_norm_herdoc(t_lexer *lex, char **env, char *hold, int fd);
+char					*ft_hendel_var(char *val, char **av);
 #endif
