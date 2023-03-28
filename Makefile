@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+         #
+#    By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 18:13:02 by ilasrarf          #+#    #+#              #
-#    Updated: 2023/03/20 22:09:57 by ilasrarf         ###   ########.fr        #
+#    Updated: 2023/03/28 06:06:34 by aen-naas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRC = minishell.c \
 	  lib/ft_substr.c \
 	  lib/ft_lstnew.c \
 	  lib/ft_lstadd_back.c \
+	  lib/ft_itoa.c \
 	  lib/ft_strdup.c \
 	  lib/ft_strlen.c \
 	  lib/ft_memcpy.c \
@@ -31,14 +32,19 @@ SRC = minishell.c \
 	  parsing/ft_parser.c \
 	  lib/ft_lstdelone.c \
 	  lib/ft_lstclear.c \
+	  lib/ft_putstr_fd.c \
+	  lib/ft_strcmp.c \
+	  lib/ft_strchr.c \
+	  parsing/prs_tools.c \
+	  parsing/prs_tools1.c \
 	  
 	  
 
 SRC_O =  ${SRC:.c=.o}
 
 NAME = minishell
-CC = cc
-FLAGS = -Wall -Werror -Wextra
+CC = cc -g 
+FLAGS = -Wall -Werror -Wextra -g
 RM = rm -rf
 
 all: ${NAME}

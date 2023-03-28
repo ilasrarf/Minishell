@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back_prs.c                               :+:      :+:    :+:   */
+/*   ft_strcmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/20 20:55:05 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/24 02:13:10 by ilasrarf         ###   ########.fr       */
+/*   Created: 2022/10/08 11:23:49 by ilasrarf          #+#    #+#             */
+/*   Updated: 2023/03/21 21:22:50 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_lstadd_back_prs(t_parser **lst, t_parser *new)
+int	ft_strcmp(char *s1, char *s2)
 {
-	t_parser	*temp;
+	size_t			i;
+	unsigned char	*ss1;
+	unsigned char	*ss2;
 
-	if (!new || !lst)
-		return ;
-	temp = *lst;
-	if (!*lst)
+	ss1 = (unsigned char *)s1;
+	ss2 = (unsigned char *)s2;
+	i = 0;
+	if (!s1)
+		return (1);
+	while ((ss1[i] != '\0' || ss2[i] != '\0'))
 	{
-		*lst = new;
-		return ;
+		if (ss1[i] < ss2[i])
+			return (-1);
+		else if (ss1[i] > ss2[i])
+			return (1);
+		i++;
 	}
-	while (temp->next)
-		temp = temp->next;
-	temp->next = new;
+	return (0);
 }

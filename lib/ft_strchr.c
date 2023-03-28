@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back_prs.c                               :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/20 20:55:05 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/24 02:13:10 by ilasrarf         ###   ########.fr       */
+/*   Created: 2023/03/28 06:04:46 by aen-naas          #+#    #+#             */
+/*   Updated: 2023/03/28 06:20:39 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_lstadd_back_prs(t_parser **lst, t_parser *new)
+int	ft_strchr(char *str, char c)
 {
-	t_parser	*temp;
+	int i;
 
-	if (!new || !lst)
-		return ;
-	temp = *lst;
-	if (!*lst)
+	i = 0;
+	while (str && str[i])
 	{
-		*lst = new;
-		return ;
+		if (str[i] == c)
+			return 1;
+		i++;
 	}
-	while (temp->next)
-		temp = temp->next;
-	temp->next = new;
+	return 0;
 }

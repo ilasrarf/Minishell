@@ -3,23 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/21 02:25:38 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/03/28 06:20:11 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(void)
+int	main(int ac, char **av, char **env)
 {
-	char	*str;
-	char	*holder;
-	t_lexer	*lex;
-	t_parser *prs;
-	
+	char		*str;
+	char		*holder;
+	t_lexer		*lex;
+	t_parser	*prs;
+
 	prs = NULL;
+	(void)ac;
+	(void)av;
 	while (1)
 	{
 		str = readline("\e[91mMinishell$ \e[0m");
@@ -32,15 +34,7 @@ int	main(void)
 			exit(1);
 		}
 		ft_lexer(str, &lex);
-		// while (lex)
-		// {
-		// 	printf("%s ", lex->word);
-		// 	printf("%i ", lex->in_quotes);
-		// 	printf("%c \n", lex->type);
-		// 	lex = lex->next;
-		// }
-		
 		free(holder);
-		ft_parser(lex, &prs);
+		ft_parser(lex, &prs, env);
 	}
 }

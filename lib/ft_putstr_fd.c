@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back_prs.c                               :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/20 20:55:05 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/24 02:13:10 by ilasrarf         ###   ########.fr       */
+/*   Created: 2022/10/19 15:02:42 by ilasrarf          #+#    #+#             */
+/*   Updated: 2023/03/25 03:30:51 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_lstadd_back_prs(t_parser **lst, t_parser *new)
+void	ft_putstr_fd(char const *s, int fd)
 {
-	t_parser	*temp;
-
-	if (!new || !lst)
-		return ;
-	temp = *lst;
-	if (!*lst)
-	{
-		*lst = new;
-		return ;
-	}
-	while (temp->next)
-		temp = temp->next;
-	temp->next = new;
+	while (s && s[0])
+		write(fd, s++, 1);
 }

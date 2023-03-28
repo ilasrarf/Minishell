@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:57:32 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/21 02:30:21 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/03/24 02:16:21 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ void	ft_lexer(char *str, t_lexer **lex)
 	*lex = NULL;
 	while (*str)
 	{
-		if (!ft_check_herdoc_fm(str) && *str != ' ' && 
-			*str != '|' && *str != '$')
+		if (!ft_check_herdoc_fm(str) && *str != ' ' && *str != '|'
+			&& *str != '$')
 			ft_handel_char(lex, &str);
 		else if (*str == ' ')
 		{
@@ -74,7 +74,7 @@ void	ft_lexer(char *str, t_lexer **lex)
 			ft_handel_var(lex, &str);
 		else if (*str == '|')
 		{
-			ft_lstadd_back(lex, ft_lstnew(ft_strdup("|"),'p', 0));
+			ft_lstadd_back(lex, ft_lstnew(ft_strdup("|"), 'p', 0));
 			str++;
 		}
 		else if (ft_check_herdoc_fm(str))

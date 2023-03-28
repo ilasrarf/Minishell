@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 22:08:15 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/21 01:55:43 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/03/28 00:57:07 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ char	*ft_strjoin(char *s1, char *s2)
 		j++;
 		i++;
 	}
-	// free(s1);
 	alloc[i] = '\0';
 	return (alloc);
 }
