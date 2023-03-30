@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 18:37:52 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/28 01:35:03 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/03/29 03:38:06 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,25 @@
 void	ft_handel_char(t_lexer **lex, char **str)
 {
 	int		i;
+	int		j;
 	char	*hold;
 
 	hold = ft_strdup("");
 	i = 0;
 	while ((*str)[i] && !ft_check_herdoc_fm(*str + i) && (*str)[i] != ' '
-		&& (*str)[i] != '|' && (*str)[i] != '$')
+		&& (*str)[i] != '|')
 	{
 		if ((*str)[i] != '"' && (*str)[i] != '\'')
 			hold = ft_strjoin_char(hold, (*str)[i]);
 		i++;
 	}
-	ft_lstadd_back(lex, ft_lstnew(hold, 'w', 0));
+	j = 0;
+	while ((*str)[j] && (*str)[j] != '$')
+		j++;
+	if ((*str)[j] == '$')
+		ft_lstadd_back(lex, ft_lstnew(hold, 'v', 0));
+	else
+		ft_lstadd_back(lex, ft_lstnew(hold, 'w', 0));
 	*str += i;
 }
 
@@ -92,6 +99,7 @@ void	ft_handel_herdoc_fm(t_lexer **lex, char **str)
 void	ft_handel_qoutes(t_lexer **lex, char **str)
 {
 	int	i;
+	int	j;
 
 	i = 0;
 	if ((*str)[i] == '"')
@@ -99,7 +107,13 @@ void	ft_handel_qoutes(t_lexer **lex, char **str)
 		i++;
 		while ((*str)[i] && (*str)[i] != '"')
 			i++;
-		ft_lstadd_back(lex, ft_lstnew(ft_substr(*str, 1, i - 1), 'w', 2));
+		j = i;
+		while ((*str)[j] && (*str)[j] != '$')
+			j++;
+		if ((*str)[j] == '$')
+			ft_lstadd_back(lex, ft_lstnew(ft_substr(*str, 1, i - 1), 'v', 2));
+		else
+			ft_lstadd_back(lex, ft_lstnew(ft_substr(*str, 1, i - 1), 'w', 2));
 		i++;
 	}
 	else

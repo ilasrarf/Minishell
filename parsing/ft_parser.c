@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:23:37 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/28 06:44:57 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/03/29 21:22:41 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,10 @@ int	ft_fill_args(t_lexer *lex, t_parser **prs, char **env)
 		if (lex && !ft_strcmp(lex->word, "<<"))
 			ft_use_heredoc(&lex, env, &hdc);
 		if (lex && lex->type == 'v')
+		{
 			str[i] = ft_hendel_var(lex->word, env);
+			i++;
+		}
 		if (lex && lex->type == 'w')
 		{
 			str[i] = ft_strdup(lex->word);

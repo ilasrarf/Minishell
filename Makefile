@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+         #
+#    By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 18:13:02 by ilasrarf          #+#    #+#              #
-#    Updated: 2023/03/28 06:06:34 by aen-naas         ###   ########.fr        #
+#    Updated: 2023/03/29 01:25:16 by ilasrarf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRC = minishell.c \
 	  lib/ft_lstclear.c \
 	  lib/ft_putstr_fd.c \
 	  lib/ft_strcmp.c \
+	  lib/ft_strncmp.c \
 	  lib/ft_strchr.c \
 	  parsing/prs_tools.c \
 	  parsing/prs_tools1.c \

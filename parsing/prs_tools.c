@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prs_tools.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:16:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/28 06:09:07 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/03/29 02:10:37 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	ft_check_in_out_snt(t_lexer *lex)
 				lex = lex->next;
 			if (!lex->next || (lex->next->type != 'w' && lex->next->type != 'v'))
 			{
+				if (lex->next)
+					lex = lex->next;
 				printf("syntax error near unexpected token `%s'\n", lex->word);
 				ft_lstclear_lex(&lex);
 				return (0);

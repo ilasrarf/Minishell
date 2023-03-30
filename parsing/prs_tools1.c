@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prs_tools1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:12:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/28 06:44:26 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/03/30 00:42:51 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,70 @@ void	ft_norm_herdoc(t_lexer *lex, char **env, char *hold, int fd)
 		}
 		if (lex->in_quotes == 0 && ft_strchr(str, '$'))
 		{
-			ft_putstr_fd(ft_hendel_var(str, env), fd);
+			ft_putstr_fd(ft_hendel_var_herdoc(str, env), fd);
 		}
 		else if (ft_strcmp(str, lex->word))
 			ft_putstr_fd(str, fd); 
 		free(str);
 	}
 }
+char	*ft_hendel_var_herdoc(char *val, char **av)
+{
+    int		i;
+	int		j;
+	int		len;
+	char	*holder;
+	
+    j = 0;
+	i = 0;
+	while (val[j] && val[j] != '$')
+		j++;
+	len = j;
+	while (val[len] && val[len] != ' ')
+		len++;
+	len -= j;
+	// printf("\n------ %i %s------\n", len, val + j);
+    while (av[i] && ft_strncmp(av[i], val + j + 1, len - 1))
+        i++;
+	if (!av[i])
+		return (ft_strdup(""));
+	if(j > 0)
+    	holder = ft_strjoin(ft_substr(val, 0, j), av[i] + len);
+	else
+		holder = av[i] + len;
+	return (ft_strjoin(holder, val + len + j));
+}
 char	*ft_hendel_var(char *val, char **av)
 {
-    int i;
-
-    i = 0;
-    while (av[i] && strncmp(av[i], val + 1, ft_strlen(val) - 1))
+	int		i;
+	int		j;
+	int		k;
+	int		len;
+	char	*holder;
+	
+    j = 0;
+	i = 0;
+	k = 0;
+	while (val[j] && val[j] != '$')
+		j++;
+	len = j;
+	while (val[len] && ft_is(val[len]))
+		len++;
+	len -= j;
+	while (av[0][k]!= '=')
+		k++;
+    while (av[i] && ft_strncmp(av[i], val + j + 1, k))
+	{
         i++;
-	printf("%s\n",val);
-    return av[i] + ft_strlen(val);
+		k = 0;
+		while (av[i] && av[i][k]!= '=')
+			k++;
+	}
+	if (!av[i])
+		return (ft_strdup(""));
+	if(j > 0)
+    	holder = ft_strjoin(ft_substr(val, 0, j), av[i] + len);
+	else
+		holder = ft_strdup(av[i] + len);
+	return (holder);
 }
