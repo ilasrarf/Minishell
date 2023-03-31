@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:23:37 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/29 21:22:41 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/03/31 20:14:58 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int	ft_fill_args(t_lexer *lex, t_parser **prs, char **env)
 		if (lex && lex->type == 'w')
 		{
 			str[i] = ft_strdup(lex->word);
+			// printf("%s", str[i]);
 			i++;
 		}
 		if (lex)

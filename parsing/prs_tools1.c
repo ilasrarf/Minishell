@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prs_tools1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:12:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/30 00:42:51 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/03/31 20:09:41 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	ft_norm_herdoc(t_lexer *lex, char **env, char *hold, int fd)
 		}
 		if (lex->in_quotes == 0 && ft_strchr(str, '$'))
 		{
-			ft_putstr_fd(ft_hendel_var_herdoc(str, env), fd);
+			ft_putstr_fd(ft_hendel_var(str, env), fd);
+			write(fd, "\n",1);
 		}
 		else if (ft_strcmp(str, lex->word))
 			ft_putstr_fd(str, fd); 
@@ -88,7 +89,7 @@ char	*ft_hendel_var(char *val, char **av)
 	while (val[j] && val[j] != '$')
 		j++;
 	len = j;
-	while (val[len] && ft_is(val[len]))
+	while (val[len] && !ft_isalnum(val[len]))
 		len++;
 	len -= j;
 	while (av[0][k]!= '=')
@@ -103,8 +104,8 @@ char	*ft_hendel_var(char *val, char **av)
 	if (!av[i])
 		return (ft_strdup(""));
 	if(j > 0)
-    	holder = ft_strjoin(ft_substr(val, 0, j), av[i] + len);
+    	holder = ft_strjoin(ft_substr(val, 0, j), av[i] + k + 1);
 	else
-		holder = ft_strdup(av[i] + len);
-	return (holder);
+		holder = ft_strdup(av[i] + k + 1);
+	return (ft_strjoin(holder, val + j + k +1));
 }

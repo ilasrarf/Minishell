@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/29 21:11:57 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/03/31 20:16:51 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int ac, char **av, char **env)
 	prs = NULL;
 	(void)ac;
 	(void)av;
-	// (void)env;
+	(void)env;
 	while (1)
 	{
 		str = readline("\e[91mMinishell$ \e[0m");
@@ -40,7 +40,7 @@ int	main(int ac, char **av, char **env)
 		free(holder);
 		// while(lex)
 		// {
-		// 	printf("word: %s,\n",lex->word);
+		// 	printf("word: %s\n",lex->word);
 		// 	printf("type: %c\n", lex->type);
 		// 	printf("in_q: %i\n", lex->in_quotes);
 		// 	lex = lex->next;

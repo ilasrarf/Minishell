@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handel_lex.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 18:37:52 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/29 03:38:06 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/03/31 20:16:26 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_handel_char(t_lexer **lex, char **str)
 		i++;
 	}
 	j = 0;
-	while ((*str)[j] && (*str)[j] != '$')
+	while ((*str)[j] && (*str)[j] != '$' && (*str)[j] != ' ')
 		j++;
 	if ((*str)[j] == '$')
 		ft_lstadd_back(lex, ft_lstnew(hold, 'v', 0));
@@ -46,7 +46,7 @@ void	ft_handel_var(t_lexer **lex, char **str)
 	if ((*str)[i] == '_')
 	{
 		i++;
-		while ((*str)[i] && ft_isalnum((*str)[i]))
+		while ((*str)[i] && (*str)[i] != ' ')
 			i++;
 		ft_lstadd_back(lex, ft_lstnew(ft_substr(*str, 0, i), 'v', 0));
 	}

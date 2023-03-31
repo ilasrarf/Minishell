@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lexeing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:57:32 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/29 21:19:02 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/03/31 20:15:13 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ft_lexer(char *str, t_lexer **lex)
 	while (*str)
 	{
 		if (!ft_check_herdoc_fm(str) && *str != ' ' && *str != '|'
-			&& *str != '$')
+			&& *str != '$' && *str != '\'' && *str != '"')
 			ft_handel_char(lex, &str);
 		else if (*str == ' ')
 		{
