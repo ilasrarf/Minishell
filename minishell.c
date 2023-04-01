@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/31 20:16:51 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/04/01 05:19:56 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	main(int ac, char **av, char **env)
 		}
 		ft_lexer(str, &lex);
 		free(holder);
+		// ft_lstclear_lex(&lex);
 		// while(lex)
 		// {
 		// 	printf("word: %s\n",lex->word);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prs_tools.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:16:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/29 02:10:37 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/04/01 05:26:13 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,15 +83,20 @@ void	ft_inial(t_norm *var, t_lexer *lex)
 void	ft_use_heredoc(t_lexer **lex, char **env, int *fd)
 {
 	char		*hold;
+	char		*hold1;
 	static int	i;
 
-	hold = ft_strjoin("/tmp/heredoc_", ft_itoa(i));
+	hold1 = ft_itoa(i);
+	hold = ft_strjoin(ft_strdup("/tmp/heredoc_"), hold1);
 	while (!access(hold, F_OK))
 	{
 		free(hold);
+		free(hold1);
+		hold1 = ft_itoa(i);
 		i++;
-		hold = ft_strjoin("/tmp/heredoc_", ft_itoa(i));
+		hold = ft_strjoin(ft_strdup("/tmp/heredoc_"), hold1);
 	}
+	free(hold1);
 	*lex = (*lex)->next;
 	if (!ft_strcmp((*lex)->word, " "))
 		*lex = (*lex)->next;

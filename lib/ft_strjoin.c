@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 22:08:15 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/28 00:57:07 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/03/31 21:28:19 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		i++;
 	}
 	alloc[i] = '\0';
+	free(s1);
 	return (alloc);
 }
 

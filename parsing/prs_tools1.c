@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:12:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/31 20:09:41 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/04/01 06:56:07 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	ft_check_next_fd(t_lexer *lex, int in, int out)
 void	ft_norm_herdoc(t_lexer *lex, char **env, char *hold, int fd)
 {
 	char *str;
+	char *str1;
 
 	str = NULL;
 	while (ft_strcmp(str, lex->word))
@@ -41,7 +42,9 @@ void	ft_norm_herdoc(t_lexer *lex, char **env, char *hold, int fd)
 		}
 		if (lex->in_quotes == 0 && ft_strchr(str, '$'))
 		{
-			ft_putstr_fd(ft_hendel_var(str, env), fd);
+			str1 = ft_hendel_var(str, env);
+			ft_putstr_fd(str, fd);
+			free(str1);
 			write(fd, "\n",1);
 		}
 		else if (ft_strcmp(str, lex->word))
@@ -85,25 +88,27 @@ char	*ft_hendel_var(char *val, char **av)
 	
     j = 0;
 	i = 0;
-	k = 0;
 	while (val[j] && val[j] != '$')
 		j++;
-	len = j;
-	while (val[len] && !ft_isalnum(val[len]))
+	len = j + 1;
+	while (val[len] && ft_isalnum(val[len]))
 		len++;
 	len -= j;
-	while (av[0][k]!= '=')
-		k++;
-    while (av[i] && ft_strncmp(av[i], val + j + 1, k))
+	// printf("var len %i", len);
+    while (av[i])
 	{
-        i++;
 		k = 0;
-		while (av[i] && av[i][k]!= '=')
+		while (av[i] && av[i][k] != '=')
 			k++;
+		if (!strncmp(av[i], val + j + 1, k) && !strncmp(av[i], val + j + 1, len - 1))
+			break ;
+        i++;
 	}
-	if (!av[i])
+	if (!av[i] && !j)
 		return (ft_strdup(""));
-	if(j > 0)
+	if (!av[i] && j)
+		return (ft_substr(val, 0, j));
+	if (j > 0)
     	holder = ft_strjoin(ft_substr(val, 0, j), av[i] + k + 1);
 	else
 		holder = ft_strdup(av[i] + k + 1);
