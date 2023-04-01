@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:12:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/04/01 06:56:07 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/04/01 20:01:22 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,22 @@ char	*ft_hendel_var_herdoc(char *val, char **av)
 		holder = av[i] + len;
 	return (ft_strjoin(holder, val + len + j));
 }
+
+int	ft_check_other_var(char *var)
+{
+	int	i;
+
+	i = 0;
+	while (var[i] && var[i] != '$')
+		i++;
+	if (var[i] == '$')
+		return (1);
+	return (0);
+}
+
 char	*ft_hendel_var(char *val, char **av)
 {
+	static int t;
 	int		i;
 	int		j;
 	int		k;
@@ -88,29 +102,53 @@ char	*ft_hendel_var(char *val, char **av)
 	
     j = 0;
 	i = 0;
+	t++;
+	// if (t == 3)
+	// {
+	// 	printf("%s\n", val);
+	// 	exit(0);
+	// }
 	while (val[j] && val[j] != '$')
 		j++;
 	len = j + 1;
 	while (val[len] && ft_isalnum(val[len]))
 		len++;
 	len -= j;
-	// printf("var len %i", len);
     while (av[i])
 	{
 		k = 0;
 		while (av[i] && av[i][k] != '=')
 			k++;
-		if (!strncmp(av[i], val + j + 1, k) && !strncmp(av[i], val + j + 1, len - 1))
+		if (!ft_strncmp(av[i], val + j + 1, k) && !ft_strncmp(av[i], val + j + 1, len - 1))
 			break ;
         i++;
 	}
-	if (!av[i] && !j)
-		return (ft_strdup(""));
-	if (!av[i] && j)
-		return (ft_substr(val, 0, j));
-	if (j > 0)
-    	holder = ft_strjoin(ft_substr(val, 0, j), av[i] + k + 1);
+	if (!ft_check_other_var(val + j + 1))
+	{
+		if (!av[i] && !j)
+			return (ft_strdup(""));
+		if (!av[i] && j)
+			return (ft_substr(val, 0, j));
+		else if (j > 0)
+			holder = ft_strjoin(ft_substr(val, 0, j), av[i] + k + 1);
+		else
+			holder = ft_strdup(av[i] + k + 1);
+		holder = ft_strjoin(holder, val + j + k + 1);
+		// ft_expand(av, len, k, j, holder)
+	}
 	else
-		holder = ft_strdup(av[i] + k + 1);
-	return (ft_strjoin(holder, val + j + k +1));
+	{
+		if (!av[i] && !j)
+			holder = ft_strjoin(ft_strdup(""), val + len + j);
+		else if (!av[i] && j)
+			holder = ft_strjoin(ft_substr(val, 0, j), val + len + j);
+		else if (j > 0)
+			holder = ft_strjoin(ft_substr(val, 0, j), av[i] + k + 1);
+		else
+			holder = ft_strdup(av[i] + k + 1);
+		if (av[i])
+			holder = ft_strjoin(holder, val + j + k + 1);
+		holder = ft_hendel_var(holder, av);
+	}
+	return (holder);
 }

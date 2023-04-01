@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 18:37:52 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/31 20:16:26 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/04/01 07:32:52 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,27 +44,10 @@ void	ft_handel_var(t_lexer **lex, char **str)
 	i = 0;
 	i++;
 	if ((*str)[i] == '_')
-	{
 		i++;
-		while ((*str)[i] && (*str)[i] != ' ')
-			i++;
-		ft_lstadd_back(lex, ft_lstnew(ft_substr(*str, 0, i), 'v', 0));
-	}
-	else
-	{
-		if (ft_isdigit((*str)[i]))
-		{
-			i++;
-			ft_lstadd_back(lex, ft_lstnew(ft_substr(*str, 0, i), 'v', 0));
-		}
-		else
-		{
-			while ((*str)[i] && ft_isalpha((*str)[i]))
-				i++;
-			ft_lstadd_back(lex, ft_lstnew(ft_substr(*str, 0, i), 'v', 0));
-		}
-		
-	}
+	while ((*str)[i] && (*str)[i] != ' ')
+		i++;
+	ft_lstadd_back(lex, ft_lstnew(ft_substr(*str, 0, i), 'v', 0));
 	*str += i;
 }
 

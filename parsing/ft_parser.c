@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:23:37 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/31 21:24:37 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/04/01 10:02:05 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ void	ft_parser(t_lexer *lex, t_parser **prs, char **env)
 		printf("out %i\n", holder->out_red);
 		printf("heredoc %i\n", holder->heredoc);
         holder = holder->next;
+		printf("\n-------------\n");
     }
 	ft_lstclear_lex(&lex);
 	ft_lstclear(prs);
