@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:23:37 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/04/01 10:02:05 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/04/03 10:09:29 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,30 @@ int	ft_out_open(t_lexer **lex, char **out_red)
 	free(*out_red);
 	*out_red = ft_strdup((*lex)->word);
 	return (open((*lex)->word, O_CREAT | O_RDWR, 0777));
+}
+
+int	ft_check_syntax(t_lexer *lex)
+{
+	while (lex)
+	{
+		if (lex->type != 's')
+			break ;
+		lex = lex->next;
+	}
+	if (!ft_strcmp(lex->word, "|") && lex->type == 'p')
+		return 0;
+	while (lex)
+	{
+		if (!ft_strcmp(lex->word, "|") && lex->type == 'p')
+		{
+			if (lex->next && lex->next->type == 's')
+				lex = lex->next;
+			if ((lex->next && lex->next->type == 'p') || !lex->next)
+				return 0;
+		}
+		lex = lex->next;
+	}
+	return 1;
 }
 
 int	ft_fill_heredoc_fm(t_lexer **lex, int *in, int *out)
@@ -103,7 +127,7 @@ void	ft_parser(t_lexer *lex, t_parser **prs, char **env)
 	t_parser	*holder;
 
 	*prs = NULL;
-	if (!ft_check_in_out_snt(lex))
+	if (!ft_check_in_out_snt(lex) || !ft_check_syntax(lex))
 		return ;
 	ft_fill_args(lex, prs, env);
 	holder = (*prs);

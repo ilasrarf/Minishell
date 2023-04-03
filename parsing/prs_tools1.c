@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:12:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/04/01 20:01:22 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/04/03 10:49:01 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void	ft_norm_herdoc(t_lexer *lex, char **env, char *hold, int fd)
 		if (lex->in_quotes == 0 && ft_strchr(str, '$'))
 		{
 			str1 = ft_hendel_var(str, env);
-			ft_putstr_fd(str, fd);
+			ft_putstr_fd(str1, fd);
+			write(fd, "\n", 1);
 			free(str1);
 			write(fd, "\n",1);
 		}
@@ -93,25 +94,18 @@ int	ft_check_other_var(char *var)
 
 char	*ft_hendel_var(char *val, char **av)
 {
-	static int t;
 	int		i;
 	int		j;
-	int		k;
 	int		len;
+	int		k;
 	char	*holder;
 	
     j = 0;
 	i = 0;
-	t++;
-	// if (t == 3)
-	// {
-	// 	printf("%s\n", val);
-	// 	exit(0);
-	// }
 	while (val[j] && val[j] != '$')
 		j++;
 	len = j + 1;
-	while (val[len] && ft_isalnum(val[len]))
+	while (val[len] && (val[len] == '_' || ft_isalnum(val[len])) )
 		len++;
 	len -= j;
     while (av[i])
@@ -126,14 +120,14 @@ char	*ft_hendel_var(char *val, char **av)
 	if (!ft_check_other_var(val + j + 1))
 	{
 		if (!av[i] && !j)
-			return (ft_strdup(""));
-		if (!av[i] && j)
-			return (ft_substr(val, 0, j));
+			holder = (ft_strdup(""));
+		else if (!av[i] && j)
+			holder = (ft_substr(val, 0, j));
 		else if (j > 0)
 			holder = ft_strjoin(ft_substr(val, 0, j), av[i] + k + 1);
 		else
 			holder = ft_strdup(av[i] + k + 1);
-		holder = ft_strjoin(holder, val + j + k + 1);
+		holder = ft_strjoin(holder, val + j + len);
 		// ft_expand(av, len, k, j, holder)
 	}
 	else
