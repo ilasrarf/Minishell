@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handel_lex.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 18:37:52 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/04/01 07:32:52 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/04/01 20:25:24 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,14 +109,3 @@ void	ft_handel_qoutes(t_lexer **lex, char **str)
 	}
 	*str += i;
 }
-// void	ft_handel_extra(t_lexer **lex, char **str)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while ((*str)[i])
-// 	{
-
-// 	}
-
-// }

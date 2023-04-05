@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:23:37 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/04/01 10:02:05 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/04/03 21:15:22 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,6 @@ void	ft_parser(t_lexer *lex, t_parser **prs, char **env)
         holder = holder->next;
 		printf("\n-------------\n");
     }
-	ft_lstclear_lex(&lex);
-	ft_lstclear(prs);
+	// ft_lstclear_lex(&lex);
+	// ft_lstclear(prs);
 }

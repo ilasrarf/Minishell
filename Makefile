@@ -6,7 +6,7 @@
 #    By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 18:13:02 by ilasrarf          #+#    #+#              #
-#    Updated: 2023/03/29 01:25:16 by ilasrarf         ###   ########.fr        #
+#    Updated: 2023/04/03 20:48:22 by ilasrarf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,8 +38,8 @@ SRC = minishell.c \
 	  lib/ft_strchr.c \
 	  parsing/prs_tools.c \
 	  parsing/prs_tools1.c \
-	  
-	  
+	  builtins/builtins.c \
+	  builtins/builtins2.c
 
 SRC_O =  ${SRC:.c=.o}
 

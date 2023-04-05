@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/04/01 08:50:41 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/04/03 21:09:49 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@ int	main(int ac, char **av, char **env)
 		// 	printf("type: %c\n", lex->type);
 		// 	printf("in_q: %i\n", lex->in_quotes);
 		// 	lex = lex->next;
-		// 	printf("---------------\n");
 		// }
 		ft_parser(lex, &prs, env);
+		// printf("-------builtins part--------\n");
+		ft_builtins(&prs);
 	}
 }

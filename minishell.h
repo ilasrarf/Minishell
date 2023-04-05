@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/29 03:33:22 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/04/03 22:19:32 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,13 @@ typedef struct s_parser
 	int					heredoc;
 	struct s_parser		*next;
 }						t_parser;
+
+typedef struct s_env
+{
+	char				*name;
+	char				*value;
+	struct s_env		*next;
+}						t_env;
 
 // lexer functions
 int						ft_check_quotes(char *str);
@@ -94,7 +101,14 @@ int						ft_count_arg(t_lexer *lex);
 void					ft_inial(t_norm *var, t_lexer *lex);
 void					ft_use_heredoc(t_lexer **lex, char **env, int *fd);
 void					ft_check_next_fd(t_lexer *lex, int in, int out);
-void					ft_norm_herdoc(t_lexer *lex, char **env, char *hold, int fd);
+void					ft_norm_herdoc(t_lexer *lex, char **env, char *hold,
+							int fd);
 char					*ft_hendel_var(char *val, char **av);
 char					*ft_hendel_var_herdoc(char *val, char **av);
+
+//builtins
+void					ft_builtins(t_parser **prs);
+void					ft_handel_cd(t_parser **prs);
+void					ft_handel_echo(t_parser **prs);
+int						ft_handel_n(char *str);
 #endif
