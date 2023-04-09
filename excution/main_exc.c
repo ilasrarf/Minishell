@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   main_exc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/29 01:25:37 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/04/03 19:51:26 by aen-naas         ###   ########.fr       */
+/*   Created: 2023/04/03 11:01:38 by aen-naas          #+#    #+#             */
+/*   Updated: 2023/04/09 21:25:06 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_strncmp(char *s1, char *s2, int n)
+void	ft_exc(t_parser *pars, char **env)
 {
-	int				i;
-	unsigned char	*ss1;
-	unsigned char	*ss2;
+	int	id;
+	int fd;
+	char *str;
 
-	ss1 = (unsigned char *)s1;
-	ss2 = (unsigned char *)s2;
-	i = 0;
-	if (!s1)
-		return (1);
-	while ((ss1[i] != '\0' || ss2[i] != '\0') && i < n)
+	id = fork();
+	if (id == 0)
 	{
-		if (ss1[i] < ss2[i])
-			return (-1);
-		else if (ss1[i] > ss2[i])
-			return (1);
-		i++;
+		if (pars->out_red)
+			fd = ft_red_out(pars, env);
+		str = ft_strjoin(ft_strdup("/bin/"), pars->args[0]);
+		if (execve(str, &(pars->args[0]), env) == -1)
+			exit(0);
 	}
-	return (0);
+	wait(NULL);
 }

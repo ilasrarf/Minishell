@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:23:37 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/04/03 10:09:29 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/04/08 06:51:46 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_check_syntax(t_lexer *lex)
 		lex = lex->next;
 	}
 	if (!ft_strcmp(lex->word, "|") && lex->type == 'p')
-		return 0;
+		return (0);
 	while (lex)
 	{
 		if (!ft_strcmp(lex->word, "|") && lex->type == 'p')
@@ -39,11 +39,11 @@ int	ft_check_syntax(t_lexer *lex)
 			if (lex->next && lex->next->type == 's')
 				lex = lex->next;
 			if ((lex->next && lex->next->type == 'p') || !lex->next)
-				return 0;
+				return (0);
 		}
 		lex = lex->next;
 	}
-	return 1;
+	return (1);
 }
 
 int	ft_fill_heredoc_fm(t_lexer **lex, int *in, int *out)
@@ -87,8 +87,8 @@ int	ft_fill_args(t_lexer *lex, t_parser **prs, char **env)
 	str = ft_calloc(i + 1, sizeof(char *));
 	i = 0;
 	in = 0;
-	out = 1;
-	hdc = -1;
+	out = 0;
+	hdc = 0;
 	while (lex)
 	{
 		if (lex && !ft_strcmp(lex->word, "|") && lex->in_quotes == 0)
@@ -131,22 +131,21 @@ void	ft_parser(t_lexer *lex, t_parser **prs, char **env)
 		return ;
 	ft_fill_args(lex, prs, env);
 	holder = (*prs);
-	int			i = 0;
-	printf("\n-------------\n");
-	while(holder)
-    {
-        i = 0;
-        while (holder->args[i])
-        {
-            printf("ARGS: %s\n",holder->args[i]);
-            i++;
-        }
-		printf("in %i\n", holder->in_red);
-		printf("out %i\n", holder->out_red);
-		printf("heredoc %i\n", holder->heredoc);
-        holder = holder->next;
-		printf("\n-------------\n");
-    }
+	// int			i = 0;
+	// printf("\n-------------\n");
+	// while(holder)
+	// {
+	//     i = 0;
+	//     while (holder->args[i])
+	//     {
+	//         printf("ARGS: %s\n",holder->args[i]);
+	//         i++;
+	//     }
+	// 	printf("in %i\n", holder->in_red);
+	// 	printf("out %i\n", holder->out_red);
+	// 	printf("heredoc %i\n", holder->heredoc);
+	//     holder = holder->next;
+	// 	printf("\n-------------\n");
+	// }
 	ft_lstclear_lex(&lex);
-	ft_lstclear(prs);
 }

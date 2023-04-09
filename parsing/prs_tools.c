@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:16:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/04/01 05:26:13 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/04/03 19:49:31 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int	ft_check_in_out_snt(t_lexer *lex)
 		{
 			if (lex->next && !ft_strcmp(lex->next->word, " "))
 				lex = lex->next;
-			if (!lex->next || (lex->next->type != 'w' && lex->next->type != 'v'))
+			if (!lex->next || (lex->next->type != 'w'
+					&& lex->next->type != 'v'))
 			{
 				if (lex->next)
 					lex = lex->next;

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+         #
+#    By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 18:13:02 by ilasrarf          #+#    #+#              #
-#    Updated: 2023/03/29 01:25:16 by ilasrarf         ###   ########.fr        #
+#    Updated: 2023/04/09 10:50:31 by aen-naas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,8 @@ SRC = minishell.c \
 	  lib/ft_strchr.c \
 	  parsing/prs_tools.c \
 	  parsing/prs_tools1.c \
-	  
+	  excution/main_exc.c \
+	  excution/exc_tools.c \
 	  
 
 SRC_O =  ${SRC:.c=.o}
