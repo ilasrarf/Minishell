@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:23:37 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/04/03 21:15:22 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/05/08 20:01:39 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,22 +107,22 @@ void	ft_parser(t_lexer *lex, t_parser **prs, char **env)
 		return ;
 	ft_fill_args(lex, prs, env);
 	holder = (*prs);
-	int			i = 0;
-	printf("\n-------------\n");
-	while(holder)
-    {
-        i = 0;
-        while (holder->args[i])
-        {
-            printf("ARGS: %s\n",holder->args[i]);
-            i++;
-        }
-		printf("in %i\n", holder->in_red);
-		printf("out %i\n", holder->out_red);
-		printf("heredoc %i\n", holder->heredoc);
-        holder = holder->next;
-		printf("\n-------------\n");
-    }
+	// int			i = 0;
+	// printf("\n-------------\n");
+	// while(holder)
+    // {
+    //     i = 0;
+    //     while (holder->args[i])
+    //     {
+    //         printf("ARGS: %s\n",holder->args[i]);
+    //         i++;
+    //     }
+	// 	printf("in %i\n", holder->in_red);
+	// 	printf("out %i\n", holder->out_red);
+	// 	printf("heredoc %i\n", holder->heredoc);
+    //     holder = holder->next;
+	// 	printf("\n-------------\n");
+    // }
 	// ft_lstclear_lex(&lex);
 	// ft_lstclear(prs);
 }

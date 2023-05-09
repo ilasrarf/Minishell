@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/04/03 22:19:32 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/05/08 12:40:22 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,13 @@ typedef struct s_env
 	char				*value;
 	struct s_env		*next;
 }						t_env;
+
+typedef struct s_var
+{
+	char				*name;
+	char				*value;
+	struct s_var		*next;
+}						t_var;
 
 // lexer functions
 int						ft_check_quotes(char *str);
@@ -107,8 +114,14 @@ char					*ft_hendel_var(char *val, char **av);
 char					*ft_hendel_var_herdoc(char *val, char **av);
 
 //builtins
-void					ft_builtins(t_parser **prs);
-void					ft_handel_cd(t_parser **prs);
+void					ft_builtins(t_parser **prs, t_env **env_list);
+void					ft_handel_cd(t_parser **prs,  t_env **env);
 void					ft_handel_echo(t_parser **prs);
 int						ft_handel_n(char *str);
+void					fill_env_list(char **env, t_env **env_list);
+t_env					*ft_lstnew_env(void *name, void *val);
+void					ft_lstadd_back_env(t_env **lst, t_env *new);
+void					ft_handel_env(t_env **env);
+void					ft_handel_pwd(t_env **env);
+void					ft_handel_exit(t_env **env);
 #endif

@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/04/03 21:09:49 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/05/08 12:43:33 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,14 @@ int	main(int ac, char **av, char **env)
 	char		*holder;
 	t_lexer		*lex;
 	t_parser	*prs;
+	t_env		*env_list;
 
 	prs = NULL;
+	env_list = NULL;
 	(void)ac;
 	(void)av;
-	(void)env;
+	if (env[0] != NULL)
+		fill_env_list(env, &env_list);
 	while (1)
 	{
 		str = readline("\e[91mMinishell$ \e[0m");
@@ -47,7 +50,7 @@ int	main(int ac, char **av, char **env)
 		// 	lex = lex->next;
 		// }
 		ft_parser(lex, &prs, env);
-		// printf("-------builtins part--------\n");
-		ft_builtins(&prs);
+		// // printf("-------builtins part--------\n");
+		ft_builtins(&prs, &env_list);
 	}
 }

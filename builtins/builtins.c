@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 02:48:29 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/04/03 20:51:13 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/05/08 20:04:20 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,27 @@ void	ft_handel_echo(t_parser **prs)
 		write((*prs)->out_red, "\n", 1);
 }
 
-void	ft_builtins(t_parser **prs)
+void	ft_builtins(t_parser **prs, t_env **env_list)
 {
 	if (!ft_strcmp((*prs)->args[0], "echo") || !ft_strcmp((*prs)->args[0],
 			"ECHO"))
 		ft_handel_echo(prs);
 	else if (!ft_strcmp((*prs)->args[0], "cd") || !ft_strcmp((*prs)->args[0],
 			"CD"))
-		ft_handel_cd(prs);
+		ft_handel_cd(prs, env_list);
+	if (!ft_strcmp((*prs)->args[0], "pwd") || !ft_strcmp((*prs)->args[0],
+			"PWD"))
+		ft_handel_pwd(env_list);
+	// else if (!ft_strcmp((*prs)->args[0], "export") || !ft_strcmp((*prs)->args[0],
+	// 		"EXPORT"))
+	// 	ft_handel_exp(prs);
+	// else if (!ft_strcmp((*prs)->args[0], "unset") || !ft_strcmp((*prs)->args[0],
+	// 		"UNSET"))
+		// ft_handel_unset(prs);
+	else if (!ft_strcmp((*prs)->args[0], "env") || !ft_strcmp((*prs)->args[0],
+			"ENV"))
+		ft_handel_env(env_list);
+	// else if (!ft_strcmp((*prs)->args[0], "exit") || !ft_strcmp((*prs)->args[0],
+	// 		"exit"))
+	// 	ft_handel_exit(prs);
 }

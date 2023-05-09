@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/03/13 18:13:02 by ilasrarf          #+#    #+#              #
-#    Updated: 2023/04/03 20:48:22 by ilasrarf         ###   ########.fr        #
+#    Created: 2023/05/08 16:35:03 by ilasrarf          #+#    #+#              #
+#    Updated: 2023/05/08 20:27:54 by ilasrarf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,12 +39,16 @@ SRC = minishell.c \
 	  parsing/prs_tools.c \
 	  parsing/prs_tools1.c \
 	  builtins/builtins.c \
-	  builtins/builtins2.c
+	  builtins/builtins1.c \
+	  builtins/builtins2.c \
+	  builtins/fill_envlist.c \
+	  
+	  
 
 SRC_O =  ${SRC:.c=.o}
 
 NAME = minishell
-CC = cc -g 
+CC = cc
 FLAGS = -Wall -Werror -Wextra -g
 RM = rm -rf
 
