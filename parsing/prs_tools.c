@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:16:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/04/03 19:49:31 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/08 15:50:00 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	ft_count_arg(t_lexer *lex)
 	j = 0;
 	while (lex)
 	{
-		if ((lex->word[0] == '|' && lex->in_quotes == 0))
+		if (lex->type == 'p')
 			return (i - j);
 		if (lex->type == 'w' || lex->type == 'v')
 			i++;

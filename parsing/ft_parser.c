@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:23:37 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/04/08 06:51:46 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/10 22:23:45 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int	ft_fill_heredoc_fm(t_lexer **lex, int *in, int *out)
 		if (!ft_strcmp((*lex)->word, " "))
 			(*lex) = (*lex)->next;
 		*in = open((*lex)->word, O_RDONLY, 0777);
+		if (*in < 0)
+			printf("minisell: %s: No such file or directory\n", (*lex)->word);
 	}
 	else if (!ft_strcmp((*lex)->word, ">"))
 	{
@@ -81,23 +83,22 @@ int	ft_fill_args(t_lexer *lex, t_parser **prs, char **env)
 	char	**str;
 	int		in;
 	int		out;
-	int		hdc;
 
 	i = ft_count_arg(lex);
 	str = ft_calloc(i + 1, sizeof(char *));
+	// printf("set index: %i\n", i + 1);
 	i = 0;
 	in = 0;
 	out = 0;
-	hdc = 0;
 	while (lex)
 	{
-		if (lex && !ft_strcmp(lex->word, "|") && lex->in_quotes == 0)
+		if (lex && lex->type == 'p')
 			break ;
 		if (lex && (!ft_strcmp(lex->word, ">") || !ft_strcmp(lex->word, "<")
 				|| !ft_strcmp(lex->word, ">>")))
 			ft_fill_heredoc_fm(&lex, &in, &out);
 		if (lex && !ft_strcmp(lex->word, "<<"))
-			ft_use_heredoc(&lex, env, &hdc);
+			ft_use_heredoc(&lex, env, &in);
 		if (lex && lex->type == 'v')
 		{
 			str[i] = ft_hendel_var(lex->word, env);
@@ -106,13 +107,14 @@ int	ft_fill_args(t_lexer *lex, t_parser **prs, char **env)
 		if (lex && lex->type == 'w')
 		{
 			str[i] = ft_strdup(lex->word);
-			// printf("%s", str[i]);
 			i++;
 		}
-		if (lex)
+		if (lex && lex->type != 'p')
 			lex = lex->next;
 	}
-	ft_lstadd_back_prs(prs, ft_lst_new_prs(str, in, out, hdc));
+	// printf("last index %i\n", i);
+	str[i] = NULL;
+	ft_lstadd_back_prs(prs, ft_lst_new_prs(str, in, out));
 	if (lex && !ft_strcmp(lex->word, "|"))
 	{
 		lex = lex->next;
@@ -127,25 +129,23 @@ void	ft_parser(t_lexer *lex, t_parser **prs, char **env)
 	t_parser	*holder;
 
 	*prs = NULL;
-	if (!ft_check_in_out_snt(lex) || !ft_check_syntax(lex))
+	if (!lex || !ft_check_in_out_snt(lex) || !ft_check_syntax(lex))
 		return ;
 	ft_fill_args(lex, prs, env);
-	holder = (*prs);
-	// int			i = 0;
+	holder = *prs;
 	// printf("\n-------------\n");
+	// int			i = 0;
 	// while(holder)
-	// {
-	//     i = 0;
-	//     while (holder->args[i])
-	//     {
-	//         printf("ARGS: %s\n",holder->args[i]);
-	//         i++;
-	//     }
+    // {
+    //     i = 0;
+    //     while (holder->args[i])
+    //     {
+    //         printf("ARGS: %s\n",holder->args[i]);
+    //         i++;
+    //     }
 	// 	printf("in %i\n", holder->in_red);
 	// 	printf("out %i\n", holder->out_red);
-	// 	printf("heredoc %i\n", holder->heredoc);
-	//     holder = holder->next;
-	// 	printf("\n-------------\n");
-	// }
+    //     holder = holder->next;
+    // } 
 	ft_lstclear_lex(&lex);
 }
