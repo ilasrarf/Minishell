@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 10:46:04 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/14 17:28:59 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/15 14:54:25 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ char	*ft_check_path(char *cmd, char **env)
 	char	**paths;
 	int i = 1;
 
+	if (!access(cmd, F_OK))
+		return cmd;
 	path = ft_get_path(env);
 	if (!path)
 	{
@@ -62,5 +64,9 @@ char	*ft_check_path(char *cmd, char **env)
 		holder = ft_strjoin(ft_strjoin_char(paths[i], '/'), cmd);
 		i++;
 	}
+	if(!paths[i])
+		printf("minishell: %s: : command not found\n", cmd);
+	if (paths)
+		ft_free(paths);
 	return (holder);
 }

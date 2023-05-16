@@ -6,14 +6,13 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/14 17:32:33 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/15 21:46:01 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	exit_s;
-//  t_var	*g_var;
+t_var	*g_var;
 
 void	handel(int signal)
 {
@@ -21,6 +20,7 @@ void	handel(int signal)
 		return ;
 	else if (signal == SIGINT)
 	{
+			g_var->exit_s = 1;
 			write(1, "\n", 1);
 			rl_on_new_line();
 			rl_replace_line("", 0);
@@ -28,6 +28,18 @@ void	handel(int signal)
 	}
 	else
 		return ;
+}
+
+t_var	*ft_lstnew_var(int i, char *name , char *value)
+{
+	t_var	*head;
+
+	head = malloc(sizeof(t_var));
+	head->exit_s = i;
+	head->name = name;
+	head->value = value;
+	head->next = NULL;
+	return head;
 }
 
 int	main(int ac, char **av, char **env)
@@ -40,7 +52,7 @@ int	main(int ac, char **av, char **env)
 	t_env		*env_list;
 
 	prs = NULL;
-	exit_s = 0;
+	g_var = ft_lstnew_var(0, NULL,NULL);
 	(void)ac;
 	(void)av;
 	(void)res;
@@ -59,32 +71,39 @@ int	main(int ac, char **av, char **env)
 		if (str && *str)
 			add_history(str);
 		if (!str)
+		{
+			printf("exit");
 			return (0);
+		}
 		holder = str;
 		if (ft_check_quotes(holder))
 		{
 			free(holder);
-			exit(1);
+			g_var->exit_s = 2;
 		}
-		ft_lexer(str, &lex);
-		free(holder);
-		// while(lex)
-		// {
-		// 	printf("word: %s\n",lex->word);
-		// 	printf("type: %c\n", lex->type);
-		// 	printf("in_q: %i\n", lex->in_quotes);
-		// 	lex = lex->next;
-		// 	printf("---------------\n");
-		// }
-		ft_parser(lex, &prs, env);
-		if (prs)
+		else
 		{
-			if (env[0] != NULL)
-				fill_env_list(env , &env_list);
-			res = ft_reconver(&env_list);
-			ft_excution(prs, env);
-			// ft_status(exit_s);
-			ft_lstclear(&prs);
+			ft_lexer(str, &lex);
+			free(holder);
+			// while(lex)
+			// {
+			// 	printf("word: %s\n",lex->word);
+			// 	printf("type: %c\n", lex->type);
+			// 	printf("in_q: %i\n", lex->in_quotes);
+			// 	lex = lex->next;
+			// 	printf("---------------\n");
+			// }
+			ft_parser(lex, &prs, env);
+			if (prs)
+			{
+				if (env[0] != NULL)
+					fill_env_list(env , &env_list);
+				res = ft_reconver(&env_list);
+				ft_excution(prs, res);
+				// ft_status(g_var->exit_s);
+				ft_lstclear(&prs);
+				// ft_free(res);
+			}
 		}
 	}
 }

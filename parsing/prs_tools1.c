@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:12:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/10 18:31:01 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/15 21:38:56 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,7 @@ char	*ft_hendel_var(char *val, char **av)
 		j++;
 	if (val[++j] == '?')
 	{
-		printf("exit status: %d\n", exit_s);
-		return NULL;
+		return ft_itoa(g_var->exit_s);
 	}
 	len = j + 1;
 	while (val[len] && (val[len] == '_'  || ft_isalnum(val[len])))

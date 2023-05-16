@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/14 17:47:30 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/15 21:39:06 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <stdio.h>
+# include <signal.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
@@ -57,17 +58,17 @@ typedef struct s_env
 	struct s_env		*next;
 }						t_env;
 
-// typedef struct s_var
-// {
-// 	int					exit_s;
-// 	char				*name;
-// 	char				*value;
-// 	struct s_var		*next;
-// }						t_var;
+typedef struct s_var
+{
+	int					exit_s;
+	char				*name;
+	char				*value;
+	struct s_var		*next;
+}						t_var;
 
-// extern t_var	*g_var;
+extern t_var	*g_var;
 
-int exit_s;
+
 
 // lexer functions
 int						ft_check_quotes(char *str);
@@ -108,6 +109,7 @@ int						ft_strncmp(char *s1, char *s2, int n);
 char					**ft_split(char const *s, char c);
 t_env					*ft_lstnew_env(void *name, void *val);
 void					ft_lstadd_back_env(t_env **lst, t_env *new);
+void					ft_free(char **str);
 
 // parsing
 void					ft_parser(t_lexer *lex, t_parser **prs, char **env);

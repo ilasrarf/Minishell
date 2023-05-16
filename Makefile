@@ -6,7 +6,7 @@
 #    By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 18:13:02 by ilasrarf          #+#    #+#              #
-#    Updated: 2023/05/09 16:20:24 by aen-naas         ###   ########.fr        #
+#    Updated: 2023/05/15 21:39:32 by aen-naas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRC = minishell.c \
 	  lib/ft_strcmp.c \
 	  lib/ft_strncmp.c \
 	  lib/ft_strchr.c \
+	  lib/ft_free.c \
 	  parsing/prs_tools.c \
 	  parsing/prs_tools1.c \
 	  excution/main_exc.c \

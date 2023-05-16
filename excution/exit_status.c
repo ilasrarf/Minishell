@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_status.c                                      :+:      :+:    :+:   */
+/*   g_var->exit_status.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 12:59:12 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/14 18:09:24 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/15 17:46:01 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,17 @@
 
 void	ft_status()
 {
-    int status = exit_s;
+    int status = g_var->exit_s;
     if (WIFEXITED(status)) {
         status = WEXITSTATUS(status);
         // printf("Exit status was %d\n", status);
     }
 	else if (WIFSIGNALED(status)) 
 	{
-        // puts("---");
-        status = WIFSIGNALED(status) + 128;
+        status = WIFSIGNALED(status) + 129;
         // printf("Child process terminated by signal %d\n", status);
     }
-    exit_s = status;
+    g_var->exit_s = status;
 	// if (WIFEXITED(status)) 
 	// {
     //     status = WEXITSTATUS(status);
