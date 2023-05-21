@@ -6,21 +6,19 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:01:38 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/16 11:46:21 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/21 12:21:40 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 
-void	ft_pipe(t_parser *pars, char **env, int fd[2], int *status)
+void	ft_pipe(t_parser *pars, char **env, int fd[2])
 {
 	char	*str;
 	int		old;
 	pid_t		id;
-	(void)status;
 
-	// str = NULL;
 	old = fd[0];
 	pipe(fd);
 	id = fork();
@@ -37,13 +35,23 @@ void	ft_pipe(t_parser *pars, char **env, int fd[2], int *status)
 		}
 		if (pars->out_red > 2)
 			ft_red_out(pars, env);
-		if (pars->in_red > 2)
+		if (pars->in_red > 2 )
 			ft_red_in(pars, env);
+		if (!ft_strcmp(pars->args[0], "exit"))
+			exit(0);
 		else
 		{
 			str = ft_check_path(pars->args[0], env);
 			if (execve(str, pars->args, env) == -1)
-				exit(127);
+			{
+				if (errno == EACCES)
+				{
+					printf("minishell: %s: : Permission denied\n", pars->args[0]);
+					exit(126);
+				}
+				else
+					exit(127);
+			}
 		}
 	}
 	close(fd[1]);
@@ -66,7 +74,6 @@ int	ft_check_files(t_parser *pars)
 void	ft_excution(t_parser *pars, char **env)
 {
 	int	fd[2];
-	int status;
 
 	fd[0] = -1;
 	fd[1] = -1;
@@ -74,17 +81,25 @@ void	ft_excution(t_parser *pars, char **env)
 		return ;
 	while (pars)
 	{
-		if (!ft_strcmp(pars->args[0], "exit"))
-			exit(0);
+		if (!pars->args[0])
+			break;
+		if (!ft_strcmp(pars->args[0], "exit") && !pars->next && fd[0] == -1)
+		{
+			if (!ft_check_exit_args(pars->args))
+			{
+				write(1, "exit", 4);
+				exit(ft_atoi(pars->args[1]));
+			}
+		}
 		else
 		{
-			ft_pipe(pars, env, fd, &status);
+			ft_pipe(pars, env, fd);
 			if (pars->out_red > 2)
 				close(pars->out_red);
-			if (pars->in_red > 2)
-				close(pars->in_red);
-			pars = pars->next;
+			// if (pars->in_red > 2)
+			// 	close(pars->in_red);
 		}
+		pars = pars->next;
 		ft_status();
 	}
 	while (wait(0) != -1 || errno != ECHILD)

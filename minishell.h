@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/15 21:39:06 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/20 13:55:51 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 
 # include <errno.h>
 # include <fcntl.h>
-# include <readline/history.h>
-# include <readline/readline.h>
 # include <stdio.h>
 # include <signal.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+# include <readline/history.h>
+# include <readline/readline.h>
 
 int						i;
 
@@ -62,6 +62,7 @@ typedef struct s_var
 {
 	int					exit_s;
 	char				*name;
+	char				*PATH;
 	char				*value;
 	struct s_var		*next;
 }						t_var;
@@ -110,6 +111,8 @@ char					**ft_split(char const *s, char c);
 t_env					*ft_lstnew_env(void *name, void *val);
 void					ft_lstadd_back_env(t_env **lst, t_env *new);
 void					ft_free(char **str);
+int						ft_atoi(const char *str);
+void					ft_free_env(t_env **env);
 
 // parsing
 void					ft_parser(t_lexer *lex, t_parser **prs, char **env);
@@ -134,6 +137,9 @@ void					rl_replace_line(const char *text, int clear_undo);
 void					handel(int signal);
 void					ft_status();
 void					fill_env_list(char **env, t_env **env_list);
-char					**ft_reconver(t_env **env);
+char					**ft_reconver(t_env *env);
+int     				ft_check_exit_args(char **args);
+int 					rl_catch_signals (int catch);
+void					fill_empty_env(char **env, t_env **env_list);
 
 #endif

@@ -11,23 +11,36 @@
 /* ************************************************************************** */
 
 #include "../minishell.h"
+#include <limits.h>
 
 void	ft_status()
 {
-    int status = g_var->exit_s;
-    if (WIFEXITED(status)) {
-        status = WEXITSTATUS(status);
-        // printf("Exit status was %d\n", status);
+    if (WIFEXITED(g_var->exit_s))
+        g_var->exit_s = WEXITSTATUS(g_var->exit_s);
+	else if (WIFSIGNALED(g_var->exit_s)) 
+        g_var->exit_s = WIFSIGNALED(g_var->exit_s) + 129;
+}
+
+int     ft_check_exit_args(char **args)
+{
+    long long i;
+
+    i = 0;
+    while (args[i])
+        i++;
+    if (i > 2)
+    {
+        printf("minishell: exit: too many arguments\n");
+        exit(255);
     }
-	else if (WIFSIGNALED(status)) 
-	{
-        status = WIFSIGNALED(status) + 129;
-        // printf("Child process terminated by signal %d\n", status);
+    else
+    {
+        i = ft_atoi(args[1]) +1;
+        if (LONG_MAX > i)
+        {
+            printf("exit\nminishell: exit: %s: numeric argument required\n", args[1]);
+            exit(255);
+        }
     }
-    g_var->exit_s = status;
-	// if (WIFEXITED(status)) 
-	// {
-    //     status = WEXITSTATUS(status);
-    //     printf("Child process exited normally with status %d\n", status);
-    // } 
+    return (i - 2);
 }

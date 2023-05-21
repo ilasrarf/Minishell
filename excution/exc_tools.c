@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 10:46:04 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/15 14:54:25 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/21 11:43:00 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,29 @@ char	*ft_check_path(char *cmd, char **env)
 	char	*holder;
 	char	*path;
 	char	**paths;
-	int i = 1;
+	int 	i;
+	int 	j;
 
+	i = 1;
+	j = 0;
+	while (env[j])
+		j++;
 	if (!access(cmd, F_OK))
 		return cmd;
-	path = ft_get_path(env);
+	if (j == 3)
+		path = g_var->PATH;
+	else
+		path = ft_get_path(env);
 	if (!path)
 	{
 		printf("minishell: %s: No such file or directory\n", cmd);
 		exit(1);
 	}
 	paths = ft_split(path + 5, ':');
-	holder = ft_strjoin(ft_strjoin_char(paths[0], '/'), cmd);
+	holder = ft_strjoin(ft_strjoin_char(ft_strdup(paths[0]), '/'), cmd);
 	while  (paths[i] && access(holder, F_OK))
 	{
-		holder = ft_strjoin(ft_strjoin_char(paths[i], '/'), cmd);
+		holder = ft_strjoin(ft_strjoin_char(ft_strdup(paths[i]), '/'), cmd);
 		i++;
 	}
 	if(!paths[i])

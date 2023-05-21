@@ -13,7 +13,7 @@
 #include "../minishell.h"
 
 
-char	**ft_reconver(t_env **env)
+char	**ft_reconver(t_env *env)
 {
 	int i;
 	char **res;
@@ -21,21 +21,20 @@ char	**ft_reconver(t_env **env)
 
 	
 	i = 0;
-	tmp = *env;
+	tmp = env;
 	while (tmp)
 	{
 		i++;
 		tmp = tmp->next;
 	}
-	res = malloc(sizeof(char *) * (i + 1));
+	res = ft_calloc(i + 1, sizeof(char *));
 	i = 0;
-	while (*env)
+	while (env)
 	{
-		res[i] = ft_strjoin(ft_strjoin_char((*env)->name, '='), (*env)->value);
+		res[i] = ft_strjoin(ft_strjoin_char((env)->name, '='), (env)->value);
 		i++;
-		(*env) = (*env)->next;
+		(env) = (env)->next;
 	}
-	res[i] = NULL;
 	return res;
 }
 
@@ -79,7 +78,7 @@ void	fill_env_list(char **env, t_env **env_list)
 	int	i;
 	int	cnt1;
 
-	i = 1;
+	i = 1; 
 	cnt1 = ft_cnt_name(env[0]);
 	*env_list = ft_lstnew_env(ft_substr(env[0], 0, cnt1)
 		, ft_substr(env[0], cnt1 + 1, ft_cnt_val(env[0])));
@@ -92,3 +91,12 @@ void	fill_env_list(char **env, t_env **env_list)
 	}
 }
 
+void	fill_empty_env(char **env, t_env **env_list)
+{
+	char pwd[1024];
+	(void)env;
+	getcwd(pwd, sizeof(pwd));
+	*env_list = ft_lstnew_env(ft_strdup("PWD"), ft_strdup(pwd));
+	ft_lstadd_back_env(env_list, ft_lstnew_env(ft_strdup("SHLVL"), ft_strdup("1")));
+	ft_lstadd_back_env(env_list, ft_lstnew_env(ft_strdup("_"), ft_strdup("/usr/bin/env")));
+}

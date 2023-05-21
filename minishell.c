@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/15 21:46:01 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/21 11:34:41 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,21 @@ int	main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	(void)res;
+	res = NULL;
+	(void)env;
 	(void)env_list;
+	g_var->PATH = "/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.";
 	while (1)
 	{
 		signal(SIGINT, &handel);
 		signal(SIGQUIT, &handel);
+		// rl_catch_signals(0) = 0;
 		if (isatty(STDIN_FILENO) == 0)
 		{
 			dup2(i, STDIN_FILENO);
 			i = -1;
 		}
 		str = readline("\e[91mMinishell$ \e[0m");
-		// rl_catch_signals = 0;
 		if (str && *str)
 			add_history(str);
 		if (!str)
@@ -96,13 +99,15 @@ int	main(int ac, char **av, char **env)
 			ft_parser(lex, &prs, env);
 			if (prs)
 			{
-				if (env[0] != NULL)
+				if (!*env)
+					fill_empty_env(env , &env_list);
+				else
 					fill_env_list(env , &env_list);
-				res = ft_reconver(&env_list);
+				res = ft_reconver(env_list);
 				ft_excution(prs, res);
-				// ft_status(g_var->exit_s);
-				ft_lstclear(&prs);
+				// ft_lstclear(&prs);
 				// ft_free(res);
+				// ft_free_env(&env_list);
 			}
 		}
 	}

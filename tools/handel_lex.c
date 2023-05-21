@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 18:37:52 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/04/03 22:30:20 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/19 19:33:33 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	ft_handel_qoutes(t_lexer **lex, char **str)
 	{
 		i++;
 		while ((*str)[i] && (*str)[i] != '"')
-			i++;
+			i++;                                                                                            
 		j = i;
 		while ((*str)[j] && (*str)[j] != '$')
 			j++;
