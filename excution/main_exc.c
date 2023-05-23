@@ -1,0 +1,83 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main_exc.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/03 11:01:38 by aen-naas          #+#    #+#             */
+/*   Updated: 2023/05/23 15:33:32 by aen-naas         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../minishell.h"
+
+void	ft_pipe(t_parser *pars, char **env, int fd[2])
+{
+	char	*str;
+	int		old;
+	pid_t	id;
+
+	old = fd[0];
+	pipe(fd);
+	id = fork();
+	if (id == 0)
+	{
+		ft_dup_fd(pars, old, fd);
+		if (!ft_strcmp(pars->args[0], "exit"))
+			exit(0);
+		else
+		{
+			str = ft_check_path(pars->args[0], env);
+			if (execve(str, pars->args, env) == -1)
+			{
+				if (errno == EACCES)
+				{
+					printf("minishell: %s: : Permission denied\n",
+							pars->args[0]);
+					exit(126);
+				}
+				else
+					exit(127);
+			}
+		}
+	}
+	close(fd[1]);
+	close(old);
+	if (!pars->next)
+		waitpid(id, &g_var->exit_s, 0);
+}
+
+int	ft_check_files(t_parser *pars)
+{
+	while (pars)
+	{
+		if (pars->in_red == -1)
+			return (g_var->exit_s = 1);
+		pars = pars->next;
+	}
+	return (0);
+}
+
+void	ft_excution(t_parser *pars, char **env)
+{
+	int	fd[2];
+
+	fd[0] = -1;
+	fd[1] = -1;
+	// ft_check_files(&pars);
+	while (pars)
+	{
+		if (!pars->args[0])
+			break ;
+		if (pars->in_red != -1)
+		{
+			ft_norm_exc(pars, env, fd);
+			ft_status();
+		}
+		pars = pars->next;
+	}
+	while (wait(0) != -1 || errno != ECHILD)
+		;
+	close(fd[0]);
+}

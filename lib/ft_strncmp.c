@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 01:25:37 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/03/29 01:26:08 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/04/03 19:51:26 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_strncmp(char *s1, char *s2, int n)
 {
-	int			    i;
+	int				i;
 	unsigned char	*ss1;
 	unsigned char	*ss2;
 

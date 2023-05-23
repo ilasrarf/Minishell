@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+         #
+#    By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 18:13:02 by ilasrarf          #+#    #+#              #
-#    Updated: 2023/03/29 01:25:16 by ilasrarf         ###   ########.fr        #
+#    Updated: 2023/05/21 19:00:47 by aen-naas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRC = minishell.c \
 	  lib/ft_bzero.c \
 	  lib/ft_memset.c \
 	  lib/ft_strjoin.c \
+	  lib/ft_split.c \
 	  lib/ft_lst_new_prs.c \
 	  lib/ft_lstadd_back_prs.c \
 	  parsing/ft_parser.c \
@@ -36,22 +37,29 @@ SRC = minishell.c \
 	  lib/ft_strcmp.c \
 	  lib/ft_strncmp.c \
 	  lib/ft_strchr.c \
+	  lib/ft_free.c \
+	  lib/ft_atoi.c \
 	  parsing/prs_tools.c \
 	  parsing/prs_tools1.c \
-	  
+	  excution/main_exc.c \
+	  excution/exc_tools.c \
+	  excution/exc_tools1.c \
+	  excution/exit_status.c \
+	  excution/fill_envlist.c \
 	  
 
 SRC_O =  ${SRC:.c=.o}
 
 NAME = minishell
 CC = cc -g 
-FLAGS = -Wall -Werror -Wextra -g
+FLAGS = -Wall -Werror -Wextra -g 
 RM = rm -rf
+# LDFLAGS=
 
 all: ${NAME}
 
 ${NAME}: ${SRC_O}
-	${CC} ${SRC_O} -o ${NAME} -lreadline
+	${CC} ${SRC_O} -o ${NAME} -lreadline  -L /Users/aen-naas/.brew/opt/readline/lib -I /Users/aen-naas/.brew/opt/readline/include
 
 %.o: %.c minishell.h
 	${CC} ${FLAGS} -c $< -o $@

@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:16:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/04/01 05:26:13 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/22 14:29:57 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@ int	ft_check_in_out_snt(t_lexer *lex)
 {
 	while (lex)
 	{
-		if (ft_check_herdoc_fm(lex->word))
+		if (lex && lex->type == 'r' && ft_check_herdoc_fm(lex->word))
 		{
 			if (lex->next && !ft_strcmp(lex->next->word, " "))
 				lex = lex->next;
-			if (!lex->next || (lex->next->type != 'w' && lex->next->type != 'v'))
+			if (!lex->next || (lex->next->type != 'w'
+					&& lex->next->type != 'v'))
 			{
 				if (lex->next)
 					lex = lex->next;
 				printf("syntax error near unexpected token `%s'\n", lex->word);
-				ft_lstclear_lex(&lex);
 				return (0);
 			}
 		}
@@ -59,7 +59,7 @@ int	ft_count_arg(t_lexer *lex)
 	j = 0;
 	while (lex)
 	{
-		if ((lex->word[0] == '|' && lex->in_quotes == 0))
+		if (lex->type == 'p')
 			return (i - j);
 		if (lex->type == 'w' || lex->type == 'v')
 			i++;
@@ -98,7 +98,7 @@ void	ft_use_heredoc(t_lexer **lex, char **env, int *fd)
 	}
 	free(hold1);
 	*lex = (*lex)->next;
-	if (!ft_strcmp((*lex)->word, " "))
+	if ((*lex) && !ft_strcmp((*lex)->word, " "))
 		*lex = (*lex)->next;
 	*fd = open(hold, O_RDWR | O_CREAT, 0777);
 	i++;

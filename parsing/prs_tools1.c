@@ -6,37 +6,57 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:12:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/04/03 10:49:01 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/23 18:54:32 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+
 void	ft_check_next_fd(t_lexer *lex, int in, int out)
 {
 	while (lex && lex->type != 'p')
 	{
-		if ((ft_strcmp(lex->word, ">") || ft_strcmp(lex->word, ">>"))
+		if ((!ft_strcmp(lex->word, ">") || !ft_strcmp(lex->word, ">>"))
 			&& out >= 3)
-			close(out);
-		else if (ft_strcmp(lex->word, "<") && in >= 3)
+				close(out);
+		else if (!ft_strcmp(lex->word, "<") && in >= 3)
 			close(in);
 		lex = lex->next;
 	}
 }
 
+
+void	heredoc_sgl(int signal)
+{
+	if (signal == SIGINT)
+	{
+		// i = 130;
+		// write(1, "\n", 1);
+		g_var->i = dup(STDIN_FILENO);
+		// rl_on_new_line();
+		// rl_replace_line("", 0);
+		// rl_redisplay();
+		close(0);
+		// handel(signal);
+	}
+	else
+		return ;
+}
+
 void	ft_norm_herdoc(t_lexer *lex, char **env, char *hold, int fd)
 {
-	char *str;
-	char *str1;
+	char	*str;
+	char	*str1;
 
 	str = NULL;
-	while (ft_strcmp(str, lex->word))
+	(void)hold;
+	signal(SIGINT, 	&heredoc_sgl);
+	while (lex && ft_strcmp(str, lex->word))
 	{
 		str = readline("\e[91mheredoc>  \e[0m");
 		if (!str)
 		{
-			free(hold);
 			close(fd);
 			return ;
 		}
@@ -46,44 +66,29 @@ void	ft_norm_herdoc(t_lexer *lex, char **env, char *hold, int fd)
 			ft_putstr_fd(str1, fd);
 			write(fd, "\n", 1);
 			free(str1);
-			write(fd, "\n",1);
 		}
 		else if (ft_strcmp(str, lex->word))
-			ft_putstr_fd(str, fd); 
+		{
+			ft_putstr_fd(str, fd);
+			write(fd, "\n", 1);
+			close(fd);
+			fd = open(hold, O_RDWR | O_CREAT, 0777);
+		}
 		free(str);
 	}
 }
-char	*ft_hendel_var_herdoc(char *val, char **av)
-{
-    int		i;
-	int		j;
-	int		len;
-	char	*holder;
-	
-    j = 0;
-	i = 0;
-	while (val[j] && val[j] != '$')
-		j++;
-	len = j;
-	while (val[len] && val[len] != ' ')
-		len++;
-	len -= j;
-	// printf("\n------ %i %s------\n", len, val + j);
-    while (av[i] && ft_strncmp(av[i], val + j + 1, len - 1))
-        i++;
-	if (!av[i])
-		return (ft_strdup(""));
-	if(j > 0)
-    	holder = ft_strjoin(ft_substr(val, 0, j), av[i] + len);
-	else
-		holder = av[i] + len;
-	return (ft_strjoin(holder, val + len + j));
-}
+
+
 
 int	ft_check_other_var(char *var)
 {
 	int	i;
 
+	i = 0;
+	while (var[i] && var[i] != '\'')
+		i++;
+	if (var[i] == '\'')
+		return (0);
 	i = 0;
 	while (var[i] && var[i] != '$')
 		i++;
@@ -99,23 +104,28 @@ char	*ft_hendel_var(char *val, char **av)
 	int		len;
 	int		k;
 	char	*holder;
-	
-    j = 0;
+
+	j = 0;
 	i = 0;
 	while (val[j] && val[j] != '$')
 		j++;
+	if (val[j + 1] == '?')
+	{
+		return ft_itoa(g_var->exit_s);
+	}
 	len = j + 1;
-	while (val[len] && (val[len] == '_' || ft_isalnum(val[len])) )
+	while (val[len] && (val[len] == '_'  || ft_isalnum(val[len])))
 		len++;
 	len -= j;
-    while (av[i])
+	while (av[i])
 	{
 		k = 0;
 		while (av[i] && av[i][k] != '=')
 			k++;
-		if (!ft_strncmp(av[i], val + j + 1, k) && !ft_strncmp(av[i], val + j + 1, len - 1))
+		if (!ft_strncmp(av[i], val + j + 1, k) && !ft_strncmp(av[i], val + j
+				+ 1, len - 1))
 			break ;
-        i++;
+		i++;
 	}
 	if (!ft_check_other_var(val + j + 1))
 	{
@@ -128,7 +138,6 @@ char	*ft_hendel_var(char *val, char **av)
 		else
 			holder = ft_strdup(av[i] + k + 1);
 		holder = ft_strjoin(holder, val + j + len);
-		// ft_expand(av, len, k, j, holder)
 	}
 	else
 	{
@@ -146,3 +155,30 @@ char	*ft_hendel_var(char *val, char **av)
 	}
 	return (holder);
 }
+
+
+// char	*ft_hendel_var_herdoc(char *val, char **av)
+// {
+// 	int		i;
+// 	int		j;
+// 	int		len;
+// 	char	*holder;
+
+// 	j = 0;
+// 	i = 0;
+// 	while (val[j] && val[j] != '$')
+// 		j++;
+// 	len = j;
+// 	while (val[len] && val[len] != ' ')
+// 		len++;
+// 	len -= j;
+// 	while (av[i] && ft_strncmp(av[i], val + j + 1, len - 1))
+// 		i++;
+// 	if (!av[i])
+// 		return (ft_strdup(""));
+// 	if (j > 0)
+// 		holder = ft_strjoin(ft_substr(val, 0, j), av[i] + len);
+// 	else
+// 		holder = av[i] + len;
+// 	return (ft_strjoin(holder, val + len + j));
+// }

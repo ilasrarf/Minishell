@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:23:37 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/04/03 10:09:29 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/23 18:26:29 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int	ft_check_syntax(t_lexer *lex)
 			break ;
 		lex = lex->next;
 	}
-	if (!ft_strcmp(lex->word, "|") && lex->type == 'p')
-		return 0;
+	if (lex && !ft_strcmp(lex->word, "|") && lex->type == 'p')
+		return (0);
 	while (lex)
 	{
 		if (!ft_strcmp(lex->word, "|") && lex->type == 'p')
@@ -39,11 +39,11 @@ int	ft_check_syntax(t_lexer *lex)
 			if (lex->next && lex->next->type == 's')
 				lex = lex->next;
 			if ((lex->next && lex->next->type == 'p') || !lex->next)
-				return 0;
+				return (0);
 		}
 		lex = lex->next;
 	}
-	return 1;
+	return (1);
 }
 
 int	ft_fill_heredoc_fm(t_lexer **lex, int *in, int *out)
@@ -54,6 +54,8 @@ int	ft_fill_heredoc_fm(t_lexer **lex, int *in, int *out)
 		if (!ft_strcmp((*lex)->word, " "))
 			(*lex) = (*lex)->next;
 		*in = open((*lex)->word, O_RDONLY, 0777);
+		if (*in < 0)
+			printf("minishell: %s: No such file or directory\n", (*lex)->word);
 	}
 	else if (!ft_strcmp((*lex)->word, ">"))
 	{
@@ -81,38 +83,55 @@ int	ft_fill_args(t_lexer *lex, t_parser **prs, char **env)
 	char	**str;
 	int		in;
 	int		out;
-	int		hdc;
 
 	i = ft_count_arg(lex);
 	str = ft_calloc(i + 1, sizeof(char *));
 	i = 0;
 	in = 0;
-	out = 1;
-	hdc = -1;
+	out = 0;
 	while (lex)
 	{
-		if (lex && !ft_strcmp(lex->word, "|") && lex->in_quotes == 0)
+		if (lex && lex->type == 'p')
 			break ;
 		if (lex && (!ft_strcmp(lex->word, ">") || !ft_strcmp(lex->word, "<")
-				|| !ft_strcmp(lex->word, ">>")))
+				|| !ft_strcmp(lex->word, ">>")) && lex->type == 'r')
 			ft_fill_heredoc_fm(&lex, &in, &out);
-		if (lex && !ft_strcmp(lex->word, "<<"))
-			ft_use_heredoc(&lex, env, &hdc);
+		if (lex && !ft_strcmp(lex->word, "<<") && lex->type == 'r')
+			ft_use_heredoc(&lex, env, &in);
 		if (lex && lex->type == 'v')
 		{
 			str[i] = ft_hendel_var(lex->word, env);
+			lex = lex->next; 
+			while (lex && (lex->type == 'w' || lex->type == 'v'))
+			{
+				if (lex->type == 'v')
+					str[i] = ft_strjoin(ft_strdup(str[i]), ft_hendel_var(lex->word, env));
+				else
+					str[i] = ft_strjoin(ft_strdup(str[i]), lex->word);
+				lex = lex->next; 
+			}
 			i++;
 		}
 		if (lex && lex->type == 'w')
 		{
 			str[i] = ft_strdup(lex->word);
-			// printf("%s", str[i]);
+			lex = lex->next; 
+			while (lex && (lex->type == 'w' || lex->type == 'v'))
+			{
+				if (lex->type == 'v')
+					str[i] = ft_strjoin(ft_strdup(str[i]), ft_hendel_var(lex->word, env));
+				else
+					str[i] = ft_strjoin(ft_strdup(str[i]), lex->word);
+				lex = lex->next; 
+			}
 			i++;
 		}
-		if (lex)
+		if (lex && lex->type != 'p')
 			lex = lex->next;
 	}
-	ft_lstadd_back_prs(prs, ft_lst_new_prs(str, in, out, hdc));
+	// printf("last index %i\n", i);
+	str[i] = NULL;
+	ft_lstadd_back_prs(prs, ft_lst_new_prs(str, in, out));
 	if (lex && !ft_strcmp(lex->word, "|"))
 	{
 		lex = lex->next;
@@ -127,12 +146,12 @@ void	ft_parser(t_lexer *lex, t_parser **prs, char **env)
 	t_parser	*holder;
 
 	*prs = NULL;
-	if (!ft_check_in_out_snt(lex) || !ft_check_syntax(lex))
+	if (!lex || !ft_check_in_out_snt(lex) || !ft_check_syntax(lex))
 		return ;
 	ft_fill_args(lex, prs, env);
-	holder = (*prs);
-	int			i = 0;
+	holder = *prs;
 	printf("\n-------------\n");
+	int			i = 0;
 	while(holder)
     {
         i = 0;
@@ -143,10 +162,6 @@ void	ft_parser(t_lexer *lex, t_parser **prs, char **env)
         }
 		printf("in %i\n", holder->in_red);
 		printf("out %i\n", holder->out_red);
-		printf("heredoc %i\n", holder->heredoc);
         holder = holder->next;
-		printf("\n-------------\n");
-    }
-	ft_lstclear_lex(&lex);
-	ft_lstclear(prs);
+    } 
 }

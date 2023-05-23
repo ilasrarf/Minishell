@@ -1,28 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lst_new_prs.c                                   :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/20 20:47:57 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/03 15:23:10 by aen-naas         ###   ########.fr       */
+/*   Created: 2023/05/15 14:47:12 by aen-naas          #+#    #+#             */
+/*   Updated: 2023/05/22 14:21:22 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_parser	*ft_lst_new_prs(char **str, int in, int out)
+void	ft_free(char **str)
 {
-	t_parser	*n1;
+	int	i;
 
-	n1 = malloc(sizeof(t_parser));
-	if (n1)
+	i = 0;
+	while (str[i])
 	{
-		n1->args = str;
-		n1->in_red = in;
-		n1->out_red = out;
-		n1->next = NULL;
+		free(str[i]);
+		i++;
 	}
-	return (n1);
+	free(str);
+}
+
+void	ft_free_env(t_env **env)
+{
+	t_env *tmp;
+	tmp = *env;
+	while (tmp)
+	{
+		free((*env)->name);
+		free((*env)->value);
+		tmp = (*env)->next;
+		free(*env);
+		(*env) = (*env)->next;
+	}
+	// free(tmp);
+	// *env = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 06:04:46 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/03/28 06:20:39 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/04/03 19:51:08 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	ft_strchr(char *str, char c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str && str[i])
 	{
 		if (str[i] == c)
-			return 1;
+			return (1);
 		i++;
 	}
-	return 0;
+	return (0);
 }
