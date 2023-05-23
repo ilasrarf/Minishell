@@ -6,23 +6,21 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 10:46:04 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/21 11:43:00 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/22 16:41:44 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_red_out(t_parser *pars, char **env)
+void	ft_red_out(t_parser *pars)
 {
-	(void)env;
 	if (dup2(pars->out_red, STDOUT_FILENO) < 0)
 		return ;
 	close(pars->out_red);
 }
 
-void	ft_red_in(t_parser *pars, char **env)
+void	ft_red_in(t_parser *pars)
 {
-	(void)env;
 	if (dup2(pars->in_red, STDIN_FILENO) < 0)
 		return ;
 	close(pars->in_red);
@@ -30,32 +28,28 @@ void	ft_red_in(t_parser *pars, char **env)
 
 char	*ft_get_path(char **env)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	while (env[i])
 	{
 		if (!strncmp(env[i], "PATH", 4))
-			return env[i];
+			return (env[i]);
 		i++;
 	}
-	return NULL;
+	return (NULL);
 }
 
 char	*ft_check_path(char *cmd, char **env)
 {
-	char	*holder;
 	char	*path;
-	char	**paths;
-	int 	i;
-	int 	j;
+	int		j;
 
-	i = 1;
 	j = 0;
 	while (env[j])
 		j++;
 	if (!access(cmd, F_OK))
-		return cmd;
+		return (cmd);
 	if (j == 3)
 		path = g_var->PATH;
 	else
@@ -65,16 +59,5 @@ char	*ft_check_path(char *cmd, char **env)
 		printf("minishell: %s: No such file or directory\n", cmd);
 		exit(1);
 	}
-	paths = ft_split(path + 5, ':');
-	holder = ft_strjoin(ft_strjoin_char(ft_strdup(paths[0]), '/'), cmd);
-	while  (paths[i] && access(holder, F_OK))
-	{
-		holder = ft_strjoin(ft_strjoin_char(ft_strdup(paths[i]), '/'), cmd);
-		i++;
-	}
-	if(!paths[i])
-		printf("minishell: %s: : command not found\n", cmd);
-	if (paths)
-		ft_free(paths);
-	return (holder);
+	return (ft_norm_check_path(cmd, path));
 }

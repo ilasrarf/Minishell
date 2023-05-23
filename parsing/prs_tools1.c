@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:12:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/21 12:28:46 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/23 18:54:32 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	heredoc_sgl(int signal)
 	{
 		// i = 130;
 		// write(1, "\n", 1);
-		i = dup(STDIN_FILENO);
+		g_var->i = dup(STDIN_FILENO);
 		// rl_on_new_line();
 		// rl_replace_line("", 0);
 		// rl_redisplay();
@@ -52,12 +52,12 @@ void	ft_norm_herdoc(t_lexer *lex, char **env, char *hold, int fd)
 	str = NULL;
 	(void)hold;
 	signal(SIGINT, 	&heredoc_sgl);
-	while (ft_strcmp(str, lex->word))
+	while (lex && ft_strcmp(str, lex->word))
 	{
 		str = readline("\e[91mheredoc>  \e[0m");
 		if (!str)
+		{
 			close(fd);
-			// exit(0);
 			return ;
 		}
 		if (lex->in_quotes == 0 && ft_strchr(str, '$'))
@@ -109,7 +109,7 @@ char	*ft_hendel_var(char *val, char **av)
 	i = 0;
 	while (val[j] && val[j] != '$')
 		j++;
-	if (val[++j] == '?')
+	if (val[j + 1] == '?')
 	{
 		return ft_itoa(g_var->exit_s);
 	}

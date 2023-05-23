@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/21 11:34:41 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/23 20:05:12 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,13 @@ void	handel(int signal)
 		return ;
 }
 
-t_var	*ft_lstnew_var(int i, char *name , char *value)
+t_var	*ft_lstnew_var(int x, int y,  char *name , char *value)
 {
 	t_var	*head;
 
 	head = malloc(sizeof(t_var));
-	head->exit_s = i;
+	head->exit_s = x;
+	head->i = y;
 	head->name = name;
 	head->value = value;
 	head->next = NULL;
@@ -51,15 +52,14 @@ int	main(int ac, char **av, char **env)
 	t_parser	*prs;
 	t_env		*env_list;
 
-	prs = NULL;
-	g_var = ft_lstnew_var(0, NULL,NULL);
+	g_var = ft_lstnew_var(0, 0, NULL, NULL);
 	(void)ac;
 	(void)av;
 	(void)res;
-	res = NULL;
 	(void)env;
 	(void)env_list;
 	g_var->PATH = "/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.";
+	prs = NULL;
 	while (1)
 	{
 		signal(SIGINT, &handel);
@@ -67,8 +67,8 @@ int	main(int ac, char **av, char **env)
 		// rl_catch_signals(0) = 0;
 		if (isatty(STDIN_FILENO) == 0)
 		{
-			dup2(i, STDIN_FILENO);
-			i = -1;
+			dup2(g_var->i, STDIN_FILENO);
+			g_var->i = -1;
 		}
 		str = readline("\e[91mMinishell$ \e[0m");
 		if (str && *str)
@@ -87,7 +87,6 @@ int	main(int ac, char **av, char **env)
 		else
 		{
 			ft_lexer(str, &lex);
-			free(holder);
 			// while(lex)
 			// {
 			// 	printf("word: %s\n",lex->word);
@@ -96,19 +95,21 @@ int	main(int ac, char **av, char **env)
 			// 	lex = lex->next;
 			// 	printf("---------------\n");
 			// }
-			ft_parser(lex, &prs, env);
-			if (prs)
-			{
-				if (!*env)
-					fill_empty_env(env , &env_list);
-				else
-					fill_env_list(env , &env_list);
-				res = ft_reconver(env_list);
-				ft_excution(prs, res);
-				// ft_lstclear(&prs);
-				// ft_free(res);
-				// ft_free_env(&env_list);
-			}
+			if (!*env)
+				fill_empty_env(env , &env_list);
+			else
+				fill_env_list(env , &env_list, prs);
+			res = ft_reconver(env_list);
+			ft_free_env(&env_list);
+			free(holder);
+			ft_parser(lex, &prs, res);
+			// if (prs)
+			// {
+			// 	ft_excution(prs, res);
+			// 	ft_lstclear(&prs);
+			// }
+			ft_free(res);
+			ft_lstclear_lex(&lex);
 		}
 	}
 }

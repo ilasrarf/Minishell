@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/20 13:55:51 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/22 16:43:25 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 
-int						i;
+// int						i;
 
 typedef struct s_lexeing
 {
@@ -61,6 +61,8 @@ typedef struct s_env
 typedef struct s_var
 {
 	int					exit_s;
+	int					i;
+	int					*shell_lvl;
 	char				*name;
 	char				*PATH;
 	char				*value;
@@ -130,16 +132,21 @@ char					*ft_hendel_var_herdoc(char *val, char **av);
 // excution
 void					ft_excution(t_parser *pars, char **env);
 void					ft_exc_cmd(t_parser *pars, char **env);
-void					ft_red_out(t_parser *pars, char **env);
-void					ft_red_in(t_parser *pars, char **env);
+void					ft_red_out(t_parser *pars);
+void					ft_red_in(t_parser *pars);
 char					*ft_check_path(char *cmd, char **env);
 void					rl_replace_line(const char *text, int clear_undo);
 void					handel(int signal);
 void					ft_status();
-void					fill_env_list(char **env, t_env **env_list);
 char					**ft_reconver(t_env *env);
 int     				ft_check_exit_args(char **args);
 int 					rl_catch_signals (int catch);
+void					fill_env_list(char **env, t_env **env_list, t_parser *pars);
 void					fill_empty_env(char **env, t_env **env_list);
-
+void					ft_extra_handel(t_env **env_list, t_parser *pars, char *env);
+int						ft_cnt_name(char *str);
+char					*ft_norm_check_path(char *cmd, char *path);
+void					ft_pipe(t_parser *pars, char **env, int fd[2]);
+void					ft_norm_exc(t_parser *pars, char **env , int fd[2]);
+void					ft_dup_fd(t_parser *pars, int old, int fd[2]);
 #endif

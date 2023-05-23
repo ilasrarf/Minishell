@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 14:47:12 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/18 20:36:57 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/22 14:21:22 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,16 @@ void	ft_free(char **str)
 
 void	ft_free_env(t_env **env)
 {
-	t_env *tmp = *env;
-	while ((*env))
+	t_env *tmp;
+	tmp = *env;
+	while (tmp)
 	{
-		// free((*env)->name);
+		free((*env)->name);
 		free((*env)->value);
+		tmp = (*env)->next;
+		free(*env);
 		(*env) = (*env)->next;
 	}
-	free(tmp);
-	*env = NULL;
+	// free(tmp);
+	// *env = NULL;
 }

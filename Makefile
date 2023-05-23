@@ -6,7 +6,7 @@
 #    By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 18:13:02 by ilasrarf          #+#    #+#              #
-#    Updated: 2023/05/16 14:31:31 by aen-naas         ###   ########.fr        #
+#    Updated: 2023/05/21 19:00:47 by aen-naas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ SRC = minishell.c \
 	  parsing/prs_tools1.c \
 	  excution/main_exc.c \
 	  excution/exc_tools.c \
+	  excution/exc_tools1.c \
 	  excution/exit_status.c \
 	  excution/fill_envlist.c \
 	  
