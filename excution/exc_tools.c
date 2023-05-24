@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 10:46:04 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/22 16:41:44 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/24 17:53:50 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*ft_check_path(char *cmd, char **env)
 	if (!access(cmd, F_OK))
 		return (cmd);
 	if (j == 3)
-		path = g_var->PATH;
+		path = g_var->path;
 	else
 		path = ft_get_path(env);
 	if (!path)

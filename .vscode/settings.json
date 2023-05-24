@@ -3,6 +3,9 @@
   "files.associations": {
     "minishell.h": "c",
     "errno.h": "c",
-    "sstream": "c"
+    "sstream": "c",
+    "__locale": "c",
+    "ios": "c",
+    "locale": "c"
   }
 }

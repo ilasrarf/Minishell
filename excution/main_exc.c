@@ -6,11 +6,22 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:01:38 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/23 15:33:32 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/24 18:32:25 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	ft_print_error(char *cmd)
+{
+	if (errno == EACCES)
+	{
+		printf("minishell: %s: : Permission denied\n", cmd);
+		exit(126);
+	}
+	else
+		exit(127);
+}
 
 void	ft_pipe(t_parser *pars, char **env, int fd[2])
 {
@@ -30,16 +41,7 @@ void	ft_pipe(t_parser *pars, char **env, int fd[2])
 		{
 			str = ft_check_path(pars->args[0], env);
 			if (execve(str, pars->args, env) == -1)
-			{
-				if (errno == EACCES)
-				{
-					printf("minishell: %s: : Permission denied\n",
-							pars->args[0]);
-					exit(126);
-				}
-				else
-					exit(127);
-			}
+				ft_print_error(pars->args[0]);
 		}
 	}
 	close(fd[1]);
@@ -65,12 +67,9 @@ void	ft_excution(t_parser *pars, char **env)
 
 	fd[0] = -1;
 	fd[1] = -1;
-	// ft_check_files(&pars);
 	while (pars)
 	{
-		if (!pars->args[0])
-			break ;
-		if (pars->in_red != -1)
+		if (pars->in_red >= 0)
 		{
 			ft_norm_exc(pars, env, fd);
 			ft_status();
