@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:16:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/22 14:29:57 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/24 18:25:05 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,20 +64,17 @@ int	ft_count_arg(t_lexer *lex)
 		if (lex->type == 'w' || lex->type == 'v')
 			i++;
 		if (ft_check_herdoc_fm(lex->word))
-			j++;
+			j += 2;
 		lex = lex->next;
 	}
 	return (i - j);
 }
 
-void	ft_inial(t_norm *var, t_lexer *lex)
+void	ft_inial(t_norm *var)
 {
-	var->in = NULL;
-	var->out = NULL;
-	var->i = ft_count_arg(lex);
-	var->str = ft_calloc(var->i + 1, sizeof(char *));
-	var->i = ft_count_heredoc(lex);
-	var->j = 0;
+	var->i = 0;
+	var->in = 0;
+	var->out = 0;
 }
 
 void	ft_use_heredoc(t_lexer **lex, char **env, int *fd)

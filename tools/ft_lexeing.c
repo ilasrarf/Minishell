@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:57:32 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/23 20:04:51 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/24 18:22:33 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,26 +56,8 @@ int	ft_check_quotes(char *str)
 	return (0);
 }
 
-// void	ft_lexer(char *str, t_lexer **lex)
-// {
-// 	*lex = NULL;
-// 	while (*str)
-// 	{
-// 		if (*str != '\'' && *str != '"' && *str != ' ')
-// 			ft_handel_char(lex, &str);
-// 		if (ft_check_herdoc_fm(str))
-// 			ft_handel_herdoc_fm(lex, &str);
-// 		if (*str == '\'' && *str == '"')
-// 			ft_handel_qoutes(lex, str);
-// 		while (*str == ' ')
-// 			str++;
-// 	}
-// }
-
-
 void	ft_lexer(char *str, t_lexer **lex)
 {
-	*lex = NULL;
 	while (*str)
 	{
 		if (*str == '$' && *(str + 1) == '$')
