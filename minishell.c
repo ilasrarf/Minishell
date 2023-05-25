@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/24 17:49:37 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/25 16:56:07 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ void	ft_lex_pars(char *str, char **env)
 	else
 		fill_env_list(env, &env_list, prs);
 	res = ft_reconver(env_list);
-	ft_free_env(&env_list);
 	free(str);
 	ft_parser(lex, &prs, res);
 	if (prs)
 	{
-		ft_excution(prs, res);
+		ft_excution(prs, res, &env_list);
 		ft_lstclear(&prs);
 	}
+	ft_free_env(&env_list);
 	ft_free(res);
 	ft_lstclear_lex(&lex);
 }
@@ -92,13 +92,13 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	while (1)
 	{
-		signal(SIGINT, &handel);
-		signal(SIGQUIT, &handel);
-		if (isatty(STDIN_FILENO) == 0)
-		{
-			dup2(g_var->i, STDIN_FILENO);
-			g_var->i = -1;
-		}
+		// signal(SIGINT, &handel);
+		// signal(SIGQUIT, &handel);
+		// if (isatty(STDIN_FILENO) == 0)
+		// {
+		// 	dup2(g_var->i, STDIN_FILENO);
+		// 	g_var->i = -1;
+		// }
 		str = readline("\e[91mMinishell$ \e[0m");
 		if (str && *str)
 			add_history(str);
@@ -107,6 +107,7 @@ int	main(int ac, char **av, char **env)
 			printf("exit");
 			return (0);
 		}
+		
 		ft_main(str, env);
 	}
 }

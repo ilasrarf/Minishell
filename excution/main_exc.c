@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_exc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:01:38 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/24 18:32:25 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/25 16:42:01 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ void	ft_print_error(char *cmd)
 		exit(127);
 }
 
-void	ft_pipe(t_parser *pars, char **env, int fd[2])
+void	ft_pipe(t_parser *pars, char **env, int fd[2], t_env **env_list)
 {
 	char	*str;
+	int 	i = 0;
 	int		old;
 	pid_t	id;
 
@@ -35,9 +36,8 @@ void	ft_pipe(t_parser *pars, char **env, int fd[2])
 	if (id == 0)
 	{
 		ft_dup_fd(pars, old, fd);
-		if (!ft_strcmp(pars->args[0], "exit"))
-			exit(0);
-		else
+		i = ft_builtins(&pars, env_list);
+		if (i == 0)
 		{
 			str = ft_check_path(pars->args[0], env);
 			if (execve(str, pars->args, env) == -1)
@@ -61,7 +61,7 @@ int	ft_check_files(t_parser *pars)
 	return (0);
 }
 
-void	ft_excution(t_parser *pars, char **env)
+void	ft_excution(t_parser *pars, char **env, t_env **env_list)
 {
 	int	fd[2];
 
@@ -71,7 +71,7 @@ void	ft_excution(t_parser *pars, char **env)
 	{
 		if (pars->in_red >= 0)
 		{
-			ft_norm_exc(pars, env, fd);
+			ft_norm_exc(pars, env, fd, env_list);
 			ft_status();
 		}
 		pars = pars->next;

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+         #
+#    By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 18:13:02 by ilasrarf          #+#    #+#              #
-#    Updated: 2023/05/24 17:50:55 by aen-naas         ###   ########.fr        #
+#    Updated: 2023/05/24 23:32:09 by ilasrarf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,10 @@ SRC = minishell.c \
 	  excution/exc_tools1.c \
 	  excution/exit_status.c \
 	  excution/fill_envlist.c \
+	  builtins/builtins.c \
+	  builtins/builtins1.c \
+	  builtins/builtins2.c \
+	  builtins/builtins3.c \
 	  
 
 SRC_O =  ${SRC:.c=.o}
@@ -61,7 +65,7 @@ RM = rm -rf
 all: ${NAME}
 
 ${NAME}: ${SRC_O}
-	${CC} ${SRC_O} -o ${NAME} -lreadline  -L /Users/aen-naas/.brew/opt/readline/lib -I /Users/aen-naas/.brew/opt/readline/include
+	${CC} ${SRC_O} -o ${NAME} -lreadline  -L /Users/ilasrarf/.brew/opt/readline/lib -I /Users/ilasrarf/.brew/opt/readline/include
 
 %.o: %.c minishell.h
 	${CC} ${FLAGS} -c $< -o $@

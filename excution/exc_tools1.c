@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exc_tools1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 18:05:28 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/24 17:52:51 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/25 16:40:50 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*ft_norm_check_path(char *cmd, char *path)
 	return (holder);
 }
 
-void	ft_norm_exc(t_parser *pars, char **env, int fd[2])
+void	ft_norm_exc(t_parser *pars, char **env, int fd[2], t_env **env_list)
 {
 	if (!ft_strcmp(pars->args[0], "exit") && !pars->next && fd[0] == -1)
 	{
@@ -72,7 +72,7 @@ void	ft_norm_exc(t_parser *pars, char **env, int fd[2])
 	}
 	else
 	{
-		ft_pipe(pars, env, fd);
+		ft_pipe(pars, env, fd, env_list);
 		if (pars->out_red > 2)
 			close(pars->out_red);
 		if (pars->in_red > 2)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/24 18:30:08 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/25 16:43:36 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,8 @@ void					ft_norm_herdoc(t_lexer *lex, char **env, char *hold,
 char					*ft_hendel_var(char *val, char **av);
 void					ft_handel_in(t_lexer **lex, int *in, char **av);
 char					*ft_hendel_var_herdoc(char *val, char **av);
-void					ft_fill_heredoc_fm(t_lexer **lex, int *in, int *out, char **av);
+void					ft_fill_heredoc_fm(t_lexer **lex, int *in, int *out,
+							char **av);
 void					ft_norm_herdoc_norm(char **env, char *str, char *str1,
 							int fd);
 int						ft_norm_fill_args(t_lexer **lex, char **env, char **str,
@@ -144,7 +145,7 @@ t_calcul				ft_inial_cal(void);
 char					*ft_norm_hendle_var(char **av, char *val, t_calcul cl);
 int						ft_check_other_var(char *var);
 // excution
-void					ft_excution(t_parser *pars, char **env);
+void					ft_excution(t_parser *pars, char **env, t_env **env_list);
 void					ft_exc_cmd(t_parser *pars, char **env);
 void					ft_red_out(t_parser *pars);
 void					ft_red_in(t_parser *pars);
@@ -162,8 +163,23 @@ void					ft_extra_handel(t_env **env_list, t_parser *pars,
 							char *env);
 int						ft_cnt_name(char *str);
 char					*ft_norm_check_path(char *cmd, char *path);
-void					ft_pipe(t_parser *pars, char **env, int fd[2]);
-void					ft_norm_exc(t_parser *pars, char **env, int fd[2]);
+void					ft_pipe(t_parser *pars, char **env, int fd[2], t_env **env_list);
+void					ft_norm_exc(t_parser *pars, char **env, int fd[2],  t_env **env_list);
 void					ft_dup_fd(t_parser *pars, int old, int fd[2]);
+
+// builtins
+
+int						ft_builtins(t_parser **prs, t_env **env_list);
+void					ft_handel_echo(t_parser **prs);
+int						ft_handel_n(char *str);
+void					ft_handel_env(t_env **env);
+void					ft_handel_pwd(t_env **env);
+void					ft_chang_ocwd(t_env **env, char *old);
+void					ft_chang_cwd(t_env **env, char *cur);
+char					*get_home(t_env **env);
+void					ft_handel_cd(t_parser **prs, t_env **env);
+void					ft_write_error(int fd, char *str);
+void					ft_print_exp(t_env **env);
+void					ft_handel_export(t_parser **prs, t_env **env);
 
 #endif
