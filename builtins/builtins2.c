@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:47:58 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/20 14:50:18 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/05/26 15:18:39 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void    ft_handel_cd(t_parser **prs,  t_env **env)
 		i = chdir((*prs)->args[1]);
 	else
 		i = chdir(get_home(env));
+	printf("%d----%d\n", i, hi);
 	if(i == -1 && hi == 0)
 	{
 		printf("cd: %s: No such file or directory\n", (*prs)->args[1]);

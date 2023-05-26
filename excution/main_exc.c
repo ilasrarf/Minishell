@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:01:38 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/25 16:42:01 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/05/26 16:51:19 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	ft_pipe(t_parser *pars, char **env, int fd[2], t_env **env_list)
 			if (execve(str, pars->args, env) == -1)
 				ft_print_error(pars->args[0]);
 		}
+		else
+			exit(0);
 	}
 	close(fd[1]);
 	close(old);
@@ -67,6 +69,11 @@ void	ft_excution(t_parser *pars, char **env, t_env **env_list)
 
 	fd[0] = -1;
 	fd[1] = -1;
+	if (!pars->next)
+	{
+		if (ft_builtins(&pars , env_list) == 0)
+			return ;
+	}
 	while (pars)
 	{
 		if (pars->in_red >= 0)

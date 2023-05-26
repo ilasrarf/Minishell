@@ -6,7 +6,7 @@
 #    By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 18:13:02 by ilasrarf          #+#    #+#              #
-#    Updated: 2023/05/24 23:32:09 by ilasrarf         ###   ########.fr        #
+#    Updated: 2023/05/26 12:57:08 by ilasrarf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ SRC_O =  ${SRC:.c=.o}
 
 NAME = minishell
 CC = cc -g 
-# FLAGS = -Wall -Werror -Wextra -g 
+FLAGS = -Wall -Werror -Wextra 
 RM = rm -rf
 # LDFLAGS=
 

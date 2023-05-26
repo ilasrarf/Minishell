@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 02:48:29 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/25 16:48:54 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/05/26 15:34:37 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,24 +35,26 @@ void	ft_handel_echo(t_parser **prs)
 	f = 0;
 	while ((*prs)->args[i])
 	{
-		if (!ft_strncmp((*prs)->args[i], "-n", 2) && f == 0)
+		if (!ft_strncmp((*prs)->args[i], "-", 1))
 		{
 			f = ft_handel_n((*prs)->args[i]);
 			if (f == 0)
 			{
-				ft_putstr_fd((*prs)->args[i], (*prs)->out_red);
-				write((*prs)->out_red, " ", 1);
+				ft_putstr_fd((*prs)->args[i], 1);
+				if ((*prs)->args[i + 1])
+					write(1, " ", 1);
 			}
 		}
 		else
 		{
-			ft_putstr_fd((*prs)->args[i], (*prs)->out_red);
-			write((*prs)->out_red, " ", 1);
+			ft_putstr_fd((*prs)->args[i], 1);
+			if ((*prs)->args[i + 1])
+				write(1, " ", 1);
 		}
 		i++;
 	}
 	if (f == 0)
-		write((*prs)->out_red, "\n", 1);
+		write(1, "\n", 1);
 }
 
 int	ft_builtins(t_parser **prs, t_env **env_list)

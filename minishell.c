@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/25 16:56:07 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/05/26 15:36:44 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,13 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	while (1)
 	{
-		// signal(SIGINT, &handel);
-		// signal(SIGQUIT, &handel);
-		// if (isatty(STDIN_FILENO) == 0)
-		// {
-		// 	dup2(g_var->i, STDIN_FILENO);
-		// 	g_var->i = -1;
-		// }
+		signal(SIGINT, &handel);
+		signal(SIGQUIT, &handel);
+		if (isatty(STDIN_FILENO) == 0)
+		{
+			dup2(g_var->i, STDIN_FILENO);
+			g_var->i = -1;
+		}
 		str = readline("\e[91mMinishell$ \e[0m");
 		if (str && *str)
 			add_history(str);
