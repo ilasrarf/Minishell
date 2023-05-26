@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 16:20:43 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/24 18:27:43 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/26 14:11:02 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,12 @@ void	ft_handel_in(t_lexer **lex, int *in, char **av)
 		if (*in < 0)
 			*in = -2;
 	}
+}
+
+
+void	ft_error_exit(t_parser **pars)
+{
+	write(2,"minishell: fork: Resource temporarily unavailable\n", 50);
+	while (*pars)
+		*pars = (*pars)->next;
 }
