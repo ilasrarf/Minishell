@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exc_tools1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 18:05:28 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/25 16:40:50 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/05/26 19:19:22 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,11 @@ char	*ft_norm_check_path(char *cmd, char *path)
 	return (holder);
 }
 
-void	ft_norm_exc(t_parser *pars, char **env, int fd[2], t_env **env_list)
+int	ft_norm_exc(t_parser *pars, char **env, int fd[2], t_env **env_list)
 {
+	int i;
+
+	i = 0;
 	if (!ft_strcmp(pars->args[0], "exit") && !pars->next && fd[0] == -1)
 	{
 		if (!ft_check_exit_args(pars->args))
@@ -72,12 +75,13 @@ void	ft_norm_exc(t_parser *pars, char **env, int fd[2], t_env **env_list)
 	}
 	else
 	{
-		ft_pipe(pars, env, fd, env_list);
+		i = ft_pipe(pars, env, fd, env_list);
 		if (pars->out_red > 2)
 			close(pars->out_red);
 		if (pars->in_red > 2)
 			close(pars->in_red);
 	}
+	return i;
 }
 
 void	ft_dup_fd(t_parser *pars, int old, int fd[2])

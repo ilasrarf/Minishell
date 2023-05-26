@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_exc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:01:38 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/26 16:51:19 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/05/26 19:20:49 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_print_error(char *cmd)
 		exit(127);
 }
 
-void	ft_pipe(t_parser *pars, char **env, int fd[2], t_env **env_list)
+int	ft_pipe(t_parser *pars, char **env, int fd[2], t_env **env_list)
 {
 	char	*str;
 	int 	i = 0;
@@ -33,6 +33,12 @@ void	ft_pipe(t_parser *pars, char **env, int fd[2], t_env **env_list)
 	old = fd[0];
 	pipe(fd);
 	id = fork();
+	if (id < 0)
+	{
+		close (fd[0]);
+		close (fd[1]);
+		return -1;
+	}
 	if (id == 0)
 	{
 		ft_dup_fd(pars, old, fd);
@@ -50,6 +56,7 @@ void	ft_pipe(t_parser *pars, char **env, int fd[2], t_env **env_list)
 	close(old);
 	if (!pars->next)
 		waitpid(id, &g_var->exit_s, 0);
+	return 0;
 }
 
 int	ft_check_files(t_parser *pars)
@@ -66,23 +73,30 @@ int	ft_check_files(t_parser *pars)
 void	ft_excution(t_parser *pars, char **env, t_env **env_list)
 {
 	int	fd[2];
+	int i;
+
 
 	fd[0] = -1;
 	fd[1] = -1;
-	if (!pars->next)
-	{
-		if (ft_builtins(&pars , env_list) == 0)
+	if (!pars->next && ft_builtins(&pars , env_list) != 0)
 			return ;
-	}
-	while (pars)
+	else
 	{
-		if (pars->in_red >= 0)
+		while (pars)
 		{
-			ft_norm_exc(pars, env, fd, env_list);
-			ft_status();
+			if (pars->in_red >= 0)
+			{
+				i = ft_norm_exc(pars, env, fd, env_list);
+				if (i == -1)
+				{
+					ft_putstr_fd("minishell: fork: Resource temporarily unavailable \n", 2);
+					break ;
+				}
+				ft_status();
+			}
+			pars = pars->next;
 		}
-		pars = pars->next;
-	}
+		}
 	while (wait(0) != -1 || errno != ECHILD)
 		;
 	close(fd[0]);
