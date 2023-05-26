@@ -6,11 +6,29 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 14:54:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/25 23:35:31 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/05/26 20:26:36 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int	ft_prs_exp(char *str)
+{
+	int i;
+
+	i = 0;
+	if (!(str[i] >= 'A' && str[i] <= 'Z') && !(str[i] >= 'a' && str[i] <= 'z')
+		&& str[i] != '_')
+		return (0);
+	while (str[i] && str[i] != '=')
+	{
+		if (!(str[i] >= 'A' && str[i] <= 'Z') && !(str[i] >= 'a' && str[i] <= 'z')
+			&& str[i] != '_' && !(str[i] >= '0' && str[i] <= '9'))
+			return (0);
+		i++;
+	}
+	 return (1);	
+}
 
 void	ft_write_error(int fd, char *str)
 {
@@ -40,19 +58,20 @@ void	ft_print_exp(t_env **env)
 
 void    ft_handel_export(t_parser **prs, t_env **env)
 {
-	// int i = 0;
+	int i = 1;
 	
-	printf("----%s----" ,(*prs)->args[0]);
 	if (!(*prs)->args[1])
 	{
 		ft_print_exp(env);
 		return;
 	}
-	// while((*prs)->args[i])
-	// {
-	// 	if (ft_prs_exp((*prs)->args[i]) == 0)
-	// 		ft_write_error(2, (*prs)->args[i]);
-		
-	// 	i++;
-	// }
+	// printf("---%s----", (*prs)->args[1]);
+	while((*prs)->args[i])
+	{
+		if (ft_prs_exp((*prs)->args[i]) == 0)
+			ft_write_error(2, (*prs)->args[i]);
+		else
+			add_to_env((*prs)->args[i], env);
+		i++;
+	}
 }

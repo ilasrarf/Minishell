@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 16:39:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/08 12:00:51 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/05/26 19:47:26 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,3 @@ void	ft_handel_pwd(t_env **env)
         *env = tmp1;
     }
 }
-// void	ft_handel_exit(t_env **env)
-// {
-    
-// }
