@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 18:37:52 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/24 15:41:47 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/27 19:15:43 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,9 @@ void	ft_handel_char(t_lexer **lex, char **str)
 	hold = ft_strdup("");
 	i = 0;
 	while ((*str)[i] && !ft_check_herdoc_fm(*str + i) && (*str)[i] != ' '
-		&& (*str)[i] != '|' && (*str)[i] != '$')
+		&& (*str)[i] != '|' && (*str)[i] != '$' && (*str)[i] != '"' && (*str)[i] != '\'')
 	{
-		if ((*str)[i] != '"' && (*str)[i] != '\'')
-			hold = ft_strjoin_char(hold, (*str)[i]);
+		hold = ft_strjoin_char(hold, (*str)[i]);
 		i++;
 	}
 	j = 0;
