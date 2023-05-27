@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:23:37 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/27 16:57:43 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/27 18:52:00 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	ft_fill_args(t_lexer *lex, t_parser **prs, char **env)
 			break ;
 		if (ft_norm_fill_args(&lex, env, str, &var))
 			var.i++;
-		if (lex && lex->type != 'p')
+		if (lex && lex->type == 's')
 			lex = lex->next;
 	}
 	str[var.i] = NULL;

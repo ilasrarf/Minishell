@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/27 16:41:46 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:44:18 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	handel(int signal)
 		return ;
 }
 
-void	ft_lex_pars(char *str, char **env, t_env *env_list)
+void	ft_lex_pars(char *str, char **env, t_env **env_list)
 {
 	// static int	t = 0;
 	char		**res;
@@ -41,23 +41,23 @@ void	ft_lex_pars(char *str, char **env, t_env *env_list)
 	lex = NULL;
 	ft_lexer(str, &lex);
 	if (!*env)
-		fill_empty_env(env, &env_list);
-	else
-		fill_env_list(env, &env_list, prs);
-	res = ft_reconver(env_list);
+		fill_empty_env(env, env_list);
+	else if (!*env_list) 
+		fill_env_list(env, env_list, prs);
+	res = ft_reconver(*env_list);
 	free(str);
 	ft_parser(lex, &prs, res);
 	if (prs)
 	{
-		ft_excution(prs, res, &env_list);
+		ft_excution(prs, res, env_list);
 		ft_lstclear(&prs);
 	}
-	ft_free_env(&env_list);
+	// ft_free_env(&env_list);
 	ft_free(res);
 	ft_lstclear_lex(&lex);
 }
 
-int	ft_main(char *str, char **env, t_env *env_list)
+int	ft_main(char *str, char **env, t_env **env_list)
 {
 	g_var->path = "/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.";
 	if (ft_check_quotes(str))
@@ -110,6 +110,6 @@ int	main(int ac, char **av, char **env)
 			return (0);
 		}
 		
-		ft_main(str, env, env_list);
+		ft_main(str, env, &env_list);
 	}
 }
