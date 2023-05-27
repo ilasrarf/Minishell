@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prs_tools2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:34:49 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/24 16:23:41 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/27 16:18:29 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ void	ft_norm_herdoc_norm(char **env, char *str, char *str1, int fd)
 
 void	ft_join_var_word(t_lexer **lex, char **str, char **env, int i)
 {
+	printf("%d\n", i);
 	if ((*lex) && (*lex)->type == 'v')
 		str[i] = ft_hendel_var((*lex)->word, env);
-	else
+	else if (*lex)
 		str[i] = ft_strdup((*lex)->word);
 	(*lex) = (*lex)->next;
 	while ((*lex) && ((*lex)->type == 'w' || (*lex)->type == 'v'))

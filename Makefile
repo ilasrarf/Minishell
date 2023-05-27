@@ -6,7 +6,7 @@
 #    By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 18:13:02 by ilasrarf          #+#    #+#              #
-#    Updated: 2023/05/26 19:40:48 by ilasrarf         ###   ########.fr        #
+#    Updated: 2023/05/26 22:03:16 by ilasrarf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ SRC = minishell.c \
 	  builtins/builtins1.c \
 	  builtins/builtins2.c \
 	  builtins/builtins3.c \
+	  builtins/builtins4.c \
 	  
 
 SRC_O =  ${SRC:.c=.o}

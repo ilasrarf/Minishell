@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/26 15:36:44 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/05/27 16:23:23 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ void	handel(int signal)
 		return ;
 }
 
-void	ft_lex_pars(char *str, char **env)
+void	ft_lex_pars(char *str, char **env, t_env *env_list)
 {
+	// static int	t = 0;
 	char		**res;
 	t_lexer		*lex;
 	t_parser	*prs;
-	t_env		*env_list;
 
 	prs = NULL;
 	lex = NULL;
@@ -57,7 +57,7 @@ void	ft_lex_pars(char *str, char **env)
 	ft_lstclear_lex(&lex);
 }
 
-int	ft_main(char *str, char **env)
+int	ft_main(char *str, char **env, t_env *env_list)
 {
 	g_var->path = "/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.";
 	if (ft_check_quotes(str))
@@ -66,7 +66,7 @@ int	ft_main(char *str, char **env)
 		g_var->exit_s = 2;
 	}
 	else
-		ft_lex_pars(str, env);
+		ft_lex_pars(str, env, env_list);
 	return (0);
 }
 
@@ -86,7 +86,9 @@ t_var	*ft_lstnew_var(int x, int y, char *name, char *value)
 int	main(int ac, char **av, char **env)
 {
 	char	*str;
+	t_env	*env_list;
 
+	env_list = NULL;
 	g_var = ft_lstnew_var(0, 0, NULL, NULL);
 	(void)ac;
 	(void)av;
@@ -108,6 +110,6 @@ int	main(int ac, char **av, char **env)
 			return (0);
 		}
 		
-		ft_main(str, env);
+		ft_main(str, env, env_list);
 	}
 }
