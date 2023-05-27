@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/26 22:02:56 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/05/27 16:57:57 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ int						ft_count_heredoc(t_lexer *lex);
 int						ft_count_arg(t_lexer *lex);
 void					ft_inial(t_norm *var);
 void					ft_use_heredoc(t_lexer **lex, char **env, int *fd);
-void					ft_check_next_fd(t_lexer **lex, int in, int out);
+void					ft_check_next_fd(t_lexer *lex, int in, int out);
 void					ft_norm_herdoc(t_lexer *lex, char **env, char *hold,
 							int fd);
 char					*ft_hendel_var(char *val, char **av);

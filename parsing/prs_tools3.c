@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prs_tools3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 16:20:43 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/27 16:17:59 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/05/27 16:38:32 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ int	ft_norm_fill_args(t_lexer **lex, char **env, char **str, t_norm *var)
 		return (1);
 	if ((*lex) && (!ft_strcmp((*lex)->word, ">") || !ft_strcmp((*lex)->word,
 				"<") || !ft_strcmp((*lex)->word, ">>")) && (*lex)->type == 'r')
-				{
-					puts("gggg");
 					ft_fill_heredoc_fm(&(*lex), &var->in, &var->out, env);
-				}
 	if ((*lex) && !ft_strcmp((*lex)->word, "<<") && (*lex)->type == 'r')
 		ft_use_heredoc(&(*lex), env, &var->in);
 	if ((*lex) && ((*lex)->type == 'v' || (*lex)->type == 'w'))

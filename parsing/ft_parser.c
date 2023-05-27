@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:23:37 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/27 16:19:43 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/05/27 16:57:43 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	ft_fill_heredoc_fm(t_lexer **lex, int *in, int *out, char **av)
 			(*lex) = (*lex)->next;
 		*out = open((*lex)->word, O_WRONLY | O_CREAT, 0777);
 	}
-	ft_check_next_fd(lex, *in, *out);
+	ft_check_next_fd(*lex, *in, *out);
 	if (*lex)
 		(*lex) = (*lex)->next;
 }

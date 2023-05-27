@@ -6,27 +6,27 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:12:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/24 18:29:44 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/27 16:58:09 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_check_next_fd(t_lexer **lex, int in, int out)
+void	ft_check_next_fd(t_lexer *lex, int in, int out)
 {
 	if (in == -1)
-		printf("minishell: %s: No such file or directory\n", (*lex)->word);
+		printf("minishell: %s: No such file or directory\n", (lex)->word);
 	else if (in == -2)
-		printf("minishell: %s: ambiguous redirect\n", (*lex)->word);
-	(*lex) = (*lex)->next;
-	while (*lex && (*lex)->type != 'p')
+		printf("minishell: %s: ambiguous redirect\n", (lex)->word);
+	(lex) = (lex)->next;
+	while (lex && (lex)->type != 'p')
 	{
-		if ((!ft_strcmp((*lex)->word, ">") || !ft_strcmp((*lex)->word, ">>"))
+		if ((!ft_strcmp((lex)->word, ">") || !ft_strcmp((lex)->word, ">>"))
 			&& out >= 3)
-			close(out);
-		else if (!ft_strcmp((*lex)->word, "<") && in >= 3)
+				close(out);
+		else if (!ft_strcmp((lex)->word, "<") && in >= 3)
 			close(in);
-		(*lex) = (*lex)->next;
+		(lex) = (lex)->next;
 	}
 }
 
