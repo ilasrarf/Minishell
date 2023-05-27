@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:12:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/27 16:58:09 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/27 19:37:45 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	heredoc_sgl(int signal)
 {
 	if (signal == SIGINT)
 	{
+		g_var->suspend = 0;
 		g_var->i = dup(STDIN_FILENO);
 		close(0);
 	}

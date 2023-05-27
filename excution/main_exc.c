@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_exc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:01:38 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/27 12:47:58 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/05/27 19:37:50 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,24 @@
 
 void	ft_print_error(char *cmd)
 {
+	struct stat filestat;
 	if (errno == EACCES)
 	{
-		printf("minishell: %s: : Permission denied\n", cmd);
+		if (stat(cmd, &filestat) == 0) 
+		{
+        	if (S_ISDIR(filestat.st_mode))
+            	printf("minishell: %s: No such file or directory\n", cmd);
+		}
+		else
+			printf("minishell: %s: Permission denied\n", cmd);
 		exit(126);
 	}
 	else
+	{
+
+		fprintf(stderr,"g\n"); 
 		exit(127);
+	}
 }
 
 int	ft_pipe(t_parser *pars, char **env, int fd[2], t_env **env_list)
@@ -42,6 +53,7 @@ int	ft_pipe(t_parser *pars, char **env, int fd[2], t_env **env_list)
 	if (id == 0)
 	{
 		ft_dup_fd(pars, old, fd);
+		signal(SIGINT, SIG_DFL);
 		i = ft_builtins(&pars, env_list);
 		if (i == 0)
 		{
@@ -94,9 +106,11 @@ void	ft_excution(t_parser *pars, char **env, t_env **env_list)
 				}
 				ft_status();
 			}
+			g_var->exc = 0;
 			pars = pars->next;
 		}
 		}
+		g_var->exc = 1;
 	while (wait(0) != -1 || errno != ECHILD)
 		;
 	close(fd[0]);

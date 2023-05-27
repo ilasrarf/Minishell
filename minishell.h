@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/27 17:59:24 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/05/27 19:33:23 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+# include <sys/stat.h>
 
 // int						i;
 
@@ -66,6 +67,8 @@ typedef struct s_calcul
 typedef struct s_var
 {
 	int					exit_s;
+	int					exc;
+	int					suspend;
 	int					i;
 	int					*shell_lvl;
 	char				*name;

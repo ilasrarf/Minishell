@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/27 19:15:37 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/27 19:27:57 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	handel(int signal)
 {
 	if (signal == SIGQUIT)
 		return ;
-	else if (signal == SIGINT)
+	else if (signal == SIGINT && g_var->exc == 1)
 	{
 		g_var->exit_s = 1;
 		write(1, "\n", 1);
@@ -39,6 +39,7 @@ void	ft_lex_pars(char *str, char **env, t_env **env_list)
 
 	prs = NULL;
 	lex = NULL;
+	g_var->suspend = 1;
 	ft_lexer(str, &lex);
 	if (!*env)
 		fill_empty_env(env, env_list);
@@ -47,9 +48,7 @@ void	ft_lex_pars(char *str, char **env, t_env **env_list)
 	res = ft_reconver(*env_list);
 	free(str);
 	ft_parser(lex, &prs, res);
-	printf("%s\n", prs->args[0]);
-	printf("%s\n", prs->args[1]);
-	if (prs)
+	if (prs && g_var->suspend)
 	{
 		ft_excution(prs, res, env_list);
 		ft_lstclear(&prs);
@@ -111,7 +110,6 @@ int	main(int ac, char **av, char **env)
 			printf("exit");
 			return (0);
 		}
-		
 		ft_main(str, env, &env_list);
 	}
 }
