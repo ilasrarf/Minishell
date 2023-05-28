@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 16:39:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/26 19:47:26 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/05/28 19:54:41 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@ void	ft_handel_env(t_env **env)
     tmp1 = *env;
     while ((*env))
     {
-        printf("%s=", (*env)->name);
-        printf("%s\n", (*env)->value);
+        if ((*env)->st == 1)
+        {
+            printf("%s=", (*env)->name);
+            printf("%s\n", (*env)->value);
+        }
         (*env) = (*env)->next;
     }
     *env = tmp1;

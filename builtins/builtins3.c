@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 14:54:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/27 18:54:48 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/05/28 19:55:04 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@ int	ft_prs_exp(char *str)
 		return (0);
 	while (str[i] && str[i] != '=')
 	{
-		if (!(str[i] >= 'A' && str[i] <= 'Z') && !(str[i] >= 'a'
+		if (str[i] == '+' && str[i + 1] != '=')
+			return (0);
+		else if (!(str[i] >= 'A' && str[i] <= 'Z') && !(str[i] >= 'a'
 				&& str[i] <= 'z') && str[i] != '_' && !(str[i] >= '0'
-				&& str[i] <= '9'))
+				&& str[i] <= '9') && str[i] != '+')
 			return (0);
 		i++;
 	}

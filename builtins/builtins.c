@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 02:48:29 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/27 12:06:19 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/05/28 19:54:20 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,35 +60,42 @@ void	ft_handel_echo(t_parser **prs)
 int	ft_builtins(t_parser **prs, t_env **env_list)
 {
 	if (!ft_strcmp((*prs)->args[0], "exit"))
-			exit(0);
-	if (!ft_strcmp((*prs)->args[0], "echo") || !ft_strcmp((*prs)->args[0], "ECHO"))
+		exit(0);
+	if (!ft_strcmp((*prs)->args[0], "echo") || !ft_strcmp((*prs)->args[0],
+			"ECHO"))
 	{
 		ft_handel_echo(prs);
 		return (1);
 	}
-	else if (!ft_strcmp((*prs)->args[0], "cd") || !ft_strcmp((*prs)->args[0], "CD"))
+	else if (!ft_strcmp((*prs)->args[0], "cd") || !ft_strcmp((*prs)->args[0],
+			"CD"))
 	{
 		ft_handel_cd(prs, env_list);
 		return (1);
 	}
-	else if (!ft_strcmp((*prs)->args[0], "pwd") || !ft_strcmp((*prs)->args[0], "PWD"))
+	else if (!ft_strcmp((*prs)->args[0], "pwd") || !ft_strcmp((*prs)->args[0],
+			"PWD"))
 	{
 		ft_handel_pwd(env_list);
 		return (1);
 	}
-	else if (!ft_strcmp((*prs)->args[0], "env") || !ft_strcmp((*prs)->args[0], "ENV"))
+	else if (!ft_strcmp((*prs)->args[0], "env") || !ft_strcmp((*prs)->args[0],
+			"ENV"))
 	{
 		ft_handel_env(env_list);
 		return (1);
 	}
-	else if (!ft_strcmp((*prs)->args[0], "export") || !ft_strcmp((*prs)->args[0], "EXPORT"))
+	else if (!ft_strcmp((*prs)->args[0], "export")
+		|| !ft_strcmp((*prs)->args[0], "EXPORT"))
 	{
 		ft_handel_export(prs, env_list);
 		return (1);
 	}
-
-	// else if (!ft_strcmp((*prs)->args[0], "unset") || !ft_strcmp((*prs)->args[0],
-	// 		"UNSET"))
+	// else if (!ft_strcmp((*prs)->args[0], "unset")
+	// 	|| !ft_strcmp((*prs)->args[0], "UNSET"))
+	// {
 	// 	ft_handel_unset(prs, env_list);
+	// 	return (1);		
+	// }
 	return (0);
-}                                           
+}                                         

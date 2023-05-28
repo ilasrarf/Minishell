@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 20:24:53 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/27 18:54:35 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/05/28 19:55:29 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,44 @@ void    add_new_to_env(char *str, t_env **env)
 	
 }
 
-// void    add_old_to_env(char *str, t_env **env)
-// {
-	
-// }
+void    add_old_to_env(char *str, t_env **env)
+{
+	int i;
+	t_env *tmp;
 
+	tmp = *env;
+	i = 0;
+	while (str[i] && str[i] != '=' && str[i] != '+')
+		i++;
+	if (!ft_strchr(str, '='))
+		return ;
+	while ((*env))
+	{
+		if (!ft_strncmp((*env)->name, str, i))
+		{
+			if (str[i] == '+')
+			{
+				(*env)->value = ft_strjoin((*env)->value, str + i + 2); 
+				(*env)->st = 1;
+			}
+			else
+			{
+				free((*env)->value);
+				(*env)->value = ft_strdup(str + i + 1);
+				(*env)->st = 1;
+			}
+		}
+		(*env) = (*env)->next;
+	}
+	(*env) = tmp;
+}
 
 int	is_exist(char *str, t_env *env_list)
 {
 	int i;
 
 	i = 0;
-	while (str[i] && str[i] != '=')
+	while (str[i] && str[i] != '+' && str[i] != '=')
 		i++;
 	while (env_list)
 	{

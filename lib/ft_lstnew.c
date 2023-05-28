@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 17:49:44 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/17 15:24:15 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/28 19:59:05 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_lexer	*ft_lstnew(void *word, char type, int in_quotes)
 	return (n1);
 }
 
-t_env	*ft_lstnew_env(void *name, void *val)
+t_env	*ft_lstnew_env(char *name, char *val)
 {
 	t_env	*n1;
 
@@ -36,6 +36,10 @@ t_env	*ft_lstnew_env(void *name, void *val)
 	{
 		n1->name = name;
 		n1->value = val;
+		if (!val)
+			n1->st = 0;
+		else
+			n1->st = 1;	
 	}
 	n1->next = NULL;
 	return (n1);

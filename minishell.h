@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/28 13:05:54 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/28 19:57:30 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_env
 {
 	char				*name;
 	char				*value;
+	int					st;
 	struct s_env		*next;
 }						t_env;
 
@@ -117,11 +118,12 @@ void					ft_putstr_fd(char const *s, int fd);
 int						ft_strchr(char *str, char c);
 int						ft_strncmp(char *s1, char *s2, int n);
 char					**ft_split(char const *s, char c);
-t_env					*ft_lstnew_env(void *name, void *val);
+t_env					*ft_lstnew_env(char *name, char *val);
 void					ft_lstadd_back_env(t_env **lst, t_env *new);
 void					ft_free(char **str);
 int						ft_atoi(const char *str);
 void					ft_free_env(t_env **env);
+void					ft_lstdelone_env(t_env *lst);
 
 // parsing
 void					ft_parser(t_lexer *lex, t_parser **prs, char **env);
