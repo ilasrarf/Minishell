@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:12:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/27 19:37:45 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/28 15:43:26 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,12 @@ void	ft_norm_herdoc(t_lexer *lex, char **env, char *hold, int fd)
 	str = NULL;
 	str1 = NULL;
 	signal(SIGINT, &heredoc_sgl);
-	while (lex && ft_strcmp(str, lex->word))
+	printf("%s\n", lex->word);
+	while (lex)
 	{
 		str = readline("\e[91mheredoc>  \e[0m");
+		if(!ft_strcmp(str, lex->word))
+			break;
 		if (!str)
 		{
 			close(fd);
@@ -67,7 +70,11 @@ void	ft_norm_herdoc(t_lexer *lex, char **env, char *hold, int fd)
 			close(fd);
 			fd = open(hold, O_RDWR | O_CREAT, 0777);
 		}
-		free(str);
+		if(str)
+		{
+			free(str);
+			str = NULL;
+		}
 	}
 }
 

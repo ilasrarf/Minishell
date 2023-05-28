@@ -1,0 +1,14 @@
+Makefile
+README.md
+builtins
+cmd.txt
+excution
+f
+lib
+minishell
+minishell.c
+minishell.h
+minishell.o
+parsing
+testing.sh
+tools

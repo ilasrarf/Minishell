@@ -6,7 +6,7 @@
 #    By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 18:13:02 by ilasrarf          #+#    #+#              #
-#    Updated: 2023/05/27 22:13:50 by aen-naas         ###   ########.fr        #
+#    Updated: 2023/05/28 15:27:16 by aen-naas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,14 +59,14 @@ SRC_O =  ${SRC:.c=.o}
 
 NAME = minishell
 CC = cc -g 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -fsanitize=address -Wall -Werror -Wextra
 RM = rm -rf
 # LDFLAGS=
 
 all: ${NAME}
 
 ${NAME}: ${SRC_O}
-	${CC} ${SRC_O} -o ${NAME} -lreadline -L /Users/aen-naas/.brew/opt/readline/lib -I/Users/aen-naas/.brew/opt/readline/include
+	${CC} -fsanitize=address ${SRC_O} -o ${NAME} -lreadline -L /Users/aen-naas/.brew/opt/readline/lib -I/Users/aen-naas/.brew/opt/readline/include
 
 %.o: %.c minishell.h
 	${CC} ${FLAGS} -c $< -o $@

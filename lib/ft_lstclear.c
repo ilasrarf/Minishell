@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 22:41:36 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/06 11:01:20 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/28 15:35:26 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,14 @@ void	ft_lstclear(t_parser **lst)
 
 void	ft_lstclear_lex(t_lexer **lst)
 {
+	t_lexer *tmp;
+
 	if (!lst || !*lst)
 		return ;
 	while ((*lst))
 	{
-		ft_lstdelone_lex(*lst);
-		(*lst) = (*lst)->next;
+		tmp = (*lst)->next;
+		ft_lstdelone_lex((*lst));
+		(*lst) = tmp;
 	}
 }
