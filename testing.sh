@@ -36,4 +36,5 @@ expand ~ to HOME
 cat | cat | ls // ctrl c
 
 
-add exit status to builting's
+add exit status to builting's : export cd
+

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 14:54:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/28 20:48:05 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/05/28 23:00:32 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,10 @@ void	ft_handel_export(t_parser **prs, t_env **env)
 	while ((*prs)->args[i])
 	{
 		if (ft_prs_exp((*prs)->args[i]) == 0)
+		{
+			g_var->exit_s = 1;
 			ft_write_error(2, (*prs)->args[i]);
+		}
 		else
 		{
 			if (!is_exist((*prs)->args[i], *env))

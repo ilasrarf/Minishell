@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 02:48:29 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/28 22:02:36 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/05/28 23:05:51 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,58 +42,62 @@ void	ft_handel_echo(t_parser **prs)
 			{
 				ft_putstr_fd((*prs)->args[i], (*prs)->out_red);
 				if ((*prs)->args[i + 1])
-					write(1, " ", (*prs)->out_red);
+					write((*prs)->out_red, " ", 1);
 			}
 		}
 		else
 		{
 			ft_putstr_fd((*prs)->args[i], (*prs)->out_red);
 			if ((*prs)->args[i + 1])
-				write(1, " ", (*prs)->out_red);
+				write((*prs)->out_red, " ", 1);
 		}
 		i++;
 	}
 	if (f == 0)
-		write(1, "\n", (*prs)->out_red);
+		write((*prs)->out_red , "\n", 1);
 }
 
 int	ft_builtins(t_parser **prs, t_env **env_list)
 {
-	if (!ft_strcmp((*prs)->args[0], "exit"))
-		exit(0);
 	if (!ft_strcmp((*prs)->args[0], "echo") || !ft_strcmp((*prs)->args[0],
 			"ECHO"))
 	{
+		g_var->exit_s = 0;
 		ft_handel_echo(prs);
 		return (1);
 	}
 	else if (!ft_strcmp((*prs)->args[0], "cd") || !ft_strcmp((*prs)->args[0],
 			"CD"))
 	{
+		g_var->exit_s = 0;
 		ft_handel_cd(prs, env_list);
 		return (1);
 	}
 	else if (!ft_strcmp((*prs)->args[0], "pwd") || !ft_strcmp((*prs)->args[0],
 			"PWD"))
 	{
+		g_var->exit_s = 0;
 		ft_handel_pwd(env_list);
 		return (1);
 	}
 	else if (!ft_strcmp((*prs)->args[0], "env") || !ft_strcmp((*prs)->args[0],
 			"ENV"))
 	{
+		g_var->exit_s = 0;
 		ft_handel_env(env_list);
 		return (1);
 	}
 	else if (!ft_strcmp((*prs)->args[0], "export")
 		|| !ft_strcmp((*prs)->args[0], "EXPORT"))
 	{
+		g_var->exit_s = 0;
 		ft_handel_export(prs, env_list);
 		return (1);
 	}
 	else if (!ft_strcmp((*prs)->args[0], "unset")
 		|| !ft_strcmp((*prs)->args[0], "UNSET"))
 	{
+		g_var->exit_s = 0;
 		ft_handel_unset(prs, env_list);
 		return (1);		
 	}

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+         #
+#    By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 18:13:02 by ilasrarf          #+#    #+#              #
-#    Updated: 2023/05/28 22:03:36 by ilasrarf         ###   ########.fr        #
+#    Updated: 2023/05/28 22:10:24 by aen-naas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,7 @@ RM = rm -rf
 all: ${NAME}
 
 ${NAME}: ${SRC_O}
-	${CC} -fsanitize=address ${SRC_O} -o ${NAME} -lreadline -L /Users/ilasrarf/.brew/opt/readline/lib -I/Users/ilasrarf/.brew/opt/readline/include
+	${CC} -fsanitize=address ${SRC_O} -o ${NAME} -lreadline -L /Users/aen-naas/.brew/opt/readline/lib -I/Users/aen-naas/.brew/opt/readline/include
 
 %.o: %.c minishell.h
 	${CC} ${FLAGS} -c $< -o $@

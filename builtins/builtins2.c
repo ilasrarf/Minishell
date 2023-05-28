@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:47:58 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/27 19:38:08 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/28 23:02:26 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,10 @@ char *get_home(t_env **env)
 	}
 	(*env) = tmp;
 	if (cnt == 0)
+	{
+		g_var->exit_s = 1;
 		return (write(1, "minishell: cd: HOME not set\n", 28), hi = 1, NULL);
+	}
 	else
 		return (hold->value);
 	return ((*env)->value);
@@ -90,6 +93,7 @@ void    ft_handel_cd(t_parser **prs,  t_env **env)
 	printf("%d----%d\n", i, hi);
 	if(i == -1 && hi == 0)
 	{
+		g_var->exit_s = 1;
 		printf("cd: %s: No such file or directory\n", (*prs)->args[1]);
 		return;
 	}
