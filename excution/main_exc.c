@@ -6,30 +6,47 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:01:38 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/27 22:52:18 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/28 14:56:45 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+void	ft_handel_dotes(char *cmd)
+{
+	if (!ft_strcmp(cmd, "."))
+	{
+		printf("minishell: .: filename argument required\n.: usage: . filename [arguments]\n");
+		exit(2);
+	}
+	else
+		printf("minishell: ..: command not found\n");
+	exit(127);
+}
+
 void	ft_print_error(char *cmd)
 {
-	(void)cmd;
+	DIR *dir;
 	if (errno == ENOENT)
 		perror("minishell: ");
 	else if (errno == EACCES)
 	{
-		// perror("minishell");
-		// if (access(cmd, R_OK | X_OK) == 0) 
-		// {
-            	// printf("minishell: %s: No such file or directory\n", cmd);
-		// }
-		// else
-		// 	printf("minishell: %s: Permission denied\n", cmd);
+		dir  = opendir(cmd);
+		if (!ft_strcmp(cmd, ".") || !ft_strcmp(cmd, ".."))
+			ft_handel_dotes(cmd);
+		else if (dir) 
+		{
+            printf("minishell: %s: is a directory\n", cmd);
+			closedir (dir);
+		}
+		else
+			printf("minishell: %s: Permission denied\n", cmd);
 		exit(126);
 	}
 	exit(127);
 }
+
+
 
 int	ft_pipe(t_parser *pars, char **env, int fd[2], t_env **env_list)
 {

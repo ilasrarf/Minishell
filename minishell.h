@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/27 19:33:23 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/28 13:05:54 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <string.h>
 # include <unistd.h>
 # include <sys/stat.h>
+# include <dirent.h>
 
 // int						i;
 

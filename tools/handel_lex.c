@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 18:37:52 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/28 00:24:40 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/28 11:50:50 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ void	ft_handel_qoutes(t_lexer **lex, char **str)
 			i++;
 		while ((*str)[j] && (*str)[j] != '$')
 			j++;
-			printf("word is :%c\n", (*str)[j]);
 		if ((*str)[j] == '$' && j <= i)
 			ft_lstadd_back(lex, ft_lstnew(ft_substr(*str, 1, i - 1), 'v', 2));
 		else

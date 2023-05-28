@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 10:46:04 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/27 21:39:55 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/28 12:54:44 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*ft_check_path(char *cmd, char **env)
 		path = g_var->path;
 	else
 		path = ft_get_path(env);
-	if (!path && !ft_strchr(cmd, '\\'))
+	if ((!path && !ft_strchr(cmd, '/')) || (cmd && !ft_strlen(cmd)))
 	{
 		printf("minishell: %s: No such file or directory\n", cmd);
 		exit(1);

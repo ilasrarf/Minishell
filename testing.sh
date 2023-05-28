@@ -8,13 +8,13 @@
 
 ^C should not do anything when a command is executing
 
-minishell: (null): command not found
+minishell: (null): command not found // done
 
-cat <<end  stop executin
+cat <<end  stop executin // done
 
-<<end cat>1| <<end cat>2|<<end cat >3
+<<end cat>1| <<end cat>2|<<end cat >3 // done
 
-echo "'$USER'"""""'$USER'$USER$US
+echo "'$USER'"""""'$USER'$USER$US // done
 
 {
 	bash-3.2$ .

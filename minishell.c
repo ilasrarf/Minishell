@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/28 00:25:45 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/28 11:48:24 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,6 @@ void	ft_lex_pars(char *str, char **env, t_env **env_list)
 	lex = NULL;
 	g_var->suspend = 1;
 	ft_lexer(str, &lex);
-	// while(lex)
-	// 	{
-	// 		printf("word: %s\n",lex->word);
-	// 		printf("type: %c\n", lex->type);
-	// 		printf("in_q: %i\n", lex->in_quotes);
-	// 		lex = lex->next;
-	// 		printf("---------------\n");
-	// 	}
-	// 	exit(0);
 	if (!*env)
 		fill_empty_env(env, env_list);
 	else if (!*env_list) 
