@@ -6,13 +6,14 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/28 19:57:30 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/05/28 22:03:06 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <dirent.h>
 # include <errno.h>
 # include <fcntl.h>
 # include <readline/history.h>
@@ -21,9 +22,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
-# include <unistd.h>
 # include <sys/stat.h>
-# include <dirent.h>
+# include <unistd.h>
 
 // int						i;
 
@@ -193,5 +193,6 @@ void					ft_handel_export(t_parser **prs, t_env **env);
 void					add_new_to_env(char *str, t_env **env);
 void					add_old_to_env(char *str, t_env **env);
 int						is_exist(char *str, t_env *env_list);
+void					ft_handel_unset(t_parser **prs, t_env **env);
 
 #endif

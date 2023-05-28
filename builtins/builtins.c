@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 02:48:29 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/28 19:54:20 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/05/28 22:02:36 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,21 @@ void	ft_handel_echo(t_parser **prs)
 			f = ft_handel_n((*prs)->args[i]);
 			if (f == 0)
 			{
-				ft_putstr_fd((*prs)->args[i], 1);
+				ft_putstr_fd((*prs)->args[i], (*prs)->out_red);
 				if ((*prs)->args[i + 1])
-					write(1, " ", 1);
+					write(1, " ", (*prs)->out_red);
 			}
 		}
 		else
 		{
-			ft_putstr_fd((*prs)->args[i], 1);
+			ft_putstr_fd((*prs)->args[i], (*prs)->out_red);
 			if ((*prs)->args[i + 1])
-				write(1, " ", 1);
+				write(1, " ", (*prs)->out_red);
 		}
 		i++;
 	}
 	if (f == 0)
-		write(1, "\n", 1);
+		write(1, "\n", (*prs)->out_red);
 }
 
 int	ft_builtins(t_parser **prs, t_env **env_list)
@@ -91,11 +91,11 @@ int	ft_builtins(t_parser **prs, t_env **env_list)
 		ft_handel_export(prs, env_list);
 		return (1);
 	}
-	// else if (!ft_strcmp((*prs)->args[0], "unset")
-	// 	|| !ft_strcmp((*prs)->args[0], "UNSET"))
-	// {
-	// 	ft_handel_unset(prs, env_list);
-	// 	return (1);		
-	// }
+	else if (!ft_strcmp((*prs)->args[0], "unset")
+		|| !ft_strcmp((*prs)->args[0], "UNSET"))
+	{
+		ft_handel_unset(prs, env_list);
+		return (1);		
+	}
 	return (0);
 }                                         
