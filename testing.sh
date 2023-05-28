@@ -30,3 +30,10 @@ echo "'$USER'"""""'$USER'$USER$US // done
 }
 
 expand ~ to HOME
+
+
+
+cat | cat | ls // ctrl c
+
+
+add exit status to builting's

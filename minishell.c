@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/28 15:32:35 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/28 18:08:01 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	handel(int signal)
 {
 	if (signal == SIGQUIT)
 		return ;
-	else if (signal == SIGINT && g_var->exc == 1)
+	else if (signal == SIGINT && waitpid(-1, NULL, WNOHANG))
 	{
 		g_var->exit_s = 1;
 		write(1, "\n", 1);

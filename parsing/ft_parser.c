@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:23:37 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/28 16:11:07 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/28 17:05:43 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,19 +116,4 @@ void	ft_parser(t_lexer *lex, t_parser **prs, char **env)
 		return ;
 	ft_fill_args(lex, prs, env);
 	holder = *prs;
-	// printf("\n-------------\n");
-	// int			i = 0;
-	// while(holder)
-    // {
-    //     i = 0;
-    //     while (holder->args[i])
-    //     {
-    //         printf("ARGS: %s\n",holder->args[i]);
-    //         i++;
-    //     }
-	// 	printf("in %i\n", holder->in_red);
-	// 	printf("out %i\n", holder->out_red);
-    //     holder = holder->next;
-    // } 
-	// exit(0);
 }

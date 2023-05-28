@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:57:32 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/27 23:47:19 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/28 16:50:31 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,16 @@ int	ft_check_herdoc_fm(char *str)
 		return (1);
 	return (0);
 }
+
+// int	ft_check_pipe(t_lexer *lex)
+// {
+// 	if ()
+// 	while (lex)
+// 	{
+// 		if (lex->next && lex->type == 'p' && lex->next->type == 'p')
+// 			perror("minishell: syntax error near unexpected token `||'")
+// 	}
+// }
 
 int	ft_check_quotes(char *str)
 {

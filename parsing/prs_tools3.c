@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 16:20:43 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/27 16:38:32 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/28 17:06:45 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ void	ft_handel_in(t_lexer **lex, int *in, char **av)
 	(void)av;
 	if ((*lex)->type != 'v')
 		*in = open((*lex)->word, O_RDONLY, 0777);
-	// else
-	// {
-	// 	*in = open(ft_hendel_var((*lex)->word ,av), O_RDONLY, 0777);
-	// 	if (*in < 0)
-	// 		*in = -2;
-	// }
+	else
+	{
+		*in = open(ft_hendel_var((*lex)->word ,av), O_RDONLY, 0777);
+		if (*in < 0)
+			*in = -2;
+	}
 }
