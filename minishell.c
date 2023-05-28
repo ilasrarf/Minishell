@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/27 19:27:57 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/28 00:25:45 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,15 @@ void	ft_lex_pars(char *str, char **env, t_env **env_list)
 	lex = NULL;
 	g_var->suspend = 1;
 	ft_lexer(str, &lex);
+	// while(lex)
+	// 	{
+	// 		printf("word: %s\n",lex->word);
+	// 		printf("type: %c\n", lex->type);
+	// 		printf("in_q: %i\n", lex->in_quotes);
+	// 		lex = lex->next;
+	// 		printf("---------------\n");
+	// 	}
+	// 	exit(0);
 	if (!*env)
 		fill_empty_env(env, env_list);
 	else if (!*env_list) 
@@ -93,6 +102,7 @@ int	main(int ac, char **av, char **env)
 	g_var = ft_lstnew_var(0, 0, NULL, NULL);
 	(void)ac;
 	(void)av;
+	// rl_catch_signals(0);
 	while (1)
 	{
 		signal(SIGINT, &handel);
@@ -107,8 +117,8 @@ int	main(int ac, char **av, char **env)
 			add_history(str);
 		if (!str)
 		{
-			printf("exit");
-			return (0);
+			printf("exit\n");
+			return (g_var->exit_s);
 		}
 		ft_main(str, env, &env_list);
 	}

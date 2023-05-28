@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:01:38 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/27 19:37:50 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/27 22:52:18 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,21 @@
 
 void	ft_print_error(char *cmd)
 {
-	struct stat filestat;
-	if (errno == EACCES)
+	(void)cmd;
+	if (errno == ENOENT)
+		perror("minishell: ");
+	else if (errno == EACCES)
 	{
-		if (stat(cmd, &filestat) == 0) 
-		{
-        	if (S_ISDIR(filestat.st_mode))
-            	printf("minishell: %s: No such file or directory\n", cmd);
-		}
-		else
-			printf("minishell: %s: Permission denied\n", cmd);
+		// perror("minishell");
+		// if (access(cmd, R_OK | X_OK) == 0) 
+		// {
+            	// printf("minishell: %s: No such file or directory\n", cmd);
+		// }
+		// else
+		// 	printf("minishell: %s: Permission denied\n", cmd);
 		exit(126);
 	}
-	else
-	{
-
-		fprintf(stderr,"g\n"); 
-		exit(127);
-	}
+	exit(127);
 }
 
 int	ft_pipe(t_parser *pars, char **env, int fd[2], t_env **env_list)
@@ -55,7 +52,7 @@ int	ft_pipe(t_parser *pars, char **env, int fd[2], t_env **env_list)
 		ft_dup_fd(pars, old, fd);
 		signal(SIGINT, SIG_DFL);
 		i = ft_builtins(&pars, env_list);
-		if (i == 0)
+		if (i == 0 && pars->args[0])
 		{
 			str = ft_check_path(pars->args[0], env);
 			if (execve(str, pars->args, env) == -1)
@@ -96,6 +93,7 @@ void	ft_excution(t_parser *pars, char **env, t_env **env_list)
 	{
 		while (pars)
 		{
+			g_var->exc = 0;
 			if (pars->in_red >= 0)
 			{
 				i = ft_norm_exc(pars, env, fd, env_list);
@@ -106,7 +104,6 @@ void	ft_excution(t_parser *pars, char **env, t_env **env_list)
 				}
 				ft_status();
 			}
-			g_var->exc = 0;
 			pars = pars->next;
 		}
 		}
