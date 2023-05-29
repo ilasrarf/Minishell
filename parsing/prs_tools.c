@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:16:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/29 12:29:22 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/29 19:43:53 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ int	ft_count_arg(t_lexer *lex)
 void	ft_inial(t_norm *var)
 {
 	var->i = 0;
-	var->in = 0;
-	var->out = 0;
+	var->in = 1;
+	var->out = 1;
 }
 
 void	ft_use_heredoc(t_lexer **lex, char **env, int *fd)
