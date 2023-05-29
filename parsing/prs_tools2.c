@@ -6,14 +6,16 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:34:49 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/27 19:28:13 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/29 17:47:24 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_norm_herdoc_norm(char **env, char *str, char *str1, int fd)
+void	ft_norm_herdoc_norm(char **env, char *str, int fd)
 {
+	char	*str1;
+
 	str1 = ft_hendel_var(str, env);
 	ft_putstr_fd(str1, fd);
 	write(fd, "\n", 1);

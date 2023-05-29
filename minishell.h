@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/28 22:03:06 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/05/29 12:48:32 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,8 +141,7 @@ void					ft_handel_in(t_lexer **lex, int *in, char **av);
 char					*ft_hendel_var_herdoc(char *val, char **av);
 void					ft_fill_heredoc_fm(t_lexer **lex, int *in, int *out,
 							char **av);
-void					ft_norm_herdoc_norm(char **env, char *str, char *str1,
-							int fd);
+void					ft_norm_herdoc_norm(char **env, char *str, int fd);
 int						ft_norm_fill_args(t_lexer **lex, char **env, char **str,
 							t_norm *var);
 void					ft_join_var_word(t_lexer **lex, char **str, char **env,
@@ -150,6 +149,8 @@ void					ft_join_var_word(t_lexer **lex, char **str, char **env,
 t_calcul				ft_inial_cal(void);
 char					*ft_norm_hendle_var(char **av, char *val, t_calcul cl);
 int						ft_check_other_var(char *var);
+void					ft_handel_open_error(int out, t_lexer *lex);
+int						ft_fill_herdoc(t_lexer *lex,  char **env, char *hold, int fd);
 // excution
 void					ft_excution(t_parser *pars, char **env,
 							t_env **env_list);

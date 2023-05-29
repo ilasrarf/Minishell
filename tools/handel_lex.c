@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 18:37:52 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/28 11:50:50 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/29 12:40:41 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	ft_handel_char(t_lexer **lex, char **str)
 	hold = ft_strdup("");
 	i = 0;
 	while ((*str)[i] && !ft_check_herdoc_fm(*str + i) && (*str)[i] != ' '
-		&& (*str)[i] != '|' && (*str)[i] != '$' && (*str)[i] != '"' && (*str)[i] != '\'')
+		&& (*str)[i] != '|' && (*str)[i] != '$' && (*str)[i] != '"'
+		&& (*str)[i] != '\'')
 	{
 		hold = ft_strjoin_char(hold, (*str)[i]);
 		i++;
@@ -79,26 +80,31 @@ void	ft_handel_herdoc_fm(t_lexer **lex, char **str)
 	*str += i;
 }
 
+int	ft_handel_dq(t_lexer **lex, char *str, int i)
+{
+	int	j;
+
+	j = 0;
+	i++;
+	while (str[i] && str[i] != '"')
+		i++;
+	while (str[j] && str[j] != '$')
+		j++;
+	if (str[j] == '$' && j <= i)
+		ft_lstadd_back(lex, ft_lstnew(ft_substr(str, 1, i - 1), 'v', 2));
+	else
+		ft_lstadd_back(lex, ft_lstnew(ft_substr(str, 1, i - 1), 'w', 2));
+	i++;
+	return (i);
+}
+
 void	ft_handel_qoutes(t_lexer **lex, char **str)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
 	if ((*str)[i] == '"')
-	{
-		i++;
-		while ((*str)[i] && (*str)[i] != '"')
-			i++;
-		while ((*str)[j] && (*str)[j] != '$')
-			j++;
-		if ((*str)[j] == '$' && j <= i)
-			ft_lstadd_back(lex, ft_lstnew(ft_substr(*str, 1, i - 1), 'v', 2));
-		else
-			ft_lstadd_back(lex, ft_lstnew(ft_substr(*str, 1, i - 1), 'w', 2));
-		i++;
-	}
+		i = ft_handel_dq(lex, *str, i);
 	else if ((*str)[i] == '\'')
 	{
 		i++;

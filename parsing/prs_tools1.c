@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:12:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/28 15:43:26 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/29 17:54:25 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,19 @@ void	ft_check_next_fd(t_lexer *lex, int in, int out)
 		printf("minishell: %s: No such file or directory\n", (lex)->word);
 	else if (in == -2)
 		printf("minishell: %s: ambiguous redirect\n", (lex)->word);
-	(lex) = (lex)->next;
-	while (lex && (lex)->type != 'p')
+	else
 	{
-		if ((!ft_strcmp((lex)->word, ">") || !ft_strcmp((lex)->word, ">>"))
-			&& out >= 3)
-				close(out);
-		else if (!ft_strcmp((lex)->word, "<") && in >= 3)
-			close(in);
+		fprintf(stderr, "test\n");
 		(lex) = (lex)->next;
+		while (lex && (lex)->type != 'p')
+		{
+			if ((!ft_strcmp((lex)->word, ">") || !ft_strcmp((lex)->word, ">>"))
+				&& out >= 3)
+				close(out);
+			else if (!ft_strcmp((lex)->word, "<") && in >= 3)
+				close(in);
+			(lex) = (lex)->next;
+		}
 	}
 }
 
@@ -50,31 +54,10 @@ void	ft_norm_herdoc(t_lexer *lex, char **env, char *hold, int fd)
 	str = NULL;
 	str1 = NULL;
 	signal(SIGINT, &heredoc_sgl);
-	printf("%s\n", lex->word);
 	while (lex)
 	{
-		str = readline("\e[91mheredoc>  \e[0m");
-		if(!ft_strcmp(str, lex->word))
-			break;
-		if (!str)
-		{
-			close(fd);
-			return ;
-		}
-		if (lex->in_quotes == 0 && ft_strchr(str, '$'))
-			ft_norm_herdoc_norm(env, str, str1, fd);
-		else if (ft_strcmp(str, lex->word))
-		{
-			ft_putstr_fd(str, fd);
-			write(fd, "\n", 1);
-			close(fd);
-			fd = open(hold, O_RDWR | O_CREAT, 0777);
-		}
-		if(str)
-		{
-			free(str);
-			str = NULL;
-		}
+		if (ft_fill_herdoc(lex, env, hold, fd))
+			break ;
 	}
 }
 

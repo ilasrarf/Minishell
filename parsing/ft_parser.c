@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:23:37 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/28 17:05:43 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/29 17:49:52 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,18 +61,15 @@ void	ft_fill_heredoc_fm(t_lexer **lex, int *in, int *out, char **av)
 		if (!ft_strcmp((*lex)->word, " "))
 			(*lex) = (*lex)->next;
 		*out = open((*lex)->word, O_WRONLY | O_CREAT | O_TRUNC, 0777);
-		if (*out == -1 && (*lex)->word[0] == '/')
-			fprintf(stderr,"Minishell: /f: Permission denied\n");
 	}
 	else if (!ft_strcmp((*lex)->word, ">>"))
 	{
 		(*lex) = (*lex)->next;
 		if (!ft_strcmp((*lex)->word, " "))
 			(*lex) = (*lex)->next;
-		*out = open((*lex)->word, O_WRONLY | O_CREAT, 0777);
-		if (*out == -1 && (*lex)->word[0] == '/')
-			fprintf(stderr,"Minishell: /f: Permission denied\n");
+		*out = open((*lex)->word, O_WRONLY | O_CREAT | O_APPEND, 0777);
 	}
+	ft_handel_open_error(*out, *lex);
 	ft_check_next_fd(*lex, *in, *out);
 	if (*lex)
 		(*lex) = (*lex)->next;
