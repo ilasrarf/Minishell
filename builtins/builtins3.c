@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 14:54:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/28 23:00:32 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/29 22:40:02 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,15 @@ void	ft_print_exp(t_env **env)
 	tmp1 = *env;
 	while ((*env))
 	{
-		printf("declare -x %s=", (*env)->name);
-		printf("\"%s\"\n", (*env)->value);
+		ft_putstr_fd("declare -x ", 1);
+		ft_putstr_fd((*env)->name, 1);
+		if ((*env)->value)
+		{
+			ft_putstr_fd("=\"", 1);
+			ft_putstr_fd((*env)->value, 1);
+			ft_putstr_fd("\"", 1);
+		}
+		ft_putstr_fd("\n", 1);
 		(*env) = (*env)->next;
 	}
 	*env = tmp1;

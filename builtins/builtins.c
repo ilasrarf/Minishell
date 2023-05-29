@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 02:48:29 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/29 22:49:08 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/29 22:36:19 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ void	ft_handel_echo(t_parser **prs)
 		i++;
 	}
 	if (f == 0)
-		write((*prs)->out_red , "\n", 1);
+		write((*prs)->out_red, "\n", 1);
 }
 
-int	ft_builtins(t_parser **prs, t_env **env_list)
+int	ft_norm_buil1(t_parser **prs, t_env **env_list)
 {
 	if (!ft_strcmp((*prs)->args[0], "echo") || !ft_strcmp((*prs)->args[0],
 			"ECHO"))
@@ -80,7 +80,12 @@ int	ft_builtins(t_parser **prs, t_env **env_list)
 		ft_handel_pwd(env_list);
 		return (1);
 	}
-	else if (!ft_strcmp((*prs)->args[0], "env") || !ft_strcmp((*prs)->args[0],
+	return (0);
+}
+
+int	ft_norm_buil2(t_parser **prs, t_env **env_list)
+{
+	if (!ft_strcmp((*prs)->args[0], "env") || !ft_strcmp((*prs)->args[0],
 			"ENV"))
 	{
 		g_var->exit_s = 0;
@@ -94,12 +99,20 @@ int	ft_builtins(t_parser **prs, t_env **env_list)
 		ft_handel_export(prs, env_list);
 		return (1);
 	}
-	else if (!ft_strcmp((*prs)->args[0], "unset")
-		|| !ft_strcmp((*prs)->args[0], "UNSET"))
+	else if (!ft_strcmp((*prs)->args[0], "unset") || !ft_strcmp((*prs)->args[0],
+			"UNSET"))
 	{
 		g_var->exit_s = 0;
 		ft_handel_unset(prs, env_list);
-		return (1);		
+		return (1);
 	}
 	return (0);
-}                                         
+}
+
+int	ft_builtins(t_parser **prs, t_env **env_list)
+{
+	if (ft_norm_buil1(prs, env_list) == 0 && ft_norm_buil2(prs, env_list) == 0)
+		return (0);
+	else
+		return (1);
+}
