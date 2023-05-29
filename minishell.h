@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/29 12:48:32 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/29 19:12:11 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ void					ft_join_var_word(t_lexer **lex, char **str, char **env,
 t_calcul				ft_inial_cal(void);
 char					*ft_norm_hendle_var(char **av, char *val, t_calcul cl);
 int						ft_check_other_var(char *var);
-void					ft_handel_open_error(int out, t_lexer *lex);
+void					ft_handel_open_error(int in, int out, t_lexer **lex);
 int						ft_fill_herdoc(t_lexer *lex,  char **env, char *hold, int fd);
 // excution
 void					ft_excution(t_parser *pars, char **env,
