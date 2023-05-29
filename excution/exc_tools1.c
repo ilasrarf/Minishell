@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 18:05:28 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/29 21:45:34 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/29 23:32:17 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,23 +67,11 @@ int	ft_norm_exc(t_parser *pars, char **env, int fd[2], t_env **env_list)
 {
 	int	i;
 
-	i = 0;
-	if (!ft_strcmp(pars->args[0], "exit") && !pars->next && fd[0] == -1)
-	{
-		if (!ft_check_exit_args(pars->args))
-		{
-			write(1, "exit\n", 5);
-			exit(ft_atoi(pars->args[1]));
-		}
-	}
-	else
-	{
-		i = ft_pipe(pars, env, fd, env_list);
-		if (pars->out_red > 2)
-			close(pars->out_red);
-		if (pars->in_red > 2)
-			close(pars->in_red);
-	}
+	i = ft_pipe(pars, env, fd, env_list);
+	if (pars->out_red > 2)
+		close(pars->out_red);
+	if (pars->in_red > 2)
+		close(pars->in_red);
 	return (i);
 }
 
@@ -110,6 +98,7 @@ void	ft_exc_loop(t_parser *pars, char **env, int fd[2], t_env **env_list)
 
 	while (pars)
 	{
+		g_var->exc = 0;
 		if (pars->in_red >= 0 && pars->out_red >= 0)
 		{
 			i = ft_norm_exc(pars, env, fd, env_list);
@@ -123,5 +112,4 @@ void	ft_exc_loop(t_parser *pars, char **env, int fd[2], t_env **env_list)
 		}
 		pars = pars->next;
 	}
-	g_var->exc = 0;
 }

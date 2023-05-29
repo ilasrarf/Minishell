@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/29 22:42:58 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/29 23:47:48 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_calcul
 typedef struct s_var
 {
 	int					exit_s;
+	int					hi;
 	int					exc;
 	int					suspend;
 	int					i;

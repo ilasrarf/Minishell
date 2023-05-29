@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:01:38 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/29 22:44:15 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/29 23:32:07 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,12 @@ void	ft_excution(t_parser *pars, char **env, t_env **env_list)
 
 	fd[0] = -1;
 	fd[1] = -1;
+
+	g_var->exc = 1;
 	if (!pars->next && ft_builtins(&pars, env_list) != 0)
 		return ;
 	else
 		ft_exc_loop(pars, env, fd, env_list);
-	g_var->exc = 1;
 	while (wait(0) != -1 || errno != ECHILD)
 		;
 	close(fd[0]);

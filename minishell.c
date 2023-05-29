@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/29 22:50:28 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/29 23:49:57 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int	main(int ac, char **av, char **env)
 	g_var = ft_lstnew_var(0, 0, NULL, NULL);
 	(void)ac;
 	(void)av;
+	g_var->hi = 0;
 	// rl_catch_signals(0);
 	while (1)
 	{

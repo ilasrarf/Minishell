@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:30:24 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/29 21:17:24 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/29 23:11:36 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	ft_check_exit_args(char **args)
 	long long	i;
 
 	i = 0;
+	if (args[1] == NULL)
+		return 0;
 	while (args[i])
 		i++;
 	if (i > 2)

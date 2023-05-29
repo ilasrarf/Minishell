@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 02:48:29 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/29 22:36:19 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/05/29 23:29:06 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,18 @@ void	ft_handel_echo(t_parser **prs)
 
 int	ft_norm_buil1(t_parser **prs, t_env **env_list)
 {
-	if (!ft_strcmp((*prs)->args[0], "echo") || !ft_strcmp((*prs)->args[0],
+	if (!ft_strcmp((*prs)->args[0], "exit"))
+	{
+		if (!ft_check_exit_args((*prs)->args))
+		{
+			if (g_var->exc)
+				write(1, "exit\n", 5);
+			if ((*prs)->args[1])
+				exit(ft_atoi((*prs)->args[1]));
+			exit(0);
+		}
+	}
+	else if (!ft_strcmp((*prs)->args[0], "echo") || !ft_strcmp((*prs)->args[0],
 			"ECHO"))
 	{
 		g_var->exit_s = 0;

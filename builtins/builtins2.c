@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   builtins2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:47:58 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/29 22:37:35 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/05/29 23:48:57 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-int		hi = 0;
 
 void	ft_chang_ocwd(t_env **env, char *old)
 {
@@ -79,7 +77,7 @@ char	*get_home(t_env **env)
 	if (cnt == 0)
 	{
 		g_var->exit_s = 1;
-		return (write(2, "minishell: cd: HOME not set\n", 28), hi = 1, NULL);
+		return (write(2, "minishell: cd: HOME not set\n", 28), g_var->hi = 1, NULL);
 	}
 	else
 		return (hold->value);
@@ -102,7 +100,7 @@ void	ft_handel_cd(t_parser **prs, t_env **env)
 		i = chdir((*prs)->args[1]);
 	else
 		i = chdir(get_home(env));
-	if (i == -1 && hi == 0)
+	if (i == -1 && g_var->hi == 0)
 	{
 		g_var->exit_s = 1;
 		printf("cd: %s: No such file or directory\n", (*prs)->args[1]);
