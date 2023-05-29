@@ -1,42 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_write_error.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/23 22:41:36 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/29 21:23:42 by aen-naas         ###   ########.fr       */
+/*   Created: 2023/05/29 20:37:37 by aen-naas          #+#    #+#             */
+/*   Updated: 2023/05/29 21:23:48 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_lstclear(t_parser **lst)
+void	ft_write_error_exc(char *str, char *cmd)
 {
-	t_parser	*temp;
-
-	if (!lst || !*lst)
-		return ;
-	temp = *lst;
-	while (temp)
-	{
-		temp = temp->next;
-		ft_lstdelone(*lst);
-		*lst = temp;
-	}
-}
-
-void	ft_lstclear_lex(t_lexer **lst)
-{
-	t_lexer	*tmp;
-
-	if (!lst || !*lst)
-		return ;
-	while ((*lst))
-	{
-		tmp = (*lst)->next;
-		ft_lstdelone_lex((*lst));
-		(*lst) = tmp;
-	}
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(cmd, 2);
+	ft_putstr_fd(str, 2);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 17:49:44 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/28 19:59:05 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/05/29 21:23:39 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_env	*ft_lstnew_env(char *name, char *val)
 		if (!val)
 			n1->st = 0;
 		else
-			n1->st = 1;	
+			n1->st = 1;
 	}
 	n1->next = NULL;
 	return (n1);

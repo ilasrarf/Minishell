@@ -1,42 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   exc_tools2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/23 22:41:36 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/29 21:23:42 by aen-naas         ###   ########.fr       */
+/*   Created: 2023/05/29 21:49:58 by aen-naas          #+#    #+#             */
+/*   Updated: 2023/05/29 22:49:27 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_lstclear(t_parser **lst)
+void	ft_excve(t_parser *pars, char **env, t_env **env_list)
 {
-	t_parser	*temp;
+	char	*str;
+	int		i;
 
-	if (!lst || !*lst)
-		return ;
-	temp = *lst;
-	while (temp)
+	signal(SIGINT, SIG_DFL);
+	i = ft_builtins(&pars, env_list);
+	if (pars->args[0])
 	{
-		temp = temp->next;
-		ft_lstdelone(*lst);
-		*lst = temp;
+		str = ft_check_path(pars->args[0], env);
+		if (execve(str, pars->args, env) == -1)
+			ft_print_error(pars->args[0]);
 	}
-}
-
-void	ft_lstclear_lex(t_lexer **lst)
-{
-	t_lexer	*tmp;
-
-	if (!lst || !*lst)
-		return ;
-	while ((*lst))
-	{
-		tmp = (*lst)->next;
-		ft_lstdelone_lex((*lst));
-		(*lst) = tmp;
-	}
+	else
+		exit(0);
 }

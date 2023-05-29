@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/29 12:40:19 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/29 22:50:28 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_lex_pars(char *str, char **env, t_env **env_list)
 	ft_lexer(str, &lex);
 	if (!*env)
 		fill_empty_env(env, env_list);
-	else if (!*env_list) 
+	else if (!*env_list)
 		fill_env_list(env, env_list, prs);
 	res = ft_reconver(*env_list);
 	free(str);
@@ -101,6 +101,10 @@ int	main(int ac, char **av, char **env)
 		{
 			dup2(g_var->i, STDIN_FILENO);
 			g_var->i = -1;
+			write(1, "\n", 1);
+			// rl_on_new_line();
+			// rl_replace_line("", 0);
+			// rl_redisplay();
 		}
 		str = readline("\e[91mMinishell$ \e[0m");
 		if (str && *str)

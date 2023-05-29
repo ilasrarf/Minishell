@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:12:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/29 17:54:25 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/29 21:20:15 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,11 @@
 void	ft_check_next_fd(t_lexer *lex, int in, int out)
 {
 	if (in == -1)
-		printf("minishell: %s: No such file or directory\n", (lex)->word);
+		ft_write_error_exc(": No such file or directory\n", (lex)->word);
 	else if (in == -2)
-		printf("minishell: %s: ambiguous redirect\n", (lex)->word);
+		ft_write_error_exc(": ambiguous redirect\n", (lex)->word);
 	else
 	{
-		fprintf(stderr, "test\n");
 		(lex) = (lex)->next;
 		while (lex && (lex)->type != 'p')
 		{

@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:30:24 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/28 22:49:20 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/29 21:17:24 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_check_exit_args(char **args)
 		i++;
 	if (i > 2)
 	{
-		printf("minishell: exit: too many arguments\n");
+		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
 		exit(255);
 	}
 	else
@@ -38,8 +38,9 @@ int	ft_check_exit_args(char **args)
 		i = ft_atoi(args[1]) + 1;
 		if (LONG_MAX < i)
 		{
-			printf("exit\nminishell: exit: %s: numeric argument required\n",
-				args[1]);
+			ft_putstr_fd("exit\nminishell: exit: ", 2);
+			ft_putstr_fd(args[1], 2);
+			ft_putstr_fd(": numeric argument required\n", 2);
 			exit(255);
 		}
 	}

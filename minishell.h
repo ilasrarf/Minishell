@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/29 19:12:11 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/29 22:42:58 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,19 @@ typedef struct s_var
 	int					suspend;
 	int					i;
 	int					*shell_lvl;
+	// char				**env;
 	char				*name;
 	char				*path;
 	char				*value;
 	struct s_var		*next;
 }						t_var;
+
+typedef struct s_fd
+{
+	int old;
+	int fd[2];
+}				t_fd;
+
 
 extern t_var			*g_var;
 
@@ -124,6 +132,7 @@ void					ft_free(char **str);
 int						ft_atoi(const char *str);
 void					ft_free_env(t_env **env);
 void					ft_lstdelone_env(t_env *lst);
+void					ft_write_error_exc(char *str, char *cmd);
 
 // parsing
 void					ft_parser(t_lexer *lex, t_parser **prs, char **env);
@@ -150,7 +159,8 @@ t_calcul				ft_inial_cal(void);
 char					*ft_norm_hendle_var(char **av, char *val, t_calcul cl);
 int						ft_check_other_var(char *var);
 void					ft_handel_open_error(int in, int out, t_lexer **lex);
-int						ft_fill_herdoc(t_lexer *lex,  char **env, char *hold, int fd);
+int						ft_fill_herdoc(t_lexer *lex, char **env, char *hold,
+							int fd);
 // excution
 void					ft_excution(t_parser *pars, char **env,
 							t_env **env_list);
@@ -176,6 +186,10 @@ int						ft_pipe(t_parser *pars, char **env, int fd[2],
 int						ft_norm_exc(t_parser *pars, char **env, int fd[2],
 							t_env **env_list);
 void					ft_dup_fd(t_parser *pars, int old, int fd[2]);
+void					ft_exc_loop(t_parser *pars, char **env, int fd[2],
+							t_env **env_list);
+void					ft_print_error(char *cmd);
+void	ft_excve(t_parser *pars, char **env, t_env **env_list);
 
 // builtins
 

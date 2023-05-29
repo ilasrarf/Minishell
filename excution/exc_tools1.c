@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 18:05:28 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/28 22:50:01 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/29 21:45:34 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*ft_norm_check_path(char *cmd, char *path)
 	if (!paths[i] && !ft_strchr(cmd, '/'))
 	{
 		ft_free(paths);
-		printf("minishell: %s: command not found\n", cmd);
+		ft_write_error_exc(": command not found\n", cmd);
 		exit(127);
 	}
 	ft_free(paths);
@@ -65,7 +65,7 @@ char	*ft_norm_check_path(char *cmd, char *path)
 
 int	ft_norm_exc(t_parser *pars, char **env, int fd[2], t_env **env_list)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!ft_strcmp(pars->args[0], "exit") && !pars->next && fd[0] == -1)
@@ -84,7 +84,7 @@ int	ft_norm_exc(t_parser *pars, char **env, int fd[2], t_env **env_list)
 		if (pars->in_red > 2)
 			close(pars->in_red);
 	}
-	return i;
+	return (i);
 }
 
 void	ft_dup_fd(t_parser *pars, int old, int fd[2])
@@ -102,4 +102,26 @@ void	ft_dup_fd(t_parser *pars, int old, int fd[2])
 		ft_red_out(pars);
 	if (pars->in_red > 2)
 		ft_red_in(pars);
+}
+
+void	ft_exc_loop(t_parser *pars, char **env, int fd[2], t_env **env_list)
+{
+	int	i;
+
+	while (pars)
+	{
+		if (pars->in_red >= 0 && pars->out_red >= 0)
+		{
+			i = ft_norm_exc(pars, env, fd, env_list);
+			if (i == -1)
+			{
+				ft_putstr_fd("minishell: fork: ", 2);
+				ft_putstr_fd("Resource temporarily unavailable \n", 2);
+				break ;
+			}
+			ft_status();
+		}
+		pars = pars->next;
+	}
+	g_var->exc = 0;
 }

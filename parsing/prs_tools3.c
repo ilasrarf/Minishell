@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 16:20:43 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/29 19:13:43 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/29 21:21:08 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,5 @@ void	ft_handel_open_error(int in, int out, t_lexer **lex)
 		}
 	}
 	else if (out == -1 && (*lex)->word[0] == '/')
-		fprintf(stderr, "Minishell: /f: Permission denied\n");
+		ft_write_error_exc(": Permission denied\n", (*lex)->word);
 }

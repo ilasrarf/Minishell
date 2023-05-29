@@ -6,7 +6,7 @@
 #    By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 18:13:02 by ilasrarf          #+#    #+#              #
-#    Updated: 2023/05/28 22:10:24 by aen-naas         ###   ########.fr        #
+#    Updated: 2023/05/29 22:05:04 by aen-naas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRC = minishell.c \
 	  lib/ft_substr.c \
 	  lib/ft_lstnew.c \
 	  lib/ft_lstadd_back.c \
+	  lib/ft_write_error.c \
 	  lib/ft_itoa.c \
 	  lib/ft_strdup.c \
 	  lib/ft_strlen.c \
@@ -46,6 +47,7 @@ SRC = minishell.c \
 	  excution/main_exc.c \
 	  excution/exc_tools.c \
 	  excution/exc_tools1.c \
+	  excution/exc_tools2.c \
 	  excution/exit_status.c \
 	  excution/fill_envlist.c \
 	  builtins/builtins.c \
