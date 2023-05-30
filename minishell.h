@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/30 12:56:37 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/30 22:14:39 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct s_var
 	int					exc;
 	int					suspend;
 	int					i;
+	int					in_hdc;
 	int					*shell_lvl;
 	char				*str;
 	t_lexer				*lex;

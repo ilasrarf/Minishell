@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/30 12:48:11 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/30 22:16:58 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,26 @@ void	handel(int signal)
 		return ;
 	else if (signal == SIGINT && waitpid(-1, NULL, WNOHANG))
 	{
-		g_var->exit_s = 1;
-		write(1, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
+		if (g_var->in_hdc == 1)
+		{
+			write(1,"\n",1);
+			if (g_var->str)
+				free(g_var->str);
+			g_var->suspend = 0;
+			g_var->exit_s = 130;
+			g_var->i = dup(STDIN_FILENO);
+			close(0);
+			g_var->in_hdc = 0;
+		}
+		else
+		{
+			g_var->exit_s = 1;
+			write(1, "\n", 1);
+			rl_on_new_line();
+			rl_replace_line("", 0);
+			rl_redisplay();
+		}
 	}
-	else
-		return ;
 }
 
 void	ft_lex_pars(char *str, char **env, t_env **env_list)
@@ -98,6 +110,7 @@ int	main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	g_var->hi = 0;
+	g_var->in_hdc = 0;
 	// rl_catch_signals(0);
 	while (1)
 	{
@@ -107,10 +120,6 @@ int	main(int ac, char **av, char **env)
 		{
 			dup2(g_var->i, STDIN_FILENO);
 			g_var->i = -1;
-			write(1, "\n", 1);
-			// rl_on_new_line();
-			// rl_replace_line("", 0);
-			// rl_redisplay();
 		}
 		str = readline("\e[91mMinishell$ \e[0m");
 		if (str && *str)
