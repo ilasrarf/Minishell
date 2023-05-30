@@ -38,3 +38,9 @@ cat | cat | ls // ctrl c
 
 add exit status to builting's : export cd
 
+ls | << data && << data cat one after the other
+
+./file
+
+
+exit 778798789789789789789798789798789798789889788887888989

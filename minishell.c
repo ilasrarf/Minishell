@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/29 23:49:57 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/30 12:48:11 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,15 @@ void	ft_lex_pars(char *str, char **env, t_env **env_list)
 {
 	char		**res;
 	t_lexer		*lex;
+	t_lexer		*hold;
 	t_parser	*prs;
 
 	prs = NULL;
 	lex = NULL;
 	g_var->suspend = 1;
 	ft_lexer(str, &lex);
+	hold  = lex;
+	g_var->lex = hold;
 	if (!*env)
 		fill_empty_env(env, env_list);
 	else if (!*env_list)
@@ -50,8 +53,9 @@ void	ft_lex_pars(char *str, char **env, t_env **env_list)
 	if (prs && g_var->suspend)
 	{
 		ft_excution(prs, res, env_list);
-		ft_lstclear(&prs);
 	}
+	if (prs)
+		ft_lstclear(&prs);
 	// ft_free_env(&env_list);
 	ft_free(res);
 	ft_lstclear_lex(&lex);
@@ -78,6 +82,7 @@ t_var	*ft_lstnew_var(int x, int y, char *name, char *value)
 	head->exit_s = x;
 	head->i = y;
 	head->name = name;
+	head->str = NULL;
 	head->value = value;
 	head->next = NULL;
 	return (head);

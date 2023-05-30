@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 22:31:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/28 19:53:12 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/05/30 12:43:24 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	ft_lstdelone_lex(t_lexer *lst)
 		return ;
 	free(lst->word);
 	free(lst);
+	lst = NULL;
 }
 
 void	ft_lstdelone_env(t_env *lst)

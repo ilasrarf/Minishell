@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:12:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/29 21:20:15 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/30 12:46:31 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ void	heredoc_sgl(int signal)
 {
 	if (signal == SIGINT)
 	{
+		if (g_var->str)
+			free(g_var->str);
+		// if (g_var->lex)
+		// 	ft_lstclear_lex(&(g_var->lex));
 		g_var->suspend = 0;
 		g_var->i = dup(STDIN_FILENO);
 		close(0);
@@ -53,6 +57,7 @@ void	ft_norm_herdoc(t_lexer *lex, char **env, char *hold, int fd)
 	str = NULL;
 	str1 = NULL;
 	signal(SIGINT, &heredoc_sgl);
+	// signal(SIGQUIT, SIG_DFL);
 	while (lex)
 	{
 		if (ft_fill_herdoc(lex, env, hold, fd))

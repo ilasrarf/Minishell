@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:16:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/29 21:19:41 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/30 01:24:09 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ int	ft_check_in_out_snt(t_lexer *lex)
 			{
 				if (lex->next)
 					lex = lex->next;
+				g_var->exit_s = 258;
 				ft_putstr_fd("syntax error near unexpected token `", 2);
 				ft_putstr_fd(lex->word, 2);
-				ft_putstr_fd("`", 2);
+				ft_putstr_fd("`\n", 2);
 				return (0);
 			}
 		}

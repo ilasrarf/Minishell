@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/29 23:47:48 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/30 12:56:37 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,9 @@ typedef struct s_var
 	int					suspend;
 	int					i;
 	int					*shell_lvl;
-	// char				**env;
+	char				*str;
+	t_lexer				*lex;
+	t_parser			*pars;
 	char				*name;
 	char				*path;
 	char				*value;
@@ -134,6 +136,7 @@ int						ft_atoi(const char *str);
 void					ft_free_env(t_env **env);
 void					ft_lstdelone_env(t_env *lst);
 void					ft_write_error_exc(char *str, char *cmd);
+long long				ft_atoi_exit(const char *str);
 
 // parsing
 void					ft_parser(t_lexer *lex, t_parser **prs, char **env);

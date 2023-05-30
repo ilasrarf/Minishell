@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:30:24 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/29 23:11:36 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/05/30 13:02:08 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,10 @@ int	ft_check_exit_args(char **args)
 	}
 	else
 	{
-		i = ft_atoi(args[1]) + 1;
-		if (LONG_MAX < i)
+		i = ft_atoi_exit(args[1]);
+		printf("%lld\n", i);
+		printf("%ld\n", LONG_MAX);
+		if (LONG_MAX < i || LONG_MIN > i)
 		{
 			ft_putstr_fd("exit\nminishell: exit: ", 2);
 			ft_putstr_fd(args[1], 2);
