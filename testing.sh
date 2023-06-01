@@ -40,7 +40,21 @@ add exit status to builting's : export cd
 
 ls | << data && << data cat one after the other
 
-./file
 
 
 exit 778798789789789789789798789798789798789889788887888989
+
+
+echo -nnnnn -n  -nnnnd
+
+
+env -i && unset pwd;
+
+
+./file error not printing
+
+
+unset all
+cd ..
+
+ls -la | la >> re | << rre << yt << rse << we << qwerty << yuio | cat

@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:01:38 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/30 01:46:59 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/01 21:41:07 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	ft_handel_dotes(char *cmd)
 void	ft_print_error(char *cmd)
 {
 	DIR	*dir;
-
 	if (errno == ENOENT)
-		perror("minishell: ");
+		ft_write_error_exc(" : No such file or directory\n", cmd);
+		// perror("minishell: ");
 	else if (errno == EACCES)
 	{
 		dir = opendir(cmd);
@@ -45,6 +45,8 @@ void	ft_print_error(char *cmd)
 			ft_write_error_exc(": Permission denied\n", cmd);
 		exit(126);
 	}
+	else if (errno == ENOEXEC)
+		perror("minishell: ");
 	exit(127);
 }
 

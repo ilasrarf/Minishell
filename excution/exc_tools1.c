@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 18:05:28 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/29 23:32:17 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/01 21:30:15 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,18 +78,25 @@ int	ft_norm_exc(t_parser *pars, char **env, int fd[2], t_env **env_list)
 void	ft_dup_fd(t_parser *pars, int old, int fd[2])
 {
 	close(fd[0]);
-	if (pars->next)
-		dup2(fd[1], STDOUT_FILENO);
-	close(fd[1]);
-	if (old != -1)
+	if (pars->out_red > 2 || pars->in_red > 2)
 	{
-		dup2(old, STDIN_FILENO);
-		close(old);
+		if (pars->out_red > 2)
+			ft_red_out(pars);
+		if (pars->in_red > 2)
+			ft_red_in(pars);
 	}
-	if (pars->out_red > 2)
-		ft_red_out(pars);
-	if (pars->in_red > 2)
-		ft_red_in(pars);
+	else
+	{
+		if (pars->next)
+			dup2(fd[1], STDOUT_FILENO);
+		close(fd[1]);
+		if (old != -1)
+		{
+			dup2(old, STDIN_FILENO);
+			close(old);
+		}
+	}
+	close(fd[1]);
 }
 
 void	ft_exc_loop(t_parser *pars, char **env, int fd[2], t_env **env_list)

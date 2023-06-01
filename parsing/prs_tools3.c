@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 16:20:43 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/30 12:50:43 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/01 21:35:29 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,17 @@ void	ft_handel_in(t_lexer **lex, int *in, char **av)
 
 int	ft_fill_herdoc(t_lexer *lex, char **env, char *hold, int fd)
 {
+	g_var->in_hdc = 1;
 	g_var->str = readline("\e[91mheredoc>  \e[0m");
 	if (!ft_strcmp(g_var->str, lex->word))
 	{
+		g_var->in_hdc = 0;
 		free(g_var->str);
 		return (1);
 	}
 	if (!g_var->str)
 	{
-		close(fd);
+		g_var->x = 1;
 		return (1);
 	}
 	if (lex->in_quotes == 0 && ft_strchr(g_var->str, '$'))
