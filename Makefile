@@ -6,7 +6,7 @@
 #    By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 18:13:02 by ilasrarf          #+#    #+#              #
-#    Updated: 2023/06/02 21:41:26 by aen-naas         ###   ########.fr        #
+#    Updated: 2023/06/02 22:17:16 by aen-naas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ SRC = minishell.c \
 	  builtins/builtins3.c \
 	  builtins/builtins4.c \
 	  builtins/builtins5.c \
+	  norm_main.c
 	  
 
 SRC_O =  ${SRC:.c=.o}

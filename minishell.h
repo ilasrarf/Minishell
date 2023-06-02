@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/02 21:47:27 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/02 22:21:34 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,9 @@ typedef struct s_var
 
 typedef struct s_fd
 {
-	int old;
-	int fd[2];
-}				t_fd;
-
+	int					old;
+	int					fd[2];
+}						t_fd;
 
 extern t_var			*g_var;
 
@@ -218,5 +217,7 @@ void					add_new_to_env(char *str, t_env **env);
 void					add_old_to_env(char *str, t_env **env);
 int						is_exist(char *str, t_env *env_list);
 void					ft_handel_unset(t_parser **prs, t_env **env);
+
+void				fill_env(t_env **env_list, t_parser *prs ,char **env, int in);
 
 #endif

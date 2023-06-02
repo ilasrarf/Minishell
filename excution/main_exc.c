@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:01:38 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/02 21:19:55 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/02 22:25:00 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	ft_print_error(char *cmd)
 
 	if (errno == ENOENT)
 		ft_write_error_exc(" : No such file or directory\n", cmd);
-	// perror("minishell: ");
 	else if (errno == EACCES)
 	{
 		dir = opendir(cmd);
