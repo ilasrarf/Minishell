@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 18:05:28 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/01 21:30:15 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/02 18:34:44 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*ft_norm_check_path(char *cmd, char *path)
 		holder = ft_strjoin(ft_strjoin_char(ft_strdup(paths[i]), '/'), cmd);
 		i++;
 	}
-	if (!paths[i] && !ft_strchr(cmd, '/'))
+	if ((!paths[i] && !ft_strchr(cmd, '/')) || (cmd && !ft_strlen(cmd)))
 	{
 		ft_free(paths);
 		ft_write_error_exc(": command not found\n", cmd);

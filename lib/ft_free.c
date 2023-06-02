@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 14:47:12 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/24 15:43:46 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/02 19:42:29 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,10 @@ void	ft_free_env(t_env **env)
 		free(*env);
 		(*env) = (*env)->next;
 	}
+}
+
+void	ft_free_char(char **str)
+{
+	free(*str);
+	*str = NULL;
 }

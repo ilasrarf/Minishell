@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/31 00:06:16 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/02 21:47:27 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_var
 	int					i;
 	int					x;
 	int					in_hdc;
+	int					overflow;
 	int					*shell_lvl;
 	char				*str;
 	t_lexer				*lex;
@@ -138,8 +139,8 @@ int						ft_atoi(const char *str);
 void					ft_free_env(t_env **env);
 void					ft_lstdelone_env(t_env *lst);
 void					ft_write_error_exc(char *str, char *cmd);
-long long				ft_atoi_exit(const char *str);
-
+long					ft_atoi_exit(char *str);
+void					ft_free_char(char **str);
 // parsing
 void					ft_parser(t_lexer *lex, t_parser **prs, char **env);
 int						ft_fill_args(t_lexer *lex, t_parser **prs, char **env);
@@ -167,6 +168,7 @@ int						ft_check_other_var(char *var);
 void					ft_handel_open_error(int in, int out, t_lexer **lex);
 int						ft_fill_herdoc(t_lexer *lex, char **env, char *hold,
 							int fd);
+
 // excution
 void					ft_excution(t_parser *pars, char **env,
 							t_env **env_list);
@@ -195,7 +197,8 @@ void					ft_dup_fd(t_parser *pars, int old, int fd[2]);
 void					ft_exc_loop(t_parser *pars, char **env, int fd[2],
 							t_env **env_list);
 void					ft_print_error(char *cmd);
-void	ft_excve(t_parser *pars, char **env, t_env **env_list);
+void					ft_excve(t_parser *pars, char **env, t_env **env_list);
+void					ft_herdoc_sig(int *i);
 
 // builtins
 

@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:01:38 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/01 21:41:07 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/02 21:19:55 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@ void	ft_handel_dotes(char *cmd)
 void	ft_print_error(char *cmd)
 {
 	DIR	*dir;
+
 	if (errno == ENOENT)
 		ft_write_error_exc(" : No such file or directory\n", cmd);
-		// perror("minishell: ");
+	// perror("minishell: ");
 	else if (errno == EACCES)
 	{
 		dir = opendir(cmd);
@@ -65,7 +66,7 @@ int	ft_pipe(t_parser *pars, char **env, int fd[2], t_env **env_list)
 		return (-1);
 	}
 	if (id == 0)
-	{	
+	{
 		ft_dup_fd(pars, old, fd);
 		ft_excve(pars, env, env_list);
 	}
@@ -93,7 +94,6 @@ void	ft_excution(t_parser *pars, char **env, t_env **env_list)
 
 	fd[0] = -1;
 	fd[1] = -1;
-
 	g_var->exc = 1;
 	if (!pars->next && ft_builtins(&pars, env_list) != 0)
 		return ;

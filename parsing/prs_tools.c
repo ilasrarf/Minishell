@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:16:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/30 01:24:09 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/02 18:47:16 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ void	ft_use_heredoc(t_lexer **lex, char **env, int *fd)
 		hold = ft_strjoin(ft_strdup("/tmp/heredoc_"), hold1);
 	}
 	free(hold1);
-	*lex = (*lex)->next;
+	if (*lex)
+		*lex = (*lex)->next;
 	if ((*lex) && !ft_strcmp((*lex)->word, " "))
 		*lex = (*lex)->next;
 	*fd = open(hold, O_RDWR | O_CREAT, 0777);

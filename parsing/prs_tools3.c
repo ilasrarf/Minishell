@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 16:20:43 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/01 21:35:29 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/02 19:43:07 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,23 @@ void	ft_handel_in(t_lexer **lex, int *in, char **av)
 	}
 }
 
+void	ft_close_open_herdoc(char *hold, int *fd)
+{
+	ft_putstr_fd(g_var->str, *fd);
+	write(*fd, "\n", 1);
+	close(*fd);
+	*fd = open(hold, O_RDWR | O_CREAT | O_APPEND, 0777);
+}
+
 int	ft_fill_herdoc(t_lexer *lex, char **env, char *hold, int fd)
 {
 	g_var->in_hdc = 1;
 	g_var->str = readline("\e[91mheredoc>  \e[0m");
-	if (!ft_strcmp(g_var->str, lex->word))
+	if (lex && !ft_strcmp(g_var->str, lex->word))
 	{
 		g_var->in_hdc = 0;
-		free(g_var->str);
+		if (g_var->str)
+			ft_free_char(&g_var->str);
 		return (1);
 	}
 	if (!g_var->str)
@@ -57,20 +66,12 @@ int	ft_fill_herdoc(t_lexer *lex, char **env, char *hold, int fd)
 		g_var->x = 1;
 		return (1);
 	}
-	if (lex->in_quotes == 0 && ft_strchr(g_var->str, '$'))
+	if (lex && lex->in_quotes == 0 && ft_strchr(g_var->str, '$'))
 		ft_norm_herdoc_norm(env, g_var->str, fd);
-	else if (ft_strcmp(g_var->str, lex->word))
-	{
-		ft_putstr_fd(g_var->str, fd);
-		write(fd, "\n", 1);
-		close(fd);
-		fd = open(hold, O_RDWR | O_CREAT | O_APPEND, 0777);
-	}
+	else if (lex && ft_strcmp(g_var->str, lex->word))
+		ft_close_open_herdoc(hold, &fd);
 	if (g_var->str)
-	{
-		free(g_var->str);
-		g_var->str = NULL;
-	}
+		ft_free_char(&g_var->str);
 	return (0);
 }
 

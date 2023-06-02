@@ -58,3 +58,5 @@ unset all
 cd ..
 
 ls -la | la >> re | << rre << yt << rse << we << qwerty << yuio | cat
+
+ls | export - ;exit status  mybe changing in child processe

@@ -8,6 +8,7 @@
     "ios": "c",
     "locale": "c",
     "__mutex_base": "c",
-    "ostream": "c"
+    "ostream": "c",
+    "streambuf": "c"
   }
 }

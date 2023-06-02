@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/01 20:10:01 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/02 21:25:13 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,11 @@ void	handel(int signal)
 	static int i;
 
 	if (signal == SIGQUIT)
-	{
-		g_var->exit_s = 131;
 		return ;
-	}
 	else if (signal == SIGINT && waitpid(-1, NULL, WNOHANG))
 	{
 		if (g_var->in_hdc == 1)
-		{
-			i = 1;
-			if (g_var->str)
-				free(g_var->str);
-			write(1,"\n", 1);
-			g_var->suspend = 0;
-			g_var->exit_s = 130;
-			g_var->i = dup(STDIN_FILENO);
-			close(0);
-			g_var->in_hdc = 0;
-		}
+			ft_herdoc_sig(&i);
 		else
 		{
 			if (i != 1)
@@ -60,6 +47,7 @@ void	ft_lex_pars(char *str, char **env, t_env **env_list)
 	prs = NULL;
 	lex = NULL;
 	g_var->suspend = 1;
+	g_var->overflow = 1;
 	ft_lexer(str, &lex);
 	hold  = lex;
 	g_var->lex = hold;
@@ -77,12 +65,12 @@ void	ft_lex_pars(char *str, char **env, t_env **env_list)
 		ft_lstclear(&prs);
 	// ft_free_env(&env_list);
 	ft_free(res);
-	ft_lstclear_lex(&lex);
+	if (lex)
+		ft_lstclear_lex(&lex);
 }
 
 int	ft_main(char *str, char **env, t_env **env_list)
 {
-	g_var->path = "/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.";
 	if (ft_check_quotes(str))
 	{
 		free(str);

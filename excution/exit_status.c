@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:30:24 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/31 19:00:40 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/02 22:02:47 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void	ft_status(void)
 
 int	ft_check_exit_args(char **args)
 {
-	long long	i;
+	long	i;
 
 	i = 0;
 	if (args[1] == NULL)
-		return 0;
+		return (0);
 	while (args[i])
 		i++;
 	if (i > 2)
@@ -41,9 +41,7 @@ int	ft_check_exit_args(char **args)
 	else
 	{
 		i = ft_atoi_exit(args[1]);
-		printf("%lld\n", i);
-		printf("%ld\n", LONG_MAX);
-		if (LONG_MAX < i || LONG_MIN > i)
+		if (g_var->overflow == -1)
 		{
 			ft_putstr_fd("exit\nminishell: exit: ", 2);
 			ft_putstr_fd(args[1], 2);

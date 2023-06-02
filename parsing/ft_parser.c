@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:23:37 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/01 21:41:52 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/02 19:05:52 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	ft_fill_args(t_lexer *lex, t_parser **prs, char **env)
 	var.i = ft_count_arg(lex);
 	str = ft_calloc(var.i + 1, sizeof(char *));
 	var.i = 0;
-	while (lex)
+	while (lex && g_var->suspend != 0)
 	{
 		if (lex && lex->type == 'p')
 			break ;

@@ -6,7 +6,7 @@
 #    By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 18:13:02 by ilasrarf          #+#    #+#              #
-#    Updated: 2023/06/01 19:07:14 by aen-naas         ###   ########.fr        #
+#    Updated: 2023/06/02 21:41:26 by aen-naas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRC = minishell.c \
 	  parsing/prs_tools1.c \
 	  parsing/prs_tools2.c \
 	  parsing/prs_tools3.c \
+	  parsing/prs_tools4.c \
 	  excution/main_exc.c \
 	  excution/exc_tools.c \
 	  excution/exc_tools1.c \
@@ -61,10 +62,10 @@ SRC = minishell.c \
 SRC_O =  ${SRC:.c=.o}
 
 NAME = minishell
-CC = cc -g -fsanitize=address
+CC = cc -g 
 FLAGS =  -Wall -Werror -Wextra
 RM = rm -rf
-# LDFLAGS=
+
 
 all: ${NAME}
 

@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exc_tools2.c                                       :+:      :+:    :+:   */
+/*   prs_tools4.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/29 21:49:58 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/02 18:35:00 by aen-naas         ###   ########.fr       */
+/*   Created: 2023/06/02 21:14:50 by aen-naas          #+#    #+#             */
+/*   Updated: 2023/06/02 21:19:26 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_excve(t_parser *pars, char **env, t_env **env_list)
+void	ft_herdoc_sig(int *i)
 {
-	char	*str;
-	int		i;
-
-	signal(SIGINT, SIG_DFL);
-	i = ft_builtins(&pars, env_list);
-	if (pars->args[0] && !i)
-	{
-		str = ft_check_path(pars->args[0], env);
-		if (execve(str, pars->args, env) == -1)
-			ft_print_error(pars->args[0]);
-	}
-	exit(g_var->exit_s);
+	*i = 1;
+	if (g_var->str)
+		ft_free_char(&g_var->str);
+	write(1, "\n", 1);
+	g_var->suspend = 0;
+	g_var->exit_s = 130;
+	g_var->i = dup(STDIN_FILENO);
+	close(0);
+	g_var->in_hdc = 0;
 }

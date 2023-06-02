@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 14:30:48 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/30 13:02:37 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/02 22:01:48 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,22 @@ int	ft_atoi(const char *str)
 	return (res * signe);
 }
 
-long long	ft_atoi_exit(const char *str)
+long	ft_handel_over_flow(long res, int i, char *str)
 {
-	long long	i;
-	long long	res;
-	long long	signe;
+	long long	tmp;
+
+	tmp = res;
+	res = res * 10 + str[i] - '0';
+	if (tmp != res/10)
+		g_var->overflow = -1;
+	return res;
+}
+
+long	ft_atoi_exit(char *str)
+{
+	int	i;
+	long	res;
+	long	signe;
 
 	signe = 1;
 	res = 0;
@@ -57,9 +68,10 @@ long long	ft_atoi_exit(const char *str)
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		res = res * 10;
-		res = res + str[i] - '0';
+		res = ft_handel_over_flow(res, i, str);
 		i++;
 	}
+	if (str[i])
+		g_var->overflow = -1;
 	return (res * signe);
 }
