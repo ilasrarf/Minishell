@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:30:24 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/02 22:02:47 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/03 20:39:18 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ void	ft_status(void)
 	if (WIFEXITED(g_var->exit_s))
 		g_var->exit_s = WEXITSTATUS(g_var->exit_s);
 	else if (WIFSIGNALED(g_var->exit_s))
-	{
-		write(2, "\n", 1);
 		g_var->exit_s = WTERMSIG(g_var->exit_s) + 128;
-	}
 }
 
 int	ft_check_exit_args(char **args)
