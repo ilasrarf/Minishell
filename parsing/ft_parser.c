@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:23:37 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/02 19:05:52 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/03 13:10:43 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,11 @@ void	ft_parser(t_lexer *lex, t_parser **prs, char **env)
 
 	*prs = NULL;
 	if (!lex || !ft_check_in_out_snt(lex) || !ft_check_syntax(lex))
+	{
+		if (!ft_check_syntax(lex))
+			ft_putstr_fd("parssing error in pipe\n", 2);
 		return ;
+	}
 	ft_fill_args(lex, prs, env);
 	holder = *prs;
 }

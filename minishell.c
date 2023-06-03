@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/02 22:23:31 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/03 13:07:34 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int	ft_main(char *str, char **env, t_env **env_list)
 {
 	if (ft_check_quotes(str))
 	{
+		ft_putstr_fd("inclosed quote\n", 2);
 		free(str);
 		g_var->exit_s = 2;
 	}
