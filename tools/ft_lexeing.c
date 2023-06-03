@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:57:32 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/29 12:01:48 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/03 12:14:39 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ft_lexer(char *str, t_lexer **lex)
 			str += 2;
 		if (*str == '$')
 			ft_handel_var(lex, &str);
-		if (!ft_check_herdoc_fm(str) && *str != ' ' && *str != '|'
+		if (*str && !ft_check_herdoc_fm(str) && *str != ' ' && *str != '|'
 			&& *str != '$' && *str != '\'' && *str != '"')
 			ft_handel_char(lex, &str);
 		else if (*str == ' ')
