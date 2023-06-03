@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/02 22:21:34 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/03 21:18:15 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,7 @@ void					ft_exc_loop(t_parser *pars, char **env, int fd[2],
 void					ft_print_error(char *cmd);
 void					ft_excve(t_parser *pars, char **env, t_env **env_list);
 void					ft_herdoc_sig(int *i);
+void					ft_sigdef(void);
 
 // builtins
 
