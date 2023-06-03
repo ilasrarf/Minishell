@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+         #
+#    By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 18:13:02 by ilasrarf          #+#    #+#              #
-#    Updated: 2023/06/02 22:17:16 by aen-naas         ###   ########.fr        #
+#    Updated: 2023/06/03 22:38:51 by ilasrarf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ SRC = minishell.c \
 	  builtins/builtins3.c \
 	  builtins/builtins4.c \
 	  builtins/builtins5.c \
+	  builtins/norm_builtins.c \
 	  norm_main.c
 	  
 
@@ -71,7 +72,7 @@ RM = rm -rf
 all: ${NAME}
 
 ${NAME}: ${SRC_O}
-	${CC}  ${SRC_O} -o ${NAME} -lreadline -L /Users/aen-naas/.brew/opt/readline/lib -I/Users/aen-naas/.brew/opt/readline/include
+	${CC}  ${SRC_O} -o ${NAME} -lreadline -L /Users/ilasrarf/.brew/opt/readline/lib -I/Users/ilasrarf/.brew/opt/readline/include
 
 %.o: %.c minishell.h
 	${CC} ${FLAGS} -c $< -o $@

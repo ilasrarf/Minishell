@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/03 21:18:15 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/03 23:14:01 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,13 @@ typedef struct s_fd
 }						t_fd;
 
 extern t_var			*g_var;
+
+typedef struct s_bvar
+{
+	t_env				*h1;
+	t_env				*h2;
+	t_env				*tmp;
+}						t_bvar;
 
 // lexer functions
 int						ft_check_quotes(char *str);
@@ -199,6 +206,7 @@ void					ft_print_error(char *cmd);
 void					ft_excve(t_parser *pars, char **env, t_env **env_list);
 void					ft_herdoc_sig(int *i);
 void					ft_sigdef(void);
+void					fill_env(t_env **env_list, t_parser *prs ,char **env, int in);
 
 // builtins
 
@@ -218,7 +226,11 @@ void					add_new_to_env(char *str, t_env **env);
 void					add_old_to_env(char *str, t_env **env);
 int						is_exist(char *str, t_env *env_list);
 void					ft_handel_unset(t_parser **prs, t_env **env);
-
-void				fill_env(t_env **env_list, t_parser *prs ,char **env, int in);
+void					ft_norm_echo(t_parser **prs, int i, int *j, int f);
+void					ft_norm_export(char *str, int i, t_env **env);
+int						ft_prs_exp(char *str);
+void					ft_norm_unset(t_env **env, t_parser **prs, t_bvar **var,
+							int i);
+char					*ft_get_pwd(t_env **env);
 
 #endif

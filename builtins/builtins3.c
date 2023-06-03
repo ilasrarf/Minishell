@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 14:54:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/29 22:40:02 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/03 20:45:39 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_prs_exp(char *str)
 	int	i;
 
 	i = 0;
+	if (str && !str[0])
+		return (2);
 	if (!(str[i] >= 'A' && str[i] <= 'Z') && !(str[i] >= 'a' && str[i] <= 'z')
 		&& str[i] != '_')
 		return (0);
@@ -66,16 +68,22 @@ void	ft_print_exp(t_env **env)
 	*env = tmp1;
 }
 
+void	ft_add_var(t_parser **prs, t_env **env, int i, int *j)
+{
+	*j = 1;
+	if (!is_exist((*prs)->args[i], *env))
+		add_new_to_env((*prs)->args[i], env);
+	else
+		add_old_to_env((*prs)->args[i], env);
+}
+
 void	ft_handel_export(t_parser **prs, t_env **env)
 {
 	int	i;
+	int	j;
 
 	i = 1;
-	if (!(*prs)->args[1])
-	{
-		ft_print_exp(env);
-		return ;
-	}
+	j = 0;
 	while ((*prs)->args[i])
 	{
 		if (ft_prs_exp((*prs)->args[i]) == 0)
@@ -83,13 +91,13 @@ void	ft_handel_export(t_parser **prs, t_env **env)
 			g_var->exit_s = 1;
 			ft_write_error(2, (*prs)->args[i]);
 		}
-		else
+		else if (ft_prs_exp((*prs)->args[i]) != 2)
 		{
-			if (!is_exist((*prs)->args[i], *env))
-				add_new_to_env((*prs)->args[i], env);
-			else
-				add_old_to_env((*prs)->args[i], env);
+			if ((*prs)->args[i][0])
+				ft_add_var(prs, env, i, &j);
 		}
 		i++;
 	}
+	if (j == 0)
+		ft_print_exp(env);
 }

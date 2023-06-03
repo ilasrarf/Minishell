@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:47:58 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/31 20:26:29 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/03 22:09:21 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	ft_chang_ocwd(t_env **env, char *old)
 					ft_strdup(old)));
 		(*env) = (*env)->next;
 	}
-	free(old);
 	(*env) = tmp;
 }
 
@@ -75,10 +74,8 @@ char	*get_home(t_env **env)
 	}
 	(*env) = tmp;
 	if (cnt == 0)
-	{
-		g_var->exit_s = 1;
-		return (write(2, "minishell: cd: HOME not set\n", 28), g_var->hi = 1, NULL);
-	}
+		return (write(2, "minishell: cd: HOME not set\n", 28), g_var->hi = 1,
+			NULL);
 	else
 		return (hold->value);
 	return ((*env)->value);
@@ -90,16 +87,14 @@ void	ft_handel_cd(t_parser **prs, t_env **env)
 	char	cur[1024];
 	char	*old;
 
-	old = malloc(1024);
-	if (is_exist("PWD", *env))
-		getcwd(old, sizeof(old));
-	else
-		old = ft_strdup("");
+	old = ft_get_pwd(env);
 	ft_chang_ocwd(env, old);
 	if ((*prs)->args[1])
 		i = chdir((*prs)->args[1]);
 	else
 		i = chdir(get_home(env));
+	if (g_var->hi == 1)
+		g_var->exit_s = 1;
 	if (i == -1 && g_var->hi == 0)
 	{
 		g_var->exit_s = 1;
