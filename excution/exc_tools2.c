@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 21:49:58 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/02 18:35:00 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/04 20:46:58 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,16 @@ void	ft_excve(t_parser *pars, char **env, t_env **env_list)
 			ft_print_error(pars->args[0]);
 	}
 	exit(g_var->exit_s);
+}
+
+
+int	ft_close_fd(t_parser *pars, int fd[2])
+{
+	if (pars->in_red < 0 || pars->out_red < 0)
+	{
+		close(fd[0]);
+		close(fd[1]);
+		return 1;
+	}
+	return 0;
 }

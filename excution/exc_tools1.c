@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 18:05:28 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/03 20:31:18 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/04 20:47:35 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,17 +100,14 @@ void	ft_exc_loop(t_parser *pars, char **env, int fd[2], t_env **env_list)
 	while (pars)
 	{
 		g_var->exc = 0;
-		if (pars->in_red >= 0 && pars->out_red >= 0)
+		i = ft_norm_exc(pars, env, fd, env_list);
+		if (i == -1)
 		{
-			i = ft_norm_exc(pars, env, fd, env_list);
-			if (i == -1)
-			{
-				ft_putstr_fd("minishell: fork: ", 2);
-				ft_putstr_fd("Resource temporarily unavailable \n", 2);
-				break ;
-			}
-			ft_status();
+			ft_putstr_fd("minishell: fork: ", 2);
+			ft_putstr_fd("Resource temporarily unavailable \n", 2);
+			break ;
 		}
+		ft_status();
 		pars = pars->next;
 	}
 }

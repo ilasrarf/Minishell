@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:01:38 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/04 13:29:06 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/04 20:46:44 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int	ft_pipe(t_parser *pars, char **env, int fd[2], t_env **env_list)
 	if (id == 0)
 	{
 		ft_sigdef();
+		if (ft_close_fd(pars, fd))
+			exit(1);
 		ft_dup_fd(pars, old, fd);
 		ft_excve(pars, env, env_list);
 	}
