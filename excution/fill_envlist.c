@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:31:42 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/04 12:49:45 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/04 21:49:47 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ char	**ft_reconver(t_env *env)
 	i = 0;
 	while (env)
 	{
-		if ((env)->value)
-			res[i] = ft_strjoin(ft_strjoin_char(ft_strdup((env)->name), '='), (env)->value);
-		else
-			res[i] = ft_strjoin(ft_strjoin_char(ft_strdup((env)->name), '='), str);
+		res[i] = ft_env_while(env, str);
 		i++;
 		(env) = (env)->next;
 	}

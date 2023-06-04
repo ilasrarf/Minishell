@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/04 13:29:16 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/04 21:55:22 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,10 +120,7 @@ int	main(int ac, char **av, char **env)
 		if (str && *str)
 			add_history(str);
 		if (!str)
-		{
-			printf("exit\n");
-			return (g_var->exit_s);
-		}
+			return (ft_exit_main());
 		ft_main(str, env, &env_list);
 	}
 }

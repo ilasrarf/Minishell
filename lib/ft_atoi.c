@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 14:30:48 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/04 21:37:07 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/04 21:42:06 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,8 @@ int	ft_atoi(const char *str)
 long	ft_handel_over_flow(long res, int i, char *str)
 {
 	long long	tmp;
-	long long	tmp1;
 
 	tmp = res;
-	tmp1 = res * 10 + str[i] - '0';
 	res = res * 10 + str[i] - '0';
 	if (tmp != res / 10)
 		g_var->overflow = -1;
@@ -75,5 +73,7 @@ long	ft_atoi_exit(char *str)
 	}
 	if (str[i])
 		g_var->overflow = -1;
+	if (!ft_strcmp(str, "-9223372036854775808"))
+		g_var->overflow = 0;
 	return (res * signe);
 }
