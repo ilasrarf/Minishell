@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/04 21:53:13 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/04 21:58:47 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,10 +206,11 @@ void					ft_print_error(char *cmd);
 void					ft_excve(t_parser *pars, char **env, t_env **env_list);
 void					ft_herdoc_sig(int *i);
 void					ft_sigdef(void);
-void					fill_env(t_env **env_list, t_parser *prs ,char **env, int in);
+void					fill_env(t_env **env_list, t_parser *prs, char **env,
+							int in);
 int						ft_close_fd(t_parser *pars, int fd[2]);
 char					*ft_env_while(t_env *env, char *str);
-int						ft_exit_main();
+int						ft_exit_main(void);
 
 // builtins
 

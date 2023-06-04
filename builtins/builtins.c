@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 02:48:29 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/04 21:28:41 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/04 22:00:00 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	ft_handel_echo(t_parser **prs)
 	}
 	else
 		write((*prs)->out_red, "\n", 1);
-		
 }
 
 int	ft_norm_buil1(t_parser **prs, t_env **env_list)
@@ -117,7 +116,8 @@ int	ft_builtins(t_parser **prs, t_env **env_list)
 		}
 		exit(0);
 	}
-	else if (ft_norm_buil1(prs, env_list) == 0 && ft_norm_buil2(prs, env_list) == 0)
+	else if (ft_norm_buil1(prs, env_list) == 0 && ft_norm_buil2(prs,
+			env_list) == 0)
 		return (0);
 	else
 		return (1);

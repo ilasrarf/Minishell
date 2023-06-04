@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   norm_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 22:13:26 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/04 21:56:09 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/04 21:59:14 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	fill_env(t_env **env_list, t_parser *prs ,char **env, int in)
+void	fill_env(t_env **env_list, t_parser *prs, char **env, int in)
 {
 	if (!*env && !*env_list && !in)
 		fill_empty_env(env, env_list);
@@ -20,7 +20,7 @@ void	fill_env(t_env **env_list, t_parser *prs ,char **env, int in)
 		fill_env_list(env, env_list, prs);
 }
 
-int	ft_exit_main()
+int	ft_exit_main(void)
 {
 	printf("exit\n");
 	free(g_var);

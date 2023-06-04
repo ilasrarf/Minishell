@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:47:58 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/04 20:36:09 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/04 22:00:08 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	ft_chang_ocwd(t_env **env, char *old)
 
 	j = 0;
 	tmp = (*env);
-
 	while ((*env))
 	{
 		if (ft_strcmp((*env)->name, "OLDPWD") == 0)
@@ -31,9 +30,8 @@ void	ft_chang_ocwd(t_env **env, char *old)
 		}
 		else if ((*env)->next == NULL && j == 0)
 		{
-			ft_lstadd_back_env(env, ft_lstnew_env(ft_strdup("OLDPWD"),
-					old));
-			break;
+			ft_lstadd_back_env(env, ft_lstnew_env(ft_strdup("OLDPWD"), old));
+			break ;
 		}
 		(*env) = (*env)->next;
 	}

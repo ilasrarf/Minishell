@@ -3,40 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   norm_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:38:14 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/04 20:55:41 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/04 22:00:36 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void    ft_norm_echo(t_parser **prs, int i, int *j, int f)
+void	ft_norm_echo(t_parser **prs, int i, int *j, int f)
 {
-    if (!ft_strncmp((*prs)->args[i], "-", 1) && *j == 0)
+	if (!ft_strncmp((*prs)->args[i], "-", 1) && *j == 0)
+	{
+		f = ft_handel_n((*prs)->args[i]);
+		if (f == 0)
 		{
-			f = ft_handel_n((*prs)->args[i]);
-			if (f == 0)
-			{
-                *j = 1;
-				ft_putstr_fd((*prs)->args[i], (*prs)->out_red);
-				if ((*prs)->args[i + 1])
-					write((*prs)->out_red, " ", 1);
-			}
-		}
-		else
-		{
-            *j = 1;
+			*j = 1;
 			ft_putstr_fd((*prs)->args[i], (*prs)->out_red);
 			if ((*prs)->args[i + 1])
 				write((*prs)->out_red, " ", 1);
 		}
+	}
+	else
+	{
+		*j = 1;
+		ft_putstr_fd((*prs)->args[i], (*prs)->out_red);
+		if ((*prs)->args[i + 1])
+			write((*prs)->out_red, " ", 1);
+	}
 }
 
-void					ft_norm_export(char *str, int i, t_env **env)
+void	ft_norm_export(char *str, int i, t_env **env)
 {
-    if (str[i] == '+')
+	if (str[i] == '+')
 	{
 		(*env)->value = ft_strjoin((*env)->value, str + i + 2);
 		(*env)->st = 1;
@@ -49,9 +49,9 @@ void					ft_norm_export(char *str, int i, t_env **env)
 	}
 }
 
-void    ft_norm_unset(t_env **env, t_parser **prs, t_bvar **var, int i)
+void	ft_norm_unset(t_env **env, t_parser **prs, t_bvar **var, int i)
 {
-    if ((*env) && !ft_strcmp((*env)->name, (*prs)->args[i]))
+	if ((*env) && !ft_strcmp((*env)->name, (*prs)->args[i]))
 	{
 		(*var)->tmp = (*env)->next;
 		ft_lstdelone_env((*env));
@@ -73,12 +73,12 @@ void    ft_norm_unset(t_env **env, t_parser **prs, t_bvar **var, int i)
 	}
 }
 
-char    *ft_get_pwd(t_env **env)
+char	*ft_get_pwd(t_env **env)
 {
-    t_env   *tmp;
+	t_env	*tmp;
 
-    tmp = (*env);
-    while (tmp)
+	tmp = (*env);
+	while (tmp)
 	{
 		if (!ft_strcmp(tmp->name, "PWD"))
 		{
