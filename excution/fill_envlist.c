@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_envlist.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:31:42 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/03 23:11:51 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/04 12:39:26 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ char	**ft_reconver(t_env *env)
 {
 	int		i;
 	char	**res;
+	char	*str;
 	t_env	*tmp;
 
 	i = 0;
@@ -25,15 +26,19 @@ char	**ft_reconver(t_env *env)
 		i++;
 		tmp = tmp->next;
 	}
+	str = ft_strdup("");
 	res = ft_calloc(i + 1, sizeof(char *));
 	i = 0;
 	while (env)
 	{
-		res[i] = ft_strjoin(ft_strjoin_char(ft_strdup((env)->name), '='),
-				(env)->value);
+		if ((env)->value)
+			res[i] = ft_strjoin(ft_strjoin_char(ft_strdup((env)->name), '='), (env)->value);
+		else
+			res[i] = ft_strjoin(ft_strjoin_char(ft_strdup((env)->name), '='), str);
 		i++;
 		(env) = (env)->next;
 	}
+	free(str);
 	return (res);
 }
 
