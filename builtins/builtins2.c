@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:47:58 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/04 13:26:03 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/04 20:36:09 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ft_chang_ocwd(t_env **env, char *old)
 
 	j = 0;
 	tmp = (*env);
+
 	while ((*env))
 	{
 		if (ft_strcmp((*env)->name, "OLDPWD") == 0)
@@ -29,7 +30,11 @@ void	ft_chang_ocwd(t_env **env, char *old)
 			(*env)->value = old;
 		}
 		else if ((*env)->next == NULL && j == 0)
-			ft_lstadd_back_env(env, ft_lstnew_env(ft_strdup("OLDPWD"), old));
+		{
+			ft_lstadd_back_env(env, ft_lstnew_env(ft_strdup("OLDPWD"),
+					old));
+			break;
+		}
 		(*env) = (*env)->next;
 	}
 	(*env) = tmp;
@@ -98,7 +103,9 @@ void	ft_handel_cd(t_parser **prs, t_env **env)
 	if (i == -1 && g_var->hi == 0)
 	{
 		g_var->exit_s = 1;
-		printf("cd: %s: No such file or directory\n", (*prs)->args[1]);
+		ft_putstr_fd("cd: ", 2);
+		ft_putstr_fd((*prs)->args[1], 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
 		return ;
 	}
 	getcwd(cur, sizeof(cur));

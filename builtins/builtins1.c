@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 16:39:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/05/29 22:36:39 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/04 20:32:20 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ void	ft_handel_env(t_env **env)
 	t_env	*tmp1;
 
 	tmp1 = *env;
+	if (is_exist("PATH", *env) == 0)
+	{
+		ft_putstr_fd("Minishell: env: No such file or directory\n", 2);
+		return ;
+	}
 	while ((*env))
 	{
 		if ((*env)->st == 1)

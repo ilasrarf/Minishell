@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 14:54:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/03 20:45:39 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/04 20:22:23 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	ft_handel_export(t_parser **prs, t_env **env)
 	{
 		if (ft_prs_exp((*prs)->args[i]) == 0)
 		{
+			j++;
 			g_var->exit_s = 1;
 			ft_write_error(2, (*prs)->args[i]);
 		}
