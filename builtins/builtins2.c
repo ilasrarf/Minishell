@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:47:58 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/04 12:45:01 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/04 13:26:03 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ void	ft_chang_ocwd(t_env **env, char *old)
 		if (ft_strcmp((*env)->name, "OLDPWD") == 0)
 		{
 			j++;
-			free((*env)->value);
-			(*env)->value = ft_strdup(old);
+			if ((*env)->value)
+				free((*env)->value);
+			(*env)->value = old;
 		}
 		else if ((*env)->next == NULL && j == 0)
 			ft_lstadd_back_env(env, ft_lstnew_env(ft_strdup("OLDPWD"), old));
@@ -88,7 +89,6 @@ void	ft_handel_cd(t_parser **prs, t_env **env)
 
 	old = ft_get_pwd(env);
 	ft_chang_ocwd(env, old);
-	free(old);
 	if ((*prs)->args[1])
 		i = chdir((*prs)->args[1]);
 	else

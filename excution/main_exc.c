@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_exc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:01:38 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/03 23:13:47 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/04 13:29:06 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void	ft_excution(t_parser *pars, char **env, t_env **env_list)
 
 	fd[0] = -1;
 	fd[1] = -1;
+	(void)env;
 	g_var->exc = 1;
 	if (!pars->next && ft_builtins(&pars, env_list) != 0)
 		return ;

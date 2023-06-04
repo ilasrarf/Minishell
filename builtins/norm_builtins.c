@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   norm_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:38:14 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/03 22:07:31 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/04 13:19:17 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,12 @@ char    *ft_get_pwd(t_env **env)
     while (tmp)
 	{
 		if (!ft_strcmp(tmp->name, "PWD"))
-			return (tmp->value);
+		{
+			if (tmp->value)
+				return (ft_strdup(tmp->value));
+			else
+				return (ft_strdup(""));
+		}
 		tmp = tmp->next;
 	}
 	return (ft_strdup(""));
