@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:34:49 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/04 12:47:56 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/04 23:02:17 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,9 @@ void	ft_join_var_word(t_lexer **lex, char **str, char **env, int i)
 	while ((*lex) && ((*lex)->type == 'w' || (*lex)->type == 'v'))
 	{
 		if ((*lex)->type == 'v')
-			str[i] = ft_strjoin(ft_strdup(str[i]),
-					ft_hendel_var((*lex)->word, env));
+			str[i] = ft_strjoin(str[i], ft_hendel_var((*lex)->word, env));
 		else
-			str[i] = ft_strjoin(ft_strdup(str[i]), (*lex)->word);
+			str[i] = ft_strjoin(str[i], (*lex)->word);
 		(*lex) = (*lex)->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/04 21:55:22 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/04 22:57:17 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int	main(int ac, char **av, char **env)
 			write(1, "\n", 1);
 			dup2(g_var->i, STDIN_FILENO);
 		}
-		str = readline("\e[91mMinishell$ \e[0m");
+		str = readline("Minishell$");
 		if (str && *str)
 			add_history(str);
 		if (!str)

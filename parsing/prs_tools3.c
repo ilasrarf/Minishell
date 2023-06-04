@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 16:20:43 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/02 19:43:07 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/04 22:58:25 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_close_open_herdoc(char *hold, int *fd)
 int	ft_fill_herdoc(t_lexer *lex, char **env, char *hold, int fd)
 {
 	g_var->in_hdc = 1;
-	g_var->str = readline("\e[91mheredoc>  \e[0m");
+	g_var->str = readline("heredoc>");
 	if (lex && !ft_strcmp(g_var->str, lex->word))
 	{
 		g_var->in_hdc = 0;
