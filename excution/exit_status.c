@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:30:24 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/03 20:39:18 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/06 10:44:03 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int	ft_check_exit_args(char **args)
 	if (i > 2)
 	{
 		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
-		exit(255);
+		g_var->exit_s = 1;
+		return 0;
 	}
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 18:37:52 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/04 22:57:01 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/06 12:04:02 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_handel_char(t_lexer **lex, char **str)
 
 	hold = ft_strdup("");
 	i = 0;
-	while ((*str)[i] && !ft_check_herdoc_fm(*str + i) && (*str)[i] != ' '
+	while ((*str)[i] && !ft_check_herdoc_fm(*str + i) && !ft_strchr(" \t\n\r\v\f", (*str)[i])
 		&& (*str)[i] != '|' && (*str)[i] != '$' && (*str)[i] != '"'
 		&& (*str)[i] != '\'')
 	{
@@ -28,7 +28,7 @@ void	ft_handel_char(t_lexer **lex, char **str)
 		i++;
 	}
 	j = 0;
-	while ((*str)[j] && j < i - 1 && (*str)[j] != '$' && (*str)[j] != ' ')
+	while ((*str)[j] && j < i - 1 && (*str)[j] != '$' && !ft_strchr(" \t\n\r\v\f", (*str)[j]))
 		j++;
 	if ((*str)[j] == '$')
 		ft_lstadd_back(lex, ft_lstnew(hold, 'v', 0));
@@ -45,7 +45,7 @@ void	ft_handel_var(t_lexer **lex, char **str)
 	i++;
 	if ((*str)[i] == '_')
 		i++;
-	while ((*str)[i] && ((*str)[i] != ' ' && (*str)[i] != '\''
+	while ((*str)[i] && (!ft_strchr(" \t\n\r\v\f", (*str)[i]) && (*str)[i] != '\''
 			&& (*str)[i] != '"' && (*str)[i] != '|'))
 		i++;
 	ft_lstadd_back(lex, ft_lstnew(ft_substr(*str, 0, i), 'v', 0));

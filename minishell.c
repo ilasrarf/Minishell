@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/04 23:45:41 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/06 10:36:53 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,14 @@ void	handel(int signal)
 		return ;
 	else if (signal == SIGINT && waitpid(-1, NULL, WNOHANG))
 	{
+
 		if (g_var->in_hdc == 1)
 		{
 			ft_herdoc_sig(&i);
 			i++;
 		}
+		// else if (!g_var->exc)
+		// 	return ;
 		else
 		{
 			if (i == 0)
