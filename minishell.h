@@ -211,6 +211,7 @@ void					fill_env(t_env **env_list, t_parser *prs, char **env,
 int						ft_close_fd(t_parser *pars, int fd[2]);
 char					*ft_env_while(t_env *env, char *str);
 int						ft_exit_main(void);
+void					set_status_for_path(t_env **env);
 
 // builtins
 

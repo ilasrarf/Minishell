@@ -110,4 +110,7 @@ void	fill_empty_env(char **env, t_env **env_list)
 	ft_lstadd_back_env(env_list, ft_lstnew_env(ft_strdup("SHLVL"), ft_itoa(1)));
 	ft_lstadd_back_env(env_list, ft_lstnew_env(ft_strdup("_"),
 			ft_strdup("/usr/bin/env")));
+	ft_lstadd_back_env(env_list, ft_lstnew_env(ft_strdup("PATH"),
+			ft_strdup("/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.")));
+	
 }

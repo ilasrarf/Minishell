@@ -72,7 +72,7 @@ RM = rm -rf
 all: ${NAME}
 
 ${NAME}: ${SRC_O}
-	${CC}  ${SRC_O} -o ${NAME} -lreadline -L /Users/aen-naas/.brew/opt/readline/lib -I/Users/aen-naas/.brew/opt/readline/include
+	${CC}  ${SRC_O} -o ${NAME} -lreadline -L /Users/ilasrarf/.brew/opt/readline/lib -I/Users/ilasrarf/.brew/opt/readline/include
 
 %.o: %.c minishell.h
 	${CC} ${FLAGS} -c $< -o $@
