@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/04 21:58:47 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/07 14:20:09 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_var
 	int					i;
 	int					x;
 	int					in_hdc;
+	int					fd;
 	int					overflow;
 	int					*shell_lvl;
 	char				*str;
@@ -147,6 +148,8 @@ void					ft_lstdelone_env(t_env *lst);
 void					ft_write_error_exc(char *str, char *cmd);
 long					ft_atoi_exit(char *str);
 void					ft_free_char(char **str);
+void					ft_create_list(t_parser **prs, t_lexer *lex);
+void					ft_herdoc_fisrt(t_parser **prs, t_lexer *lex, char **env);
 // parsing
 void					ft_parser(t_lexer *lex, t_parser **prs, char **env);
 int						ft_fill_args(t_lexer *lex, t_parser **prs, char **env);

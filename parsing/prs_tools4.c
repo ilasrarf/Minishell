@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 21:14:50 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/04 23:48:46 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/07 11:57:28 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,48 @@ void	ft_sigdef(void)
 {
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
+}
+
+void	ft_create_list(t_parser **prs, t_lexer *lex)
+{
+	int i;
+
+	i = 0;
+	while (lex)
+	{
+		if (lex->type == 'p')
+			i++;
+		lex = lex->next;
+	}
+	while (i >= 0)
+	{
+		ft_lstadd_back_prs(prs, ft_lst_new_prs(NULL, 0, 0));
+		i--;
+	}
+}
+
+void	ft_herdoc_fisrt(t_parser **prs, t_lexer *lex, char **env)
+{
+	int	in;
+
+	in = 0;
+	while (lex)
+	{
+		if (lex && !ft_strcmp(lex->word, "<<") && lex->type == 'r')
+		{
+			ft_use_heredoc(&lex, env, &in);
+			(*prs)->in_red = in;
+			g_var->fd = in;
+		}
+		if (lex && lex->type == 'p')
+		{
+			if (*prs)
+			{
+				(*prs) = (*prs)->next;
+				in = 0;
+			}
+		}
+		if (lex)
+			lex = lex->next;
+	} 
 }

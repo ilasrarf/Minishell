@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 16:20:43 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/04 22:58:25 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/07 12:42:03 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,27 @@ int	ft_norm_fill_args(t_lexer **lex, char **env, char **str, t_norm *var)
 		return (1);
 	if ((*lex) && (!ft_strcmp((*lex)->word, ">") || !ft_strcmp((*lex)->word,
 				"<") || !ft_strcmp((*lex)->word, ">>")) && (*lex)->type == 'r')
+	{
 		ft_fill_heredoc_fm(&(*lex), &var->in, &var->out, env);
+		return 1;
+	}
 	if ((*lex) && !ft_strcmp((*lex)->word, "<<") && (*lex)->type == 'r')
-		ft_use_heredoc(&(*lex), env, &var->in);
+	{
+		if (*lex)
+			*lex = (*lex)->next;
+		if ((*lex) && (*lex)->type == 's')
+			*lex = (*lex)->next;
+		if (var->in > 2)
+			close(var->in);
+		var->in  = g_var->fd;
+		if (*lex)
+			*lex = (*lex)->next;
+		return 1;
+	}
 	if ((*lex) && ((*lex)->type == 'v' || (*lex)->type == 'w'))
 	{
 		ft_join_var_word(lex, str, env, var->i);
+		var->i++;
 		return (1);
 	}
 	return (0);

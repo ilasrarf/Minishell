@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/06 10:36:53 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/07 14:20:01 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ t_var	*ft_lstnew_var(int x, int y, char *name, char *value)
 	head->str = NULL;
 	head->value = value;
 	head->hi = 0;
+	head->fd = -1;
 	head->in_hdc = 0;
 	head->str = NULL;
 	head->next = NULL;

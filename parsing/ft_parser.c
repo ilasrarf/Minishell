@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:23:37 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/03 20:32:56 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/07 12:43:46 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,19 +87,26 @@ int	ft_fill_args(t_lexer *lex, t_parser **prs, char **env)
 	while (lex && g_var->suspend != 0)
 	{
 		if (lex && lex->type == 'p')
-			break ;
+		{
+			(*prs)->args = str;
+			(*prs)->out_red = var.out;
+			(*prs) = (*prs)->next;
+			lex = lex->next;
+			ft_inial(&var);
+			var.i = ft_count_arg(lex);
+			str = ft_calloc(var.i + 1, sizeof(char *));
+			var.i = 0;
+		}
 		if (ft_norm_fill_args(&lex, env, str, &var))
-			var.i++;
+		{
+			(*prs)->args = str;
+			(*prs)->out_red = var.out;
+			(*prs)->in_red = var.in;
+			if (!lex)
+				break;
+		}
 		if (lex && lex->type == 's')
 			lex = lex->next;
-	}
-	str[var.i] = NULL;
-	ft_lstadd_back_prs(prs, ft_lst_new_prs(str, var.in, var.out));
-	if (lex && !ft_strcmp(lex->word, "|"))
-	{
-		lex = lex->next;
-		str = NULL;
-		ft_fill_args(lex, prs, env);
 	}
 	return (0);
 }
@@ -109,12 +116,32 @@ void	ft_parser(t_lexer *lex, t_parser **prs, char **env)
 	t_parser	*holder;
 
 	*prs = NULL;
+	(void)env;
 	if (!lex || !ft_check_in_out_snt(lex) || !ft_check_syntax(lex))
 	{
 		if (!ft_check_syntax(lex))
 			ft_putstr_fd("parssing error in pipe\n", 2);
 		return ;
 	}
-	ft_fill_args(lex, prs, env);
+	ft_create_list(prs, lex);
 	holder = *prs;
+	ft_herdoc_fisrt(prs, lex, env);
+	*prs = holder;
+	ft_fill_args(lex, prs, env);
+	// *prs = holder;
+	// printf("\n-------------\n");
+	// int			i = 0;
+	// while(holder)
+	// {
+	//     i = 0;
+	//     while (holder->args && holder->args[i])
+	//     {
+	//         printf("ARGS: %s\n",holder->args[i]);
+	//         i++;
+	//     }
+	// 	printf("in %i\n", holder->in_red);
+	// 	printf("out %i\n", holder->out_red);
+	//     holder = holder->next;
+	// 	printf("\n-------------\n");
+	// }
 }
