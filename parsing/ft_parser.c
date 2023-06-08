@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:23:37 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/07 12:43:46 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/08 19:39:50 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,14 @@ int	ft_fill_args(t_lexer *lex, t_parser **prs, char **env)
 	{
 		if (lex && lex->type == 'p')
 		{
-			(*prs)->args = str;
+			if (!g_var->args)
+				(*prs)->args = str;
+			else
+			{
+				ft_free(str);
+				(*prs)->args = g_var->args;
+				g_var->args = NULL;
+			}
 			(*prs)->out_red = var.out;
 			(*prs) = (*prs)->next;
 			lex = lex->next;
@@ -99,7 +106,14 @@ int	ft_fill_args(t_lexer *lex, t_parser **prs, char **env)
 		}
 		if (ft_norm_fill_args(&lex, env, str, &var))
 		{
-			(*prs)->args = str;
+			if (!g_var->args)
+				(*prs)->args = str;
+			else
+			{
+				ft_free(str);
+				(*prs)->args = g_var->args;
+				g_var->args = NULL;
+			}
 			(*prs)->out_red = var.out;
 			(*prs)->in_red = var.in;
 			if (!lex)

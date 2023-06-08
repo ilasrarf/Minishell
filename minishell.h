@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/07 14:20:09 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/08 18:51:34 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,10 @@ typedef struct s_var
 	int					in_hdc;
 	int					fd;
 	int					overflow;
+	int					size;
 	int					*shell_lvl;
 	char				*str;
+	char				**args;
 	t_lexer				*lex;
 	t_parser			*pars;
 	char				*name;
@@ -177,7 +179,9 @@ int						ft_check_other_var(char *var);
 void					ft_handel_open_error(int in, int out, t_lexer **lex);
 int						ft_fill_herdoc(t_lexer *lex, char **env, char *hold,
 							int fd);
-
+char					**ft_realloc(char *holder, char **str);
+char					**ft_split_white(char const *s);
+int						ft_chrwithe(char *str);
 // excution
 void					ft_excution(t_parser *pars, char **env,
 							t_env **env_list);
