@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/11 12:53:09 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/11 15:15:42 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,17 @@ void	handel(int signal)
 
 	if (signal == SIGQUIT)
 		return ;
-	else if (signal == SIGINT && waitpid(-1, NULL, WNOHANG))
+	else if (signal == SIGINT)
 	{
-
+		if (waitpid(-1, NULL, WNOHANG) == 0)
+		{
+			i = 0;
+			return ;
+		}
 		if (g_var->in_hdc == 1)
 		{
 			ft_herdoc_sig(&i);
+			g_var->in_hdc = 0;
 			i++;
 		}
 		// else if (!g_var->exc)
@@ -34,6 +39,7 @@ void	handel(int signal)
 		{
 			if (i == 0)
 				write(1, "\n", 1);
+			// i=0;
 			g_var->exit_s = 1;
 			rl_on_new_line();
 			rl_replace_line("", 0);
@@ -119,8 +125,9 @@ int	main(int ac, char **av, char **env)
 		signal(SIGQUIT, &handel);
 		if (ttyname(STDIN_FILENO) == 0)
 		{
-			write(1, "\n", 1);
+			// if (g_var->in_hdc == 0)
 			dup2(g_var->i, STDIN_FILENO);
+			write(1, "\n", 1);
 		}
 		str = readline("Minishell$");
 		if (str && *str)
