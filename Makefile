@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+         #
+#    By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 18:13:02 by ilasrarf          #+#    #+#              #
-#    Updated: 2023/06/08 18:32:22 by ilasrarf         ###   ########.fr        #
+#    Updated: 2023/06/04 22:13:39 by aen-naas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,6 @@ SRC = minishell.c \
 	  lib/ft_strchr.c \
 	  lib/ft_free.c \
 	  lib/ft_atoi.c \
-	  lib/ft_splite_white.c \
 	  parsing/prs_tools.c \
 	  parsing/prs_tools1.c \
 	  parsing/prs_tools2.c \

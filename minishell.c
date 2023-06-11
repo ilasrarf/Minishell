@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/08 18:35:07 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/09 22:41:24 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,9 @@ t_var	*ft_lstnew_var(int x, int y, char *name, char *value)
 	head->i = y;
 	head->name = name;
 	head->str = NULL;
-	head->args = NULL;
 	head->value = value;
 	head->hi = 0;
-	head->size = 0;
-	head->fd = -1;
+	head->index = 0;
 	head->in_hdc = 0;
 	head->str = NULL;
 	head->next = NULL;

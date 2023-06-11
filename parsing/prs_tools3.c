@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prs_tools3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 16:20:43 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/07 12:42:03 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/09 22:21:54 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,9 @@
 
 int	ft_norm_fill_args(t_lexer **lex, char **env, char **str, t_norm *var)
 {
-	if ((*lex) && (*lex)->type == 'p')
-		return (1);
 	if ((*lex) && (!ft_strcmp((*lex)->word, ">") || !ft_strcmp((*lex)->word,
 				"<") || !ft_strcmp((*lex)->word, ">>")) && (*lex)->type == 'r')
-	{
 		ft_fill_heredoc_fm(&(*lex), &var->in, &var->out, env);
-		return 1;
-	}
 	if ((*lex) && !ft_strcmp((*lex)->word, "<<") && (*lex)->type == 'r')
 	{
 		if (*lex)
@@ -30,15 +25,14 @@ int	ft_norm_fill_args(t_lexer **lex, char **env, char **str, t_norm *var)
 			*lex = (*lex)->next;
 		if (var->in > 2)
 			close(var->in);
-		var->in  = g_var->fd;
+		var->in = var->fd[g_var->index];
 		if (*lex)
 			*lex = (*lex)->next;
-		return 1;
+		
 	}
 	if ((*lex) && ((*lex)->type == 'v' || (*lex)->type == 'w'))
 	{
 		ft_join_var_word(lex, str, env, var->i);
-		var->i++;
 		return (1);
 	}
 	return (0);

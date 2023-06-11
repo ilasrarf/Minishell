@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/08 18:51:34 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/09 22:20:12 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_norm
 	int					i;
 	int					in;
 	int					out;
+	int					*fd;
 }						t_norm;
 
 typedef struct s_parser
@@ -74,13 +75,11 @@ typedef struct s_var
 	int					suspend;
 	int					i;
 	int					x;
+	int					index;
 	int					in_hdc;
-	int					fd;
 	int					overflow;
-	int					size;
 	int					*shell_lvl;
 	char				*str;
-	char				**args;
 	t_lexer				*lex;
 	t_parser			*pars;
 	char				*name;
@@ -150,11 +149,9 @@ void					ft_lstdelone_env(t_env *lst);
 void					ft_write_error_exc(char *str, char *cmd);
 long					ft_atoi_exit(char *str);
 void					ft_free_char(char **str);
-void					ft_create_list(t_parser **prs, t_lexer *lex);
-void					ft_herdoc_fisrt(t_parser **prs, t_lexer *lex, char **env);
 // parsing
 void					ft_parser(t_lexer *lex, t_parser **prs, char **env);
-int						ft_fill_args(t_lexer *lex, t_parser **prs, char **env);
+int						ft_fill_args(t_lexer *lex, t_parser **prs, char **env, int *fd);
 int						ft_check_in_out_snt(t_lexer *lex);
 int						ft_count_heredoc(t_lexer *lex);
 int						ft_count_arg(t_lexer *lex);
@@ -179,9 +176,9 @@ int						ft_check_other_var(char *var);
 void					ft_handel_open_error(int in, int out, t_lexer **lex);
 int						ft_fill_herdoc(t_lexer *lex, char **env, char *hold,
 							int fd);
-char					**ft_realloc(char *holder, char **str);
-char					**ft_split_white(char const *s);
-int						ft_chrwithe(char *str);
+int 					count_pipe(t_lexer *lex);
+void					ft_heredoc_first(t_lexer *lex, int *fd, char **env);
+
 // excution
 void					ft_excution(t_parser *pars, char **env,
 							t_env **env_list);

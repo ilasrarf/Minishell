@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:23:37 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/08 19:39:50 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/09 22:21:48 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,13 @@ void	ft_fill_heredoc_fm(t_lexer **lex, int *in, int *out, char **av)
 		(*lex) = (*lex)->next;
 }
 
-int	ft_fill_args(t_lexer *lex, t_parser **prs, char **env)
+int	ft_fill_args(t_lexer *lex, t_parser **prs, char **env, int *fd)
 {
 	char	**str;
 	t_norm	var;
 
 	ft_inial(&var);
+	var.fd = fd;
 	var.i = ft_count_arg(lex);
 	str = ft_calloc(var.i + 1, sizeof(char *));
 	var.i = 0;
@@ -88,74 +89,44 @@ int	ft_fill_args(t_lexer *lex, t_parser **prs, char **env)
 	{
 		if (lex && lex->type == 'p')
 		{
-			if (!g_var->args)
-				(*prs)->args = str;
-			else
-			{
-				ft_free(str);
-				(*prs)->args = g_var->args;
-				g_var->args = NULL;
-			}
-			(*prs)->out_red = var.out;
-			(*prs) = (*prs)->next;
-			lex = lex->next;
-			ft_inial(&var);
-			var.i = ft_count_arg(lex);
-			str = ft_calloc(var.i + 1, sizeof(char *));
-			var.i = 0;
+			g_var->index++;
+			break ;
 		}
 		if (ft_norm_fill_args(&lex, env, str, &var))
-		{
-			if (!g_var->args)
-				(*prs)->args = str;
-			else
-			{
-				ft_free(str);
-				(*prs)->args = g_var->args;
-				g_var->args = NULL;
-			}
-			(*prs)->out_red = var.out;
-			(*prs)->in_red = var.in;
-			if (!lex)
-				break;
-		}
+			var.i++;
 		if (lex && lex->type == 's')
 			lex = lex->next;
+	}
+	str[var.i] = NULL;
+	ft_lstadd_back_prs(prs, ft_lst_new_prs(str, var.in, var.out));
+	if (lex && !ft_strcmp(lex->word, "|"))
+	{
+		lex = lex->next;
+		str = NULL;
+		ft_fill_args(lex, prs, env, fd);
 	}
 	return (0);
 }
 
 void	ft_parser(t_lexer *lex, t_parser **prs, char **env)
 {
-	t_parser	*holder;
+	// t_parser	*holder;
+	t_lexer 	*lex1;
+	int 		i;
+	int			*fd;
 
+	i = count_pipe(lex);
+	lex1 = lex;
+	fd = malloc(sizeof(int) * i + 1);
 	*prs = NULL;
-	(void)env;
 	if (!lex || !ft_check_in_out_snt(lex) || !ft_check_syntax(lex))
 	{
 		if (!ft_check_syntax(lex))
 			ft_putstr_fd("parssing error in pipe\n", 2);
 		return ;
 	}
-	ft_create_list(prs, lex);
-	holder = *prs;
-	ft_herdoc_fisrt(prs, lex, env);
-	*prs = holder;
-	ft_fill_args(lex, prs, env);
-	// *prs = holder;
-	// printf("\n-------------\n");
-	// int			i = 0;
-	// while(holder)
-	// {
-	//     i = 0;
-	//     while (holder->args && holder->args[i])
-	//     {
-	//         printf("ARGS: %s\n",holder->args[i]);
-	//         i++;
-	//     }
-	// 	printf("in %i\n", holder->in_red);
-	// 	printf("out %i\n", holder->out_red);
-	//     holder = holder->next;
-	// 	printf("\n-------------\n");
-	// }
+	ft_heredoc_first(lex1, fd, env);
+	ft_fill_args(lex, prs, env, fd);
+	free(fd);
+	g_var->index = 0;
 }

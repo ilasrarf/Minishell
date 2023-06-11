@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 21:14:50 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/08 18:29:42 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/09 22:10:47 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ void	ft_sigdef(void)
 	signal(SIGQUIT, SIG_DFL);
 }
 
-void	ft_create_list(t_parser **prs, t_lexer *lex)
+int count_pipe(t_lexer *lex)
 {
 	int i;
-
+	
 	i = 0;
 	while (lex)
 	{
@@ -41,66 +41,21 @@ void	ft_create_list(t_parser **prs, t_lexer *lex)
 			i++;
 		lex = lex->next;
 	}
-	while (i >= 0)
-	{
-		ft_lstadd_back_prs(prs, ft_lst_new_prs(NULL, 0, 0));
-		i--;
-	}
+	return (i);	
 }
 
-void	ft_herdoc_fisrt(t_parser **prs, t_lexer *lex, char **env)
+void	ft_heredoc_first(t_lexer *lex, int *fd, char **env)
 {
-	int	in;
+	int i;
 
-	in = 0;
+	i = 0;
 	while (lex)
 	{
-		if (lex && !ft_strcmp(lex->word, "<<") && lex->type == 'r')
-		{
-			ft_use_heredoc(&lex, env, &in);
-			(*prs)->in_red = in;
-			g_var->fd = in;
-		}
 		if (lex && lex->type == 'p')
-		{
-			if (*prs)
-			{
-				(*prs) = (*prs)->next;
-				in = 0;
-			}
-		}
+			i++;
+		if (lex && !ft_strcmp(lex->word, "<<") && lex->type == 'r')
+			ft_use_heredoc(&lex, env, &fd[i]);
 		if (lex)
 			lex = lex->next;
-	} 
-}
-
-char	**ft_realloc(char *holder, char **str)
-{
-	char **res;
-	char **new;
-	int i = 0;
-	int j = 0;
-
-	res = ft_split_white(holder);
-	while (res[i])
-		i++;
-	if (i == 1)
-	{
-		ft_free(res);
-		return str;
 	}
-	new = (char **)ft_calloc((i + g_var->size) + 1, sizeof(char *));
-	i = 0;
-	while (str[j])
-	{
-		new[j] = ft_strdup(str[j]);
-		 j++;
-	}
-	while (res[i])
-	{
-		new[j] = res[i];
-		j++;
-		i++;
-	}
-	return new;
 }

@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 22:13:26 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/08 18:51:02 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/04 21:59:14 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,4 @@ int	ft_exit_main(void)
 	printf("exit\n");
 	free(g_var);
 	return (g_var->exit_s);
-}
-
-int ft_chrwithe(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
-			return (1);
-		i++;
-	}
-	return (0);
 }
