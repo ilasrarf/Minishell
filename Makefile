@@ -6,7 +6,7 @@
 #    By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 18:13:02 by ilasrarf          #+#    #+#              #
-#    Updated: 2023/06/04 22:13:39 by aen-naas         ###   ########.fr        #
+#    Updated: 2023/06/11 12:44:49 by aen-naas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,7 +72,7 @@ RM = rm -rf
 all: ${NAME}
 
 ${NAME}: ${SRC_O}
-	${CC}  ${SRC_O} -o ${NAME} -lreadline -L /Users/ilasrarf/.brew/opt/readline/lib -I/Users/ilasrarf/.brew/opt/readline/include
+	${CC}  ${SRC_O} -o ${NAME} -lreadline -L /Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 
 %.o: %.c minishell.h
 	${CC} ${FLAGS} -c $< -o $@

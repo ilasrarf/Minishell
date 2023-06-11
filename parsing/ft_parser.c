@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:23:37 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/09 22:21:48 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/11 12:53:59 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ void	ft_parser(t_lexer *lex, t_parser **prs, char **env)
 	i = count_pipe(lex);
 	lex1 = lex;
 	fd = malloc(sizeof(int) * i + 1);
+	g_var->fd = fd;
 	*prs = NULL;
 	if (!lex || !ft_check_in_out_snt(lex) || !ft_check_syntax(lex))
 	{
@@ -127,6 +128,6 @@ void	ft_parser(t_lexer *lex, t_parser **prs, char **env)
 	}
 	ft_heredoc_first(lex1, fd, env);
 	ft_fill_args(lex, prs, env, fd);
-	free(fd);
+	// free(fd);
 	g_var->index = 0;
 }

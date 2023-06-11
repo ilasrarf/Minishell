@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/09 22:41:24 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/11 12:53:09 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	ft_lex_pars(char *str, char **env, t_env **env_list)
 	res = ft_reconver(*env_list);
 	free(str);
 	ft_parser(lex, &prs, res);
+	free(g_var->fd);
 	if (prs && g_var->suspend)
 		ft_excution(prs, res, env_list);
 	if (prs)
@@ -95,6 +96,7 @@ t_var	*ft_lstnew_var(int x, int y, char *name, char *value)
 	head->str = NULL;
 	head->value = value;
 	head->hi = 0;
+	head->fd = 0;
 	head->index = 0;
 	head->in_hdc = 0;
 	head->str = NULL;
