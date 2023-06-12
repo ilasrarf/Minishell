@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/12 12:21:27 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/12 12:38:31 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,28 @@
 # include <dirent.h>
 # include <errno.h>
 # include <fcntl.h>
-# include <readline/history.h>
-# include <readline/readline.h>
 # include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <sys/stat.h>
 # include <unistd.h>
+# include <readline/history.h>
+# include <readline/readline.h>
+
+// # include <stdio.h>
+// # include <stdlib.h>
+// # include <unistd.h>
+// # include <readline/readline.h>
+// # include <readline/history.h>
+// # include <signal.h>
+// # include <fcntl.h>
+// # include <paths.h>
+// # include <sys/types.h>
+// # include <sys/uio.h>
+// # include <limits.h>
+// # include <errno.h>
+// # include <dirent.h>
 
 // int						i;
 
@@ -153,7 +167,7 @@ void					ft_write_error_exc(char *str, char *cmd);
 long					ft_atoi_exit(char *str);
 void					ft_free_char(char **str);
 char					**ft_split_white(char const *s);
-int	ft_chrwithe(char *str);
+int						ft_chrwithe(char *str);
 // parsing
 void					ft_parser(t_lexer *lex, t_parser **prs, char **env);
 int						ft_fill_args(t_lexer *lex, t_parser **prs, char **env, int *fd);
@@ -196,7 +210,7 @@ void					handel(int signal);
 void					ft_status(void);
 char					**ft_reconver(t_env *env);
 int						ft_check_exit_args(char **args);
-int						rl_catch_signals(int catch);
+// int						rl_catch_signals(int catch);
 void					fill_env_list(char **env, t_env **env_list,
 							t_parser *pars);
 void					fill_empty_env(char **env, t_env **env_list);

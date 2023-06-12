@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/12 12:21:39 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/12 13:13:00 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,14 +121,13 @@ int	main(int ac, char **av, char **env)
 	g_var = ft_lstnew_var(0, 0, NULL, NULL);
 	(void)ac;
 	(void)av;
-	// rl_catch_signals = 1;
+	rl_catch_signals = 0;
 	while (1)
 	{
 		signal(SIGINT, &handel);
 		signal(SIGQUIT, &handel);
 		if (ttyname(STDIN_FILENO) == 0)
 		{
-			// if (g_var->in_hdc == 0)
 			dup2(g_var->i, STDIN_FILENO);
 			write(1, "\n", 1);
 		}
