@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:23:37 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/12 12:00:45 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/12 15:32:57 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,18 +86,7 @@ int	ft_fill_args(t_lexer *lex, t_parser **prs, char **env, int *fd)
 	g_var->size = var.i;
 	str = ft_calloc(var.i + 1, sizeof(char *));
 	var.i = 0;
-	while (lex && g_var->suspend != 0)
-	{
-		if (lex && lex->type == 'p')
-		{
-			g_var->index++;
-			break ;
-		}
-		if (ft_norm_fill_args(&lex, env, str, &var))
-			var.i++;
-		if (lex && lex->type == 's')
-			lex = lex->next;
-	}
+	ft_kk(&lex, &var, env, str);
 	str[var.i] = NULL;
 	if (g_var->relock)
 	{

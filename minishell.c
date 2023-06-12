@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/12 13:13:00 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/12 15:11:27 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,12 @@ void	handel(int signal)
 			g_var->in_hdc = 0;
 			i++;
 		}
-		// else if (!g_var->exc)
-		// 	return ;
 		else
 		{
 			if (i == 0)
 				write(1, "\n", 1);
-			// i=0;
 			g_var->exit_s = 1;
-			rl_on_new_line();
-			rl_replace_line("", 0);
-			rl_redisplay();
+			ft_norm_handel();
 		}
 	}
 }
@@ -58,8 +53,7 @@ void	ft_lex_pars(char *str, char **env, t_env **env_list)
 
 	prs = NULL;
 	lex = NULL;
-	g_var->suspend = 1;
-	g_var->overflow = 1;
+	
 	ft_lexer(str, &lex);
 	hold = lex;
 	g_var->lex = hold;
@@ -109,6 +103,8 @@ t_var	*ft_lstnew_var(int x, int y, char *name, char *value)
 	head->str = NULL;
 	head->relock = NULL;
 	head->next = NULL;
+	head->suspend = 1;
+	head->overflow = 1;
 	return (head);
 }
 

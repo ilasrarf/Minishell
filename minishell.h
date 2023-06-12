@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/12 12:38:31 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/12 15:33:35 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,6 @@
 # include <unistd.h>
 # include <readline/history.h>
 # include <readline/readline.h>
-
-// # include <stdio.h>
-// # include <stdlib.h>
-// # include <unistd.h>
-// # include <readline/readline.h>
-// # include <readline/history.h>
-// # include <signal.h>
-// # include <fcntl.h>
-// # include <paths.h>
-// # include <sys/types.h>
-// # include <sys/uio.h>
-// # include <limits.h>
-// # include <errno.h>
-// # include <dirent.h>
-
-// int						i;
 
 typedef struct s_lexeing
 {
@@ -170,7 +154,8 @@ char					**ft_split_white(char const *s);
 int						ft_chrwithe(char *str);
 // parsing
 void					ft_parser(t_lexer *lex, t_parser **prs, char **env);
-int						ft_fill_args(t_lexer *lex, t_parser **prs, char **env, int *fd);
+int						ft_fill_args(t_lexer *lex, t_parser **prs, char **env,
+							int *fd);
 int						ft_check_in_out_snt(t_lexer *lex);
 int						ft_count_heredoc(t_lexer *lex);
 int						ft_count_arg(t_lexer *lex);
@@ -195,9 +180,11 @@ int						ft_check_other_var(char *var);
 void					ft_handel_open_error(int in, int out, t_lexer **lex);
 int						ft_fill_herdoc(t_lexer *lex, char **env, char *hold,
 							int fd);
-int 					count_pipe(t_lexer *lex);
+int						count_pipe(t_lexer *lex);
 void					ft_heredoc_first(t_lexer *lex, int *fd, char **env);
 char					**ft_realloc(char *holder, char **str);
+void					ft_norm_join_var_il(char **str, char *str1, int i);
+void					ft_norm_handel(void);
 // excution
 void					ft_excution(t_parser *pars, char **env,
 							t_env **env_list);
@@ -210,7 +197,6 @@ void					handel(int signal);
 void					ft_status(void);
 char					**ft_reconver(t_env *env);
 int						ft_check_exit_args(char **args);
-// int						rl_catch_signals(int catch);
 void					fill_env_list(char **env, t_env **env_list,
 							t_parser *pars);
 void					fill_empty_env(char **env, t_env **env_list);
@@ -235,7 +221,7 @@ int						ft_close_fd(t_parser *pars, int fd[2]);
 char					*ft_env_while(t_env *env, char *str);
 int						ft_exit_main(void);
 void					set_status_for_path(t_env **env);
-
+void					ft_kk(t_lexer **lex, t_norm *var, char **env, char **str);
 // builtins
 
 int						ft_builtins(t_parser **prs, t_env **env_list);

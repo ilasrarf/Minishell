@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_exc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:01:38 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/11 18:04:01 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/12 14:36:54 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,8 @@ void	ft_excution(t_parser *pars, char **env, t_env **env_list)
 		return ;
 	else
 		ft_exc_loop(pars, env, fd, env_list);
-	 
+	while (wait(0) != -1 || errno != ECHILD)
+        ;
 	g_var->exc = 1;
 	close(fd[0]);
 }

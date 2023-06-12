@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prs_tools4.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 21:14:50 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/12 11:58:55 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/12 13:29:54 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,19 +62,16 @@ void	ft_heredoc_first(t_lexer *lex, int *fd, char **env)
 
 char	**ft_realloc(char *holder, char **str)
 {
-	char **res;
-	char **new;
-	int i = 0;
-	int j = 0;
+	char	**res;
+	char	**new;
+	int		i = 0;
+	int		j = 0;
 
 	res = ft_split_white(holder);
 	while (res[i])
 		i++;
 	if (i == 1)
-	{
-		ft_free(res);
-		return str;
-	}
+		return (ft_free(res), str);
 	new = (char **)ft_calloc((i + g_var->size) , sizeof(char *));
 	i = 0;
 	while (str[j])
@@ -89,5 +86,5 @@ char	**ft_realloc(char *holder, char **str)
 		i++;
 	}
 	free(res);
-	return new;
+	return (new);
 }
