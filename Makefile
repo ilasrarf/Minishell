@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+         #
+#    By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 18:13:02 by ilasrarf          #+#    #+#              #
-#    Updated: 2023/06/12 15:12:24 by ilasrarf         ###   ########.fr        #
+#    Updated: 2023/06/12 17:06:59 by aen-naas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,10 +78,10 @@ all: ${NAME}
 # 	${CC}  ${SRC_O} -o ${NAME} -lreadline -L /Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 
 %.o: %.c minishell.h
-	$(CC) $(FLAGS) -I $(shell brew --prefix readline)/include -c $< -o $@
+	$(CC) $(FLAGS)  -I /Users/$(USER)/.brew/opt/readline/include -c $< -o $@
 
 $(NAME): $(SRC_O)
-	$(CC) $(SRC_O) -L $(shell brew --prefix readline)/lib -lreadline -o $(NAME)
+	$(CC) $(SRC_O) -L /Users/$(USER)/.brew/opt/readline/lib -lreadline -o $(NAME)
 
 clean:
 	${RM} ${SRC_O}

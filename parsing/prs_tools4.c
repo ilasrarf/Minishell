@@ -6,15 +6,14 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 21:14:50 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/12 16:13:54 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/12 17:54:41 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_herdoc_sig(int *i)
+void	ft_herdoc_sig(void)
 {
-	(void)i;
 	if (g_var->str)
 		ft_free_char(&g_var->str);
 	g_var->suspend = 0;

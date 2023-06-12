@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/12 16:25:57 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/12 17:55:10 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,18 +75,12 @@ typedef struct s_var
 	int					x;
 	int					size;
 	int					index;
-	int					error;
 	int					*fd;
 	int					in_hdc;
 	int					overflow;
 	int					*shell_lvl;
 	char				*str;
 	char				**relock;
-	t_lexer				*lex;
-	t_parser			*pars;
-	char				*name;
-	char				*path;
-	char				*value;
 	struct s_var		*next;
 }						t_var;
 
@@ -214,7 +208,7 @@ void					ft_exc_loop(t_parser *pars, char **env, int fd[2],
 							t_env **env_list);
 void					ft_print_error(char *cmd);
 void					ft_excve(t_parser *pars, char **env, t_env **env_list);
-void					ft_herdoc_sig(int *i);
+void					ft_herdoc_sig(void);
 void					ft_sigdef(void);
 void					fill_env(t_env **env_list, t_parser *prs, char **env,
 							int in);
