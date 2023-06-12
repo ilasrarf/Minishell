@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/11 12:51:34 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/12 12:21:27 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,14 @@ typedef struct s_var
 	int					suspend;
 	int					i;
 	int					x;
+	int					size;
 	int					index;
 	int					*fd;
 	int					in_hdc;
 	int					overflow;
 	int					*shell_lvl;
 	char				*str;
+	char				**relock;
 	t_lexer				*lex;
 	t_parser			*pars;
 	char				*name;
@@ -150,6 +152,8 @@ void					ft_lstdelone_env(t_env *lst);
 void					ft_write_error_exc(char *str, char *cmd);
 long					ft_atoi_exit(char *str);
 void					ft_free_char(char **str);
+char					**ft_split_white(char const *s);
+int	ft_chrwithe(char *str);
 // parsing
 void					ft_parser(t_lexer *lex, t_parser **prs, char **env);
 int						ft_fill_args(t_lexer *lex, t_parser **prs, char **env, int *fd);
@@ -179,7 +183,7 @@ int						ft_fill_herdoc(t_lexer *lex, char **env, char *hold,
 							int fd);
 int 					count_pipe(t_lexer *lex);
 void					ft_heredoc_first(t_lexer *lex, int *fd, char **env);
-
+char					**ft_realloc(char *holder, char **str);
 // excution
 void					ft_excution(t_parser *pars, char **env,
 							t_env **env_list);

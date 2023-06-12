@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:23:37 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/11 12:53:59 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/12 12:00:45 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int	ft_fill_args(t_lexer *lex, t_parser **prs, char **env, int *fd)
 	ft_inial(&var);
 	var.fd = fd;
 	var.i = ft_count_arg(lex);
+	g_var->size = var.i;
 	str = ft_calloc(var.i + 1, sizeof(char *));
 	var.i = 0;
 	while (lex && g_var->suspend != 0)
@@ -98,6 +99,12 @@ int	ft_fill_args(t_lexer *lex, t_parser **prs, char **env, int *fd)
 			lex = lex->next;
 	}
 	str[var.i] = NULL;
+	if (g_var->relock)
+	{
+		ft_free(str);
+		str = g_var->relock;
+		g_var->relock = NULL;
+	}
 	ft_lstadd_back_prs(prs, ft_lst_new_prs(str, var.in, var.out));
 	if (lex && !ft_strcmp(lex->word, "|"))
 	{
@@ -123,7 +130,10 @@ void	ft_parser(t_lexer *lex, t_parser **prs, char **env)
 	if (!lex || !ft_check_in_out_snt(lex) || !ft_check_syntax(lex))
 	{
 		if (!ft_check_syntax(lex))
+		{
 			ft_putstr_fd("parssing error in pipe\n", 2);
+			g_var->exit_s = 2;
+		}
 		return ;
 	}
 	ft_heredoc_first(lex1, fd, env);

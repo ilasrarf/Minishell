@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:12:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/02 19:29:44 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/12 11:33:52 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,7 @@ char	*ft_hendel_var(char *val, char **av)
 	while (val[cl.j] && val[cl.j] != '$')
 		cl.j++;
 	if (val[cl.j + 1] == '?')
-	{
 		return (ft_itoa(g_var->exit_s));
-	}
 	cl.len = cl.j + 1;
 	while (val[cl.len] && (val[cl.len] == '_' || ft_isalnum(val[cl.len])))
 		cl.len++;
