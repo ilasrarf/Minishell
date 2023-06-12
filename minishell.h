@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/12 15:44:27 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/12 16:25:57 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_var
 	int					x;
 	int					size;
 	int					index;
+	int					error;
 	int					*fd;
 	int					in_hdc;
 	int					overflow;
