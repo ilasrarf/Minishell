@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:31:42 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/04 21:49:47 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/12 15:39:36 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,4 @@ void	fill_empty_env(char **env, t_env **env_list)
 			ft_strdup("/usr/bin/env")));
 	ft_lstadd_back_env(env_list, ft_lstnew_env(ft_strdup("PATH"),
 			ft_strdup("/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.")));
-	
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prs_tools4.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 21:14:50 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/12 13:29:54 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/12 16:13:54 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ void	ft_sigdef(void)
 	signal(SIGQUIT, SIG_DFL);
 }
 
-int count_pipe(t_lexer *lex)
+int	count_pipe(t_lexer *lex)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	while (lex)
 	{
@@ -41,12 +41,12 @@ int count_pipe(t_lexer *lex)
 			i++;
 		lex = lex->next;
 	}
-	return (i);	
+	return (i);
 }
 
 void	ft_heredoc_first(t_lexer *lex, int *fd, char **env)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (lex)
@@ -54,7 +54,11 @@ void	ft_heredoc_first(t_lexer *lex, int *fd, char **env)
 		if (lex && lex->type == 'p')
 			i++;
 		if (lex && !ft_strcmp(lex->word, "<<") && lex->type == 'r')
+		{
+			if (fd[i])
+				close(fd[i]);
 			ft_use_heredoc(&lex, env, &fd[i]);
+		}
 		if (lex)
 			lex = lex->next;
 	}
@@ -64,15 +68,17 @@ char	**ft_realloc(char *holder, char **str)
 {
 	char	**res;
 	char	**new;
-	int		i = 0;
-	int		j = 0;
+	int		i;
+	int		j;
 
+	i = 0;
+	j = 0;
 	res = ft_split_white(holder);
 	while (res[i])
 		i++;
 	if (i == 1)
 		return (ft_free(res), str);
-	new = (char **)ft_calloc((i + g_var->size) , sizeof(char *));
+	new = (char **)ft_calloc((i + g_var->size), sizeof(char *));
 	i = 0;
 	while (str[j])
 	{
@@ -80,11 +86,7 @@ char	**ft_realloc(char *holder, char **str)
 		j++;
 	}
 	while (res[i])
-	{
-		new[j] = res[i];
-		j++;
-		i++;
-	}
+		new[j++] = res[i++];
 	free(res);
 	return (new);
 }

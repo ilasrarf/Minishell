@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   norm_main2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 13:43:15 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/12 15:34:22 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/12 15:39:53 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void ft_norm_handel(void)
+void	ft_norm_handel(void)
 {
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
 }
 
-void ft_kk(t_lexer **lex, t_norm *var, char **env, char **str)
+void	ft_kk(t_lexer **lex, t_norm *var, char **env, char **str)
 {
 	while ((*lex) && g_var->suspend != 0)
 	{

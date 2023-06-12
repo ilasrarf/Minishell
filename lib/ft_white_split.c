@@ -6,13 +6,13 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:45:41 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/12 11:45:51 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/12 15:40:29 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char *ft_my_strtrim_w(const char *s1)
+char	*ft_my_strtrim_w(const char *s1)
 {
 	int		len_s1;
 	char	*str;
@@ -23,23 +23,23 @@ char *ft_my_strtrim_w(const char *s1)
 	while (*str && (*str == ' ' || (*str >= 9 && *str <= 13)))
 		str++;
 	len_s1 = ft_strlen(str);
-	while (len_s1 > 0 && (str[len_s1 - 1] == ' '
-		|| (str[len_s1 - 1] >= 9 && str[len_s1 - 1] <= 13)))
+	while (len_s1 > 0 && (str[len_s1 - 1] == ' ' || (str[len_s1 - 1] >= 9
+				&& str[len_s1 - 1] <= 13)))
 		len_s1--;
 	return (ft_substr(str, 0, len_s1));
 }
 
-int ft_cnt_words_w(char *str)
+int	ft_cnt_words_w(char *str)
 {
-	int i;
-	int cnt;
+	int	i;
+	int	cnt;
 
 	cnt = 0;
 	i = 0;
 	while (str[i])
 	{
-		if ((str[i] == ' ' || (str[i] >= 9 && str[i] <= 13)) &&
-			!(str[i + 1] == ' ' || (str[i + 1] >= 9 && str[i + 1] <= 13)))
+		if ((str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+			&& !(str[i + 1] == ' ' || (str[i + 1] >= 9 && str[i + 1] <= 13)))
 			cnt++;
 		i++;
 	}
@@ -48,9 +48,9 @@ int ft_cnt_words_w(char *str)
 	return (cnt + 1);
 }
 
-static int ft_char_cnt(char *str)
+static int	ft_char_cnt(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i] && !(str[i] == ' ' || (str[i] >= 9 && str[i] <= 13)))
@@ -58,9 +58,9 @@ static int ft_char_cnt(char *str)
 	return (i);
 }
 
-char **ft_append_w(char **res, char *str, int cnt_w)
+char	**ft_append_w(char **res, char *str, int cnt_w)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < cnt_w)
@@ -85,12 +85,12 @@ char **ft_append_w(char **res, char *str, int cnt_w)
 	return (res);
 }
 
-char **ft_split_white(char const *s)
+char	**ft_split_white(char const *s)
 {
-	char **res;
-	int i;
-	int cnt_w;
-	char *str;
+	char	**res;
+	int		i;
+	int		cnt_w;
+	char	*str;
 
 	i = 0;
 	str = ft_my_strtrim_w(s);

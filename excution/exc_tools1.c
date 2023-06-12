@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 18:05:28 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/05 12:15:27 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/12 16:03:27 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*ft_norm_check_path(char *cmd, char *path)
 	char	**paths;
 	char	*holder;
 
-	i = 1;
+	i = 0;
 	paths = ft_split(path + 5, ':');
 	holder = ft_strjoin(ft_strjoin_char(ft_strdup(paths[0]), '/'), cmd);
 	while (paths[i] && access(holder, F_OK))

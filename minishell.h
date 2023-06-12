@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/12 15:33:35 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/12 15:44:27 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,7 +221,8 @@ int						ft_close_fd(t_parser *pars, int fd[2]);
 char					*ft_env_while(t_env *env, char *str);
 int						ft_exit_main(void);
 void					set_status_for_path(t_env **env);
-void					ft_kk(t_lexer **lex, t_norm *var, char **env, char **str);
+void					ft_kk(t_lexer **lex, t_norm *var, char **env,
+							char **str);
 // builtins
 
 int						ft_builtins(t_parser **prs, t_env **env_list);
