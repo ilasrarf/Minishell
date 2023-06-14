@@ -1,0 +1,10 @@
+echo $HOME$HOME ==>leaks
+
+export p && export p+=sdsd done;
+
+""$HOME"''""
+
+check if /usr/bin exist in path for env
+
+cat << $PWD ther is no output
+

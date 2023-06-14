@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins4.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 20:24:53 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/04 12:32:37 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/13 22:53:19 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,28 @@ void	add_old_to_env(char *str, t_env **env)
 }
 
 int	is_exist(char *str, t_env *env_list)
+{
+	int		i;
+	char	*str1;
+
+	i = 0;
+	while (*str && str[i] && str[i] != '+' && str[i] != '=')
+		i++;
+	str1 = ft_substr(str, 0, i);
+	while (env_list)
+	{
+		if (!ft_strcmp(env_list->name, str1))
+		{
+			free(str1);
+			return (1);
+		}
+		env_list = env_list->next;
+	}
+	free(str1);
+	return (0);
+}
+
+int	is_exist_env(char *str, t_env *env_list)
 {
 	int		i;
 	char	*str1;

@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:38:14 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/04 22:00:36 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/13 21:26:11 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ void	ft_norm_export(char *str, int i, t_env **env)
 {
 	if (str[i] == '+')
 	{
-		(*env)->value = ft_strjoin((*env)->value, str + i + 2);
+		if ((*env)->value)
+			(*env)->value = ft_strjoin((*env)->value, str + i + 2);
+		else
+			(*env)->value = ft_strjoin(ft_strdup(""), str + i + 2);
 		(*env)->st = 1;
 	}
 	else
