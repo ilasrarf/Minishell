@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:12:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/12 11:33:52 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:42:44 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	ft_norm_herdoc(t_lexer *lex, char **env, char *hold, int fd)
 		if (ft_fill_herdoc(lex, env, hold, fd))
 			break ;
 	}
+	// if (lex && ft_strcmp(g_var->str, lex->word))
+		// ft_close_open_herdoc(hold, &fd);
 	g_var->in_hdc = 0;
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/13 22:53:37 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:42:16 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,7 @@ void					ft_heredoc_first(t_lexer *lex, int *fd, char **env);
 char					**ft_realloc(char *holder, char **str);
 void					ft_norm_join_var_il(char **str, char *str1, int i);
 void					ft_norm_handel(void);
+void	ft_close_open_herdoc(char *hold, int *fd);
 // excution
 void					ft_excution(t_parser *pars, char **env,
 							t_env **env_list);

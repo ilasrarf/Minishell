@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:23:37 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/12 16:46:42 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:36:24 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,12 +107,13 @@ int	ft_fill_args(t_lexer *lex, t_parser **prs, char **env, int *fd)
 void	ft_parser(t_lexer *lex, t_parser **prs, char **env)
 {
 	t_lexer	*lex1;
+	t_parser	*holder;
 	int		i;
 	int		*fd;
 
 	i = count_pipe(lex);
 	lex1 = lex;
-	fd = malloc(sizeof(int) * i + 1);
+	fd = malloc(sizeof(int) * i);
 	g_var->fd = fd;
 	*prs = NULL;
 	if (!lex || !ft_check_syntax(lex) || !ft_check_in_out_snt(lex))
@@ -125,7 +126,24 @@ void	ft_parser(t_lexer *lex, t_parser **prs, char **env)
 		return ;
 	}
 	ft_heredoc_first(lex1, fd, env);
+	// write(fd[0], "out\n", 4);
 	g_var->index = 0;
 	ft_fill_args(lex, prs, env, fd);
+	// write((*prs)->in_red, "in\n", 3);
 	g_var->index = 0;
+	holder = *prs;
+	// printf("\n-------------\n");
+	// while(holder)
+	// {
+	//     i = 0;
+	//     while (holder->args && holder->args[i])
+	//     {
+	//         printf("ARGS: %s\n",holder->args[i]);
+	//         i++;
+	//     }
+	// 	printf("in %i\n", holder->in_red);
+	// 	printf("out %i\n", holder->out_red);
+	//     holder = holder->next;
+	// 	printf("\n-------------\n");
+	// }
 }

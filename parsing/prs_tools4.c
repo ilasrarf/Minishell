@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 21:14:50 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/12 17:54:41 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:40:33 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	count_pipe(t_lexer *lex)
 			i++;
 		lex = lex->next;
 	}
+	if (!i)
+		i++;
 	return (i);
 }
 
@@ -52,13 +54,13 @@ void	ft_heredoc_first(t_lexer *lex, int *fd, char **env)
 	{
 		if (lex && lex->type == 'p')
 			i++;
-		if (lex && !ft_strcmp(lex->word, "<<") && lex->type == 'r')
+		if (lex && lex->type == 'h')
 		{
 			if (fd[i])
 				close(fd[i]);
 			ft_use_heredoc(&lex, env, &fd[i]);
 		}
-		if (lex)
+		if (lex && lex->type != 'h')
 			lex = lex->next;
 	}
 }

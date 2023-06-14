@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 18:37:52 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/12 15:37:21 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/14 14:25:32 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_handel_herdoc_fm(t_lexer **lex, char **str)
 	i = 0;
 	if ((*str)[i] == '<' && (*str)[i + 1] == '<')
 	{
-		ft_lstadd_back(lex, ft_lstnew(ft_strdup("<<"), 'r', 0));
+		ft_lstadd_back(lex, ft_lstnew(ft_strdup("<<"), 'h', 0));
 		i += 2;
 	}
 	else if ((*str)[i] == '>' && (*str)[i + 1] == '>')

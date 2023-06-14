@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 16:20:43 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/12 17:11:17 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:45:11 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,15 @@
 
 int	ft_norm_fill_args(t_lexer **lex, char **env, char **str, t_norm *var)
 {
-	if ((*lex) && (!ft_strcmp((*lex)->word, ">") || !ft_strcmp((*lex)->word,
-				"<") || !ft_strcmp((*lex)->word, ">>")) && (*lex)->type == 'r')
+	if ((*lex) && (*lex)->type == 'r')
 		ft_fill_heredoc_fm(&(*lex), &var->in, &var->out, env);
-	if ((*lex) && !ft_strcmp((*lex)->word, "<<") && (*lex)->type == 'r')
+	if ((*lex) && (*lex)->type == 'h')
 	{
 		if (*lex)
 			*lex = (*lex)->next;
 		if ((*lex) && (*lex)->type == 's')
 			*lex = (*lex)->next;
-		if (var->in > 2)
+		if (var->in > 2 && var->in != var->fd[g_var->index])
 			close(var->in);
 		var->in = var->fd[g_var->index];
 		if (*lex)
@@ -67,6 +66,8 @@ int	ft_fill_herdoc(t_lexer *lex, char **env, char *hold, int fd)
 		g_var->in_hdc = 0;
 		if (g_var->str)
 			ft_free_char(&g_var->str);
+		close(fd);
+		fd = open(hold, O_RDWR | O_CREAT | O_APPEND, 0777);
 		return (1);
 	}
 	if (!g_var->str)
