@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:23:37 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/15 14:58:33 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/15 21:25:49 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,23 +53,25 @@ void	ft_fill_heredoc_fm(t_lexer **lex, int *in, int *out, char **av)
 		(*lex) = (*lex)->next;
 		if (!ft_strcmp((*lex)->word, " "))
 			(*lex) = (*lex)->next;
-		ft_handel_in(lex, in, av);
+		ft_open_red(lex, in, av, 0);
 	}
 	else if (!ft_strcmp((*lex)->word, ">"))
 	{
 		(*lex) = (*lex)->next;
 		if (!ft_strcmp((*lex)->word, " "))
 			(*lex) = (*lex)->next;
-		*out = open((*lex)->word, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+		ft_open_red(lex, out, av, 2);
+		// *out = open((*lex)->word, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	}
 	else if (!ft_strcmp((*lex)->word, ">>"))
 	{
 		(*lex) = (*lex)->next;
 		if (!ft_strcmp((*lex)->word, " "))
 			(*lex) = (*lex)->next;
-		*out = open((*lex)->word, O_WRONLY | O_CREAT | O_APPEND, 0777);
+		ft_open_red(lex, out, av, 1);
+		// *out = open((*lex)->word, O_WRONLY | O_CREAT | O_APPEND, 0777);
 	}
-	ft_check_next_fd(*lex, *in, *out);
+	ft_check_next_fd(*lex, *in, *out, av);
 	ft_handel_open_error(*in, *out, lex);
 	if (*lex)
 		(*lex) = (*lex)->next;
@@ -87,7 +89,7 @@ int	ft_fill_args(t_lexer *lex, t_parser **prs, char **env, int *fd)
 	str = ft_calloc(var.i + 1, sizeof(char *));
 	var.i = 0;
 	ft_kk(&lex, &var, env, str);
-	str[var.i] = NULL;
+	// str[var.i] = NULL;
 	if (g_var->relock)
 	{
 		ft_free(str);
@@ -126,24 +128,8 @@ void	ft_parser(t_lexer *lex, t_parser **prs, char **env)
 		return ;
 	}
 	ft_heredoc_first(lex1, fd, env);
-	// write(fd[0], "out\n", 4);
 	g_var->index = 0;
 	ft_fill_args(lex, prs, env, fd);
-	// write((*prs)->in_red, "in\n", 3);
 	g_var->index = 0;
 	holder = *prs;
-	// printf("\n-------------\n");
-	// while(holder)
-	// {
-	//     i = 0;
-	//     while (holder->args && holder->args[i])
-	//     {
-	//         printf("ARGS: %s\n",holder->args[i]);
-	//         i++;
-	//     }
-	// 	printf("in %i\n", holder->in_red);
-	// 	printf("out %i\n", holder->out_red);
-	//     holder = holder->next;
-	// 	printf("\n-------------\n");
-	// }
 }

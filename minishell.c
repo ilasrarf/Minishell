@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/15 16:07:20 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/15 18:12:29 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int	main(int ac, char **av, char **env)
 		rl_catch_signals = 0;
 		if (ttyname(STDIN_FILENO) == 0)
 			dup2(g_var->i, STDIN_FILENO);
-		str = readline("Minishell$");
+		str = readline("Minishell$ ");
 		if (str && *str)
 			add_history(str);
 		if (!str)

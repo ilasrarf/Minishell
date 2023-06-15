@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/15 14:43:18 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/15 20:26:19 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,11 +156,11 @@ int						ft_count_heredoc(t_lexer *lex);
 int						ft_count_arg(t_lexer *lex);
 void					ft_inial(t_norm *var);
 void					ft_use_heredoc(t_lexer **lex, char **env, int *fd);
-void					ft_check_next_fd(t_lexer *lex, int in, int out);
+void					ft_check_next_fd(t_lexer *lex, int in, int out, char **env);
 void					ft_norm_herdoc(t_lexer *lex, char **env, char *hold,
 							int fd);
 char					*ft_hendel_var(char *val, char **av);
-void					ft_handel_in(t_lexer **lex, int *in, char **av);
+void					ft_open_red(t_lexer **lex, int *in, char **av, int status);
 char					*ft_hendel_var_herdoc(char *val, char **av);
 void					ft_fill_heredoc_fm(t_lexer **lex, int *in, int *out,
 							char **av);
@@ -178,9 +178,9 @@ int						ft_fill_herdoc(t_lexer *lex, char **env, char *hold,
 int						count_pipe(t_lexer *lex);
 void					ft_heredoc_first(t_lexer *lex, int *fd, char **env);
 char					**ft_realloc(char *holder, char **str);
-void					ft_norm_join_var_il(char **str, char *str1, int i);
+void					ft_norm_join_var_il(char **str, char *str1, int i, int j);
 void					ft_norm_handel(void);
-void	ft_close_open_herdoc(char *hold, int *fd);
+void					ft_close_open_herdoc(char *hold, int *fd);
 // excution
 void					ft_excution(t_parser *pars, char **env,
 							t_env **env_list);

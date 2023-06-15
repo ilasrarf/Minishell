@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 22:13:26 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/15 16:08:54 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/15 16:57:59 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ int	ft_chrwithe(char *str)
 	return (0);
 }
 
-void	ft_norm_join_var_il(char **str, char *str2, int i)
+void	ft_norm_join_var_il(char **str, char *str2, int i, int j)
 {
-	if (ft_chrwithe(str2))
+	if (ft_chrwithe(str2) && !j)
 	{
 		if (g_var->relock)
 			ft_free(g_var->relock);

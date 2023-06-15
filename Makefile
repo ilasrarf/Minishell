@@ -6,7 +6,7 @@
 #    By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 18:13:02 by ilasrarf          #+#    #+#              #
-#    Updated: 2023/06/15 16:09:20 by aen-naas         ###   ########.fr        #
+#    Updated: 2023/06/15 23:13:40 by aen-naas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,9 +67,9 @@ SRC = minishell.c \
 SRC_O =  ${SRC:.c=.o}
 
 NAME = minishell
-CC = cc
-#  -g -fsanitize=address
-FLAGS =  -Wall -Werror -Wextra 
+CC = cc 
+# -g -fsanitize=address
+FLAGS =  -Wall -Werror -Wextra -fsanitize=address
 RM = rm -rf
 
 
@@ -79,10 +79,10 @@ all: ${NAME}
 # 	${CC}  ${SRC_O} -o ${NAME} -lreadline -L /Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 
 %.o: %.c minishell.h
-	$(CC) $(FLAGS)  -I /Users/$(USER)/.brew/opt/readline/include -c $< -o $@
+	$(CC) $(FLAGS) -I /Users/$(USER)/.brew/opt/readline/include -c $< -o $@
 
 $(NAME): $(SRC_O)
-	$(CC) $(SRC_O) -L /Users/$(USER)/.brew/opt/readline/lib -lreadline -o $(NAME)
+	$(CC) $(FLAGS) $(SRC_O) -L /Users/$(USER)/.brew/opt/readline/lib -lreadline -o $(NAME)
 
 clean:
 	${RM} ${SRC_O}

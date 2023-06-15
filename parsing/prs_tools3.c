@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 16:20:43 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/15 14:53:33 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/15 20:27:53 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,31 @@ int	ft_norm_fill_args(t_lexer **lex, char **env, char **str, t_norm *var)
 	return (0);
 }
 
-void	ft_handel_in(t_lexer **lex, int *in, char **av)
+void	ft_open_red(t_lexer **lex, int *fd, char **av, int status)
 {
-	(void)av;
-	if ((*lex)->type != 'v')
-		*in = open((*lex)->word, O_RDONLY, 0777);
+	char	*str;
+
+
+	if ((*lex)->type != 'v' && status == 0)
+		*fd = open((*lex)->word, O_RDONLY, 0777);
+	else if ((*lex)->type != 'v' && status == 1)
+		*fd = open((*lex)->word, O_WRONLY | O_CREAT | O_APPEND , 0777);
+	else if ((*lex)->type != 'v' && status == 2)
+		*fd = open((*lex)->word, O_WRONLY | O_CREAT | O_TRUNC , 0777);
 	else
 	{
-		*in = open(ft_hendel_var((*lex)->word, av), O_RDONLY, 0777);
-		if (*in < 0)
-			*in = -2;
+		str = ft_hendel_var((*lex)->word, av);
+		if (!status)
+			*fd = open(str, O_RDONLY, 0777);
+		else if (status == 1)
+			*fd = open(str, O_WRONLY | O_CREAT | O_APPEND , 0777);
+		else if (status == 2)
+			*fd = open(str, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+		if (*fd < 0 && !ft_strlen(str))
+			*fd = -2;
+		else
+			*fd = -3;
+		free(str);
 	}
 }
 
