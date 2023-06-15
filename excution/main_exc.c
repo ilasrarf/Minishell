@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_exc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:01:38 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/14 16:30:49 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/15 14:34:14 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	ft_print_error(char *cmd)
 		exit(126);
 	}
 	else if (errno == ENOEXEC)
+		perror("minishell: ");
+	else
 		perror("minishell: ");
 	exit(127);
 }

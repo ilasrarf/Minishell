@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 16:39:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/04 20:32:20 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/15 14:32:21 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	ft_handel_env(t_env **env)
 	t_env	*tmp1;
 
 	tmp1 = *env;
-	if (is_exist("PATH", *env) == 0)
+	if (is_exist("PATH", *env) == 0
+		|| check_path_built(get_value_from_env(env, "PATH"), "/usr/bin") == 0)
 	{
 		ft_putstr_fd("Minishell: env: No such file or directory\n", 2);
 		return ;

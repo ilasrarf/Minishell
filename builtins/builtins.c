@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 02:48:29 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/06 10:40:51 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/15 14:31:38 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,15 +86,13 @@ int	ft_norm_buil2(t_parser **prs, t_env **env_list)
 		ft_handel_env(env_list);
 		return (1);
 	}
-	else if (!ft_strcmp((*prs)->args[0], "export")
-		|| !ft_strcmp((*prs)->args[0], "EXPORT"))
+	else if (!ft_strcmp((*prs)->args[0], "export"))
 	{
 		g_var->exit_s = 0;
 		ft_handel_export(prs, env_list);
 		return (1);
 	}
-	else if (!ft_strcmp((*prs)->args[0], "unset") || !ft_strcmp((*prs)->args[0],
-			"UNSET"))
+	else if (!ft_strcmp((*prs)->args[0], "unset"))
 	{
 		g_var->exit_s = 0;
 		ft_handel_unset(prs, env_list);

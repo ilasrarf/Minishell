@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 19:56:14 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/03 21:36:44 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/15 14:32:41 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_handel_unset(t_parser **prs, t_env **env)
 	var->tmp = (*env);
 	while ((*prs)->args[i])
 	{
-		if (ft_prs_exp((*prs)->args[i]) == 0)
+		if (ft_prs_exp_unset((*prs)->args[i]) == 0)
 		{
 			g_var->exit_s = 1;
 			ft_write_error_unset(2, (*prs)->args[i]);

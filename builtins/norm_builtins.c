@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:38:14 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/13 21:26:11 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/15 14:33:41 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,28 @@ char	*ft_get_pwd(t_env **env)
 		tmp = tmp->next;
 	}
 	return (ft_strdup(""));
+}
+int ft_check_path_if_exist(char *path)
+{
+	int i;
+	int j;
+	char *str;
+
+	str = "/usr/bin";
+	i = 0;
+	while (path[i])
+	{
+		j = 0;
+		while (str[j])
+		{
+			if (str[j] != path[i])
+				break ;
+			i++;
+			j++;
+		}
+		i++;
+	}
+	if (str[i] == '\0')
+		return (1);
+	return (0);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+         #
+#    By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 18:13:02 by ilasrarf          #+#    #+#              #
-#    Updated: 2023/06/12 17:06:59 by aen-naas         ###   ########.fr        #
+#    Updated: 2023/06/15 14:30:46 by ilasrarf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,7 @@ SRC = minishell.c \
 	  builtins/builtins3.c \
 	  builtins/builtins4.c \
 	  builtins/builtins5.c \
+	  builtins/builtins6.c \
 	  builtins/norm_builtins.c \
 	  norm_main.c \
 	  norm_main2.c
