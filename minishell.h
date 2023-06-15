@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/15 14:31:04 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/15 14:43:18 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,6 +219,7 @@ int						ft_exit_main(void);
 void					set_status_for_path(t_env **env);
 void					ft_kk(t_lexer **lex, t_norm *var, char **env,
 							char **str);
+							
 // builtins
 
 int						ft_builtins(t_parser **prs, t_env **env_list);
@@ -247,5 +248,5 @@ int						is_exist_env(char *str, t_env *env_list);
 int						ft_prs_exp_unset(char *str);
 int						check_path_built(char* str, char* substr);
 char					*get_value_from_env(t_env **env, char *name);
-
+int						ft_check_num(char *str);
 #endif

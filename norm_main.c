@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 22:13:26 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/12 15:39:49 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/15 16:08:54 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	fill_env(t_env **env_list, t_parser *prs, char **env, int in)
 int	ft_exit_main(void)
 {
 	printf("exit\n");
-	free(g_var);
+	// free(g_var);
 	return (g_var->exit_s);
 }
 

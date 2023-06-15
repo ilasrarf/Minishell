@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:12:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/14 15:42:44 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/15 14:53:08 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_check_next_fd(t_lexer *lex, int in, int out)
 {
+	if (out == -1)
+		ft_write_error_exc(": No such file or directory\n", (lex)->word);
 	if (in == -1)
 		ft_write_error_exc(": No such file or directory\n", (lex)->word);
 	else if (in == -2)

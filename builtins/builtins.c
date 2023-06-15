@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 02:48:29 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/15 14:31:38 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/15 15:02:12 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,11 @@ int	ft_builtins(t_parser **prs, t_env **env_list)
 {
 	if (!ft_strcmp((*prs)->args[0], "exit"))
 	{
+		if ((*prs)->args[1] && !ft_check_num((*prs)->args[1]))
+		{
+			ft_putstr_fd("minishell: exit: f: numeric argument required\n", 2);
+			exit(255);
+		}
 		if (!ft_check_exit_args((*prs)->args))
 		{
 			if (g_var->exc)

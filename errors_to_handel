@@ -1,10 +1,41 @@
 echo $HOME$HOME ==>leaks
 
-export p && export p+=sdsd done;
-
 ""$HOME"''""
 
 check if /usr/bin exist in path for env
 
 cat << $PWD ther is no output
 
+
+echo " '$USER' "
+
+
+exit something somethingv2
+
+exit ""
+
+exit A 2 3
+
+
+cat << lim''
+$USER
+$NOVAR
+$HOME
+lim
+
+export test=" * "
+touch "$USER * ?eHallo"
+/bin/echo "$USER "*" ?e"*
+rm -f "$USER * ?eHallo"
+
+echo "$HO ME"
+
+unset PATH
+cd /bin
+ls
+cd ~
+
+export PATH=""
+ls /no error
+
+~

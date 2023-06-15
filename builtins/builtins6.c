@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins6.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 14:33:10 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/15 14:33:21 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/15 14:58:10 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,20 @@ char *get_value_from_env(t_env **env, char *name)
 		tmp = tmp->next;
 	}
 	return (NULL);
+}
+
+int	ft_check_num(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!ft_strlen(str))
+		return 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return 0;
+		i++;
+	}
+	return 1;
 }
