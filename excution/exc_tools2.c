@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 21:49:58 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/16 14:22:32 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/16 14:59:35 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_excve(t_parser *pars, char **env, t_env **env_list)
 
 	signal(SIGINT, SIG_DFL);
 	i = ft_builtins(&pars, env_list);
-	if (pars->args[0] && !i && pars->in_red != -1 && pars->out_red != -1)
+	if (pars->args[0] && !i)
 	{
 		str = ft_check_path(pars->args[0], env);
 		if (execve(str, pars->args, env) == -1)

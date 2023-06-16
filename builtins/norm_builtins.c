@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   norm_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:38:14 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/15 14:33:41 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/16 15:04:37 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ void	ft_norm_echo(t_parser **prs, int i, int *j, int f)
 		if (f == 0)
 		{
 			*j = 1;
-			ft_putstr_fd((*prs)->args[i], (*prs)->out_red);
+			ft_putstr_fd((*prs)->args[i], 1);
 			if ((*prs)->args[i + 1])
-				write((*prs)->out_red, " ", 1);
+				write(1, " ", 1);
 		}
 	}
 	else
 	{
 		*j = 1;
-		ft_putstr_fd((*prs)->args[i], (*prs)->out_red);
+		ft_putstr_fd((*prs)->args[i], 1);
 		if ((*prs)->args[i + 1])
-			write((*prs)->out_red, " ", 1);
+			write(1, " ", 1);
 	}
 }
 

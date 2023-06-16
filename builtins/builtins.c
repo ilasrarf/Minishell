@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 02:48:29 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/16 11:46:53 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/16 15:04:07 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ void	ft_handel_echo(t_parser **prs)
 	if ((*prs)->args[1][0] == '-' && (*prs)->args[1][1])
 	{
 		if (!ft_handel_n((*prs)->args[1]))
-			write((*prs)->out_red, "\n", 1);
+			write(1, "\n", 1);
 	}
 	else
-		write((*prs)->out_red, "\n", 1);
+		write(1, "\n", 1);
 }
 
 int	ft_norm_buil1(t_parser **prs, t_env **env_list)
