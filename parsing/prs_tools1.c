@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:12:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/16 14:39:42 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/16 19:44:05 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 void	ft_check_next_fd(t_lexer *lex, int in, int out, char **env)
 {
-	char *str;
+	char	*str;
 
-	// if (out == -1)
-	// 	ft_write_error_exc(": No such file or directory\n", (lex)->word);
 	if (in == -1)
 		ft_write_error_exc(": No such file or directory\n", (lex)->word);
 	if (in == -3 || out == -3)
@@ -57,7 +55,7 @@ void	ft_norm_herdoc(t_lexer *lex, char **env, char *hold, int fd)
 			break ;
 	}
 	// if (lex && ft_strcmp(g_var->str, lex->word))
-		// ft_close_open_herdoc(hold, &fd);
+	// ft_close_open_herdoc(hold, &fd);
 	g_var->in_hdc = 0;
 }
 
@@ -92,7 +90,7 @@ char	*ft_expande(char **env, char *var, int len)
 		}
 		i++;
 	}
-	return ft_strdup("");
+	return (ft_strdup(""));
 }
 
 char	*ft_hendel_var(char *var, char **env)
@@ -110,11 +108,11 @@ char	*ft_hendel_var(char *var, char **env)
 	j = i;
 	while (var[j] && ft_isalnum(var[j]))
 		j++;
-	exp = ft_expande(env , ft_substr(var, i, j - i), j - i);
+	exp = ft_expande(env, ft_substr(var, i, j - i), j - i);
 	if (i > 1)
 	{
 		hold = exp;
-		exp = ft_strjoin(ft_substr(var, 0, i -1), exp);
+		exp = ft_strjoin(ft_substr(var, 0, i - 1), exp);
 		free(hold);
 	}
 	if (var + j)
@@ -127,5 +125,5 @@ char	*ft_hendel_var(char *var, char **env)
 		exp = ft_hendel_var(exp, env);
 		free(hold);
 	}
-	return exp;
+	return (exp);
 }

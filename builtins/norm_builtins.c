@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:38:14 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/16 15:04:37 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/16 19:42:11 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,11 +94,12 @@ char	*ft_get_pwd(t_env **env)
 	}
 	return (ft_strdup(""));
 }
-int ft_check_path_if_exist(char *path)
+
+int	ft_check_path_if_exist(char *path)
 {
-	int i;
-	int j;
-	char *str;
+	int		i;
+	int		j;
+	char	*str;
 
 	str = "/usr/bin";
 	i = 0;

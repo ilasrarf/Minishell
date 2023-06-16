@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:34:49 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/16 16:24:34 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/16 19:43:10 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ void	ft_norm_herdoc_norm(char **env, char *str, int fd)
 void	ft_join_var_word(t_lexer **lex, char **str, char **env, int i)
 {
 	char	*str1;
-	int			j;
+	int		j;
 	char	*str2;
 
 	str2 = NULL;
-	j= 0;
+	j = 0;
 	if ((*lex) && (*lex)->type == 'v')
 	{
 		if ((*lex)->in_quotes == 2)
@@ -37,8 +37,7 @@ void	ft_join_var_word(t_lexer **lex, char **str, char **env, int i)
 		str2 = ft_hendel_var((*lex)->word, env);
 		if (!ft_strlen(str2))
 			str2 = NULL;
-		else
-			ft_norm_join_var_il(str, str2, i, j);
+		ft_norm_join_var_il(str, str2, i, j);
 	}
 	else if (*lex)
 		str[i] = ft_strdup((*lex)->word);

@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 16:20:43 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/16 16:24:07 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/16 19:43:04 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,19 @@ void	ft_open_red(t_lexer **lex, int *fd, char **av, int status)
 {
 	char	*str;
 
-
 	if ((*lex)->type != 'v' && status == 0)
 		*fd = open((*lex)->word, O_RDONLY, 0777);
 	else if ((*lex)->type != 'v' && status == 1)
-		*fd = open((*lex)->word, O_WRONLY | O_CREAT | O_APPEND , 0777);
+		*fd = open((*lex)->word, O_WRONLY | O_CREAT | O_APPEND, 0777);
 	else if ((*lex)->type != 'v' && status == 2)
-		*fd = open((*lex)->word, O_WRONLY | O_CREAT | O_TRUNC , 0777);
+		*fd = open((*lex)->word, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	else
 	{
 		str = ft_hendel_var((*lex)->word, av);
 		if (!status)
 			*fd = open(str, O_RDONLY, 0777);
 		else if (status == 1)
-			*fd = open(str, O_WRONLY | O_CREAT | O_APPEND , 0777);
+			*fd = open(str, O_WRONLY | O_CREAT | O_APPEND, 0777);
 		else if (status == 2)
 			*fd = open(str, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 		if (*fd < 0 && !ft_strlen(str))

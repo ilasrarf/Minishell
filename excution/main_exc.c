@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:01:38 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/16 15:07:52 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/16 19:06:20 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,18 +100,14 @@ void	ft_excution(t_parser *pars, char **env, t_env **env_list)
 	fd[1] = -1;
 	(void)env;
 	g_var->exc = 1;
-	if (!pars->next && ft_builtins(&pars, env_list) != 0)
+	if (!pars->next && ft_check_built(pars))
 	{
-		if (pars->out_red > 2)
-		{
-			dup2(pars->out_red, STDOUT_FILENO);
-			close(pars->out_red);
-		}
-		if (pars->in_red > 2)
-		{
-			dup2(pars->in_red, STDIN_FILENO);
-			close(pars->in_red);
-		}
+		ft_dup_built(pars, fd);
+		ft_builtins(&pars, env_list);
+		if (fd[1] > 2)
+			dup2(fd[1], STDOUT_FILENO);
+		if (fd[0] > 2)
+			dup2(fd[0], STDIN_FILENO);
 		return ;
 	}
 	else

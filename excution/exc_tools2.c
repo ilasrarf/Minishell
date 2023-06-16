@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 21:49:58 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/16 14:59:35 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/16 19:39:46 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,39 @@ char	*ft_env_while(t_env *env, char *str)
 		return (ft_strjoin(ft_strjoin_char(ft_strdup((env)->name), '='),
 				(env)->value));
 	return (ft_strjoin(ft_strjoin_char(ft_strdup((env)->name), '='), str));
+}
+
+void	ft_dup_built(t_parser *pars, int fd[2])
+{
+	if (pars->out_red > 2)
+	{
+		fd[1] = dup(STDOUT_FILENO);
+		dup2(pars->out_red, STDOUT_FILENO);
+		close(pars->out_red);
+	}
+	if (pars->in_red > 2)
+	{
+		fd[0] = dup(STDIN_FILENO);
+		dup2(pars->in_red, STDIN_FILENO);
+		close(pars->in_red);
+	}
+}
+
+int	ft_check_built(t_parser *pars)
+{
+	if (!ft_strcmp(pars->args[0], "echo") || !ft_strcmp(pars->args[0], "ECHO"))
+		return (1);
+	else if (!ft_strcmp(pars->args[0], "cd") || !ft_strcmp(pars->args[0], "CD"))
+		return (1);
+	else if (!ft_strcmp(pars->args[0], "pwd") || !ft_strcmp(pars->args[0],
+			"PWD"))
+		return (1);
+	else if (!ft_strcmp(pars->args[0], "env") || !ft_strcmp(pars->args[0],
+			"ENV"))
+		return (1);
+	else if (!ft_strcmp(pars->args[0], "export"))
+		return (1);
+	else if (!ft_strcmp(pars->args[0], "unset"))
+		return (1);
+	return (0);
 }

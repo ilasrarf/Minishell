@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 14:33:10 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/15 14:58:10 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/16 19:42:26 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,29 +33,29 @@ int	ft_prs_exp_unset(char *str)
 	return (1);
 }
 
-int check_path_built(char* str, char* substr)
+int	check_path_built(char *str, char *substr)
 {
-    int i;
-	int j;
+	int	i;
+	int	j;
 
-	i  = 0;
-    while (str[i] != '\0')
+	i = 0;
+	while (str[i] != '\0')
 	{
-        j = 0;
-        while (str[i + j] == substr[j]) 
+		j = 0;
+		while (str[i + j] == substr[j])
 		{
-            if (substr[j + 1] == '\0')
-                return (1);
-            j++;
-        }
-        i++;
-    }
-    return (0);
+			if (substr[j + 1] == '\0')
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
 }
 
-char *get_value_from_env(t_env **env, char *name)
+char	*get_value_from_env(t_env **env, char *name)
 {
-	t_env *tmp;
+	t_env	*tmp;
 
 	tmp = (*env);
 	while (tmp)
@@ -73,12 +73,12 @@ int	ft_check_num(char *str)
 
 	i = 0;
 	if (!ft_strlen(str))
-		return 0;
+		return (0);
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
-			return 0;
+			return (0);
 		i++;
 	}
-	return 1;
+	return (1);
 }

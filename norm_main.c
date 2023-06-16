@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 22:13:26 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/16 14:10:18 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/16 19:42:57 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,12 @@ void	fill_env(t_env **env_list, t_parser *prs, char **env, int in)
 
 int	ft_exit_main(void)
 {
+	int	i;
+
+	i = g_var->exit_s;
 	printf("exit\n");
 	free(g_var);
-	return (g_var->exit_s);
+	return (i);
 }
 
 int	ft_chrwithe(char *str)
@@ -60,7 +63,7 @@ int	ft_chrwithe(char *str)
 
 void	ft_norm_join_var_il(char **str, char *str2, int i, int j)
 {
-	if (ft_chrwithe(str2) && !j)
+	if (str2 && ft_chrwithe(str2) && !j)
 	{
 		if (g_var->relock)
 			ft_free(g_var->relock);

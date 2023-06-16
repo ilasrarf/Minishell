@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:23:37 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/15 21:25:49 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/16 19:43:31 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	ft_fill_heredoc_fm(t_lexer **lex, int *in, int *out, char **av)
 		if (!ft_strcmp((*lex)->word, " "))
 			(*lex) = (*lex)->next;
 		ft_open_red(lex, out, av, 2);
-		// *out = open((*lex)->word, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	}
 	else if (!ft_strcmp((*lex)->word, ">>"))
 	{
@@ -69,7 +68,6 @@ void	ft_fill_heredoc_fm(t_lexer **lex, int *in, int *out, char **av)
 		if (!ft_strcmp((*lex)->word, " "))
 			(*lex) = (*lex)->next;
 		ft_open_red(lex, out, av, 1);
-		// *out = open((*lex)->word, O_WRONLY | O_CREAT | O_APPEND, 0777);
 	}
 	ft_check_next_fd(*lex, *in, *out, av);
 	ft_handel_open_error(*in, *out, lex);
@@ -89,7 +87,6 @@ int	ft_fill_args(t_lexer *lex, t_parser **prs, char **env, int *fd)
 	str = ft_calloc(var.i + 1, sizeof(char *));
 	var.i = 0;
 	ft_kk(&lex, &var, env, str);
-	// str[var.i] = NULL;
 	if (g_var->relock)
 	{
 		ft_free(str);
@@ -109,7 +106,6 @@ int	ft_fill_args(t_lexer *lex, t_parser **prs, char **env, int *fd)
 void	ft_parser(t_lexer *lex, t_parser **prs, char **env)
 {
 	t_lexer	*lex1;
-	t_parser	*holder;
 	int		i;
 	int		*fd;
 
@@ -131,5 +127,4 @@ void	ft_parser(t_lexer *lex, t_parser **prs, char **env)
 	g_var->index = 0;
 	ft_fill_args(lex, prs, env, fd);
 	g_var->index = 0;
-	holder = *prs;
 }

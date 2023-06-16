@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 10:46:04 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/16 14:21:25 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/16 19:38:35 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*ft_get_path(char **env)
 		if (!strncmp(env[i], "PATH=", 5))
 		{
 			if (!ft_strlen(env[i] + 5))
-				return NULL;
+				return (NULL);
 			return (env[i]);
 		}
 		i++;
