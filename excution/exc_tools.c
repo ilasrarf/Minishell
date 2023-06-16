@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 10:46:04 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/15 22:43:40 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/16 14:21:25 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@ void	ft_red_out(t_parser *pars)
 void	ft_red_in(t_parser *pars)
 {
 	if (dup2(pars->in_red, STDIN_FILENO) < 0)
-	{
-		ft_putstr_fd("error\n", 2);
 		return ;
-	}
 	close(pars->in_red);
 }
 

@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 21:14:50 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/14 15:40:33 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/16 14:10:54 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	ft_herdoc_sig(void)
 	g_var->suspend = 0;
 	g_var->exit_s = 1;
 	g_var->i = dup(STDIN_FILENO);
-	close(0);
 	g_var->in_hdc = 0;
+	close(0);
 }
 
 void	ft_sigdef(void)

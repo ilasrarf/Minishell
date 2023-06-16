@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:12:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/16 13:02:27 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/16 14:08:50 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ char	*ft_expande(char **env, char *var, int len)
 		}
 		i++;
 	}
-	// if ()
 	return ft_strdup("");
 }
 
@@ -111,10 +110,7 @@ char	*ft_hendel_var(char *var, char **env)
 	j = i;
 	while (var[j] && ft_isalnum(var[j]))
 		j++;
-	// if (var[j] == '?')
-	// 	exp = ft_itoa(g_var->exit_s);
-	// else
-		exp = ft_expande(env , ft_substr(var, i, j - i), j - i);
+	exp = ft_expande(env , ft_substr(var, i, j - i), j - i);
 	if (i > 1)
 	{
 		hold = exp;
