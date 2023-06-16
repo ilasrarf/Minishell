@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prs_tools2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:34:49 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/16 19:43:10 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/16 21:24:20 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ void	ft_join_var_word(t_lexer **lex, char **str, char **env, int i)
 			j++;
 		str2 = ft_hendel_var((*lex)->word, env);
 		if (!ft_strlen(str2))
+		{
+			free(str2);
 			str2 = NULL;
+		}
 		ft_norm_join_var_il(str, str2, i, j);
 	}
 	else if (*lex)

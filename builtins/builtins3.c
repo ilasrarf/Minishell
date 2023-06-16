@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 14:54:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/04 20:22:23 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/16 20:40:10 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,16 @@ void	ft_print_exp(t_env **env)
 	tmp1 = *env;
 	while ((*env))
 	{
-		ft_putstr_fd("declare -x ", 1);
-		ft_putstr_fd((*env)->name, 1);
-		if ((*env)->value)
+		if ((*env)->st != 3)
 		{
-			ft_putstr_fd("=\"", 1);
-			ft_putstr_fd((*env)->value, 1);
-			ft_putstr_fd("\"", 1);
+			ft_putstr_fd("declare -x ", 1);
+			ft_putstr_fd((*env)->name, 1);
+			if ((*env)->value)
+			{
+				ft_putstr_fd("=\"", 1);
+				ft_putstr_fd((*env)->value, 1);
+				ft_putstr_fd("\"", 1);
+			}
 		}
 		ft_putstr_fd("\n", 1);
 		(*env) = (*env)->next;
@@ -84,6 +87,7 @@ void	ft_handel_export(t_parser **prs, t_env **env)
 
 	i = 1;
 	j = 0;
+	printf("----> %s\n", (*prs)->args[1]);
 	while ((*prs)->args[i])
 	{
 		if (ft_prs_exp((*prs)->args[i]) == 0)

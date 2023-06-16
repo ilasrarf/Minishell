@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prs_tools1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:12:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/16 19:44:05 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/16 21:17:45 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ char	*ft_expande(char **env, char *var, int len)
 		}
 		i++;
 	}
+	free(var);
 	return (ft_strdup(""));
 }
 

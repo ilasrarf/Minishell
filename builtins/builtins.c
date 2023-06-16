@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 02:48:29 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/16 15:04:07 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/16 19:54:32 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_handel_n(char *str)
 	int	i;
 
 	i = 1;
+	if (!str[i])
+		return (0);
 	while (str[i])
 	{
 		if (str[i] != 'n')
@@ -36,7 +38,10 @@ void	ft_handel_echo(t_parser **prs)
 	f = 0;
 	j = 0;
 	if (!(*prs)->args[i])
+	{
+		write(1, "\n", 1);
 		return ;
+	}
 	while ((*prs)->args[i])
 	{
 		ft_norm_echo(prs, i, &j, f);

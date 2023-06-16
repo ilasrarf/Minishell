@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prs_tools.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:16:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/14 14:26:01 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/16 22:52:00 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	ft_count_arg(t_lexer *lex)
 			return (i - j);
 		if (lex->type == 'w' || lex->type == 'v')
 			i++;
-		if (ft_check_herdoc_fm(lex->word))
+		if (lex->type == 'r' || lex->type == 'h')
 			j++;
 		lex = lex->next;
 	}

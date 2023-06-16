@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/16 19:31:12 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/16 20:10:15 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,10 @@ int	main(int ac, char **av, char **env)
 		signal(SIGQUIT, &handel);
 		rl_catch_signals = 0;
 		if (isatty(STDIN_FILENO) == 0)
+		{
 			dup2(g_var->i, STDIN_FILENO);
+			close(g_var->i);
+		}
 		str = readline("Minishell$ ");
 		if (str && *str)
 			add_history(str);
