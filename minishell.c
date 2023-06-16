@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/16 20:10:15 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/16 23:21:09 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	ft_lex_pars(char *str, char **env, t_env **env_list)
 	prs = NULL;
 	lex = NULL;
 	g_var->suspend = 1;
+	g_var->fd_hd = 0;
 	ft_lexer(str, &lex);
 	hold = lex;
 	fill_env(env_list, prs, env, in);

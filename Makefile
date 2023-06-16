@@ -6,7 +6,7 @@
 #    By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 18:13:02 by ilasrarf          #+#    #+#              #
-#    Updated: 2023/06/16 21:11:00 by ilasrarf         ###   ########.fr        #
+#    Updated: 2023/06/16 23:22:29 by ilasrarf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,7 @@ SRC_O =  ${SRC:.c=.o}
 NAME = minishell
 CC = cc -g 
 # -fsanitize=address
-# FLAGS =  -Wall -Werror -Wextra
+FLAGS =  -Wall -Werror -Wextra
 RM = rm -rf
 
 

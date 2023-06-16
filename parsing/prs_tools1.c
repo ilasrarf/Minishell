@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:12:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/16 23:12:34 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/16 23:23:59 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	ft_norm_herdoc(t_lexer *lex, char **env, char *hold, int fd)
 
 	str = NULL;
 	str1 = NULL;
+	g_var->fd_hd = fd;
 	while (lex)
 	{
 		g_var->in_hdc = 1;
@@ -55,7 +56,7 @@ void	ft_norm_herdoc(t_lexer *lex, char **env, char *hold, int fd)
 			break ;
 	}
 	// if (lex && ft_strcmp(g_var->str, lex->word))
-	// ft_close_open_herdoc(hold, &fd);
+	// 	ft_close_open_herdoc(hold, &fd);
 	g_var->in_hdc = 0;
 }
 

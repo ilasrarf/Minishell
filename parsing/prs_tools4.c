@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prs_tools4.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 21:14:50 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/16 14:39:55 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/16 23:21:49 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	ft_herdoc_sig(void)
 	g_var->exit_s = 1;
 	g_var->i = dup(STDIN_FILENO);
 	g_var->in_hdc = 0;
+	if (g_var->fd_hd > 2)
+		close(g_var->fd_hd);
 	close(0);
 }
 

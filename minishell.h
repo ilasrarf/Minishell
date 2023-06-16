@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/16 20:02:52 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/16 23:20:45 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct s_var
 	int					size;
 	int					index;
 	int					*fd;
+	int					fd_hd;
 	int					in_hdc;
 	int					overflow;
 	int					*shell_lvl;
