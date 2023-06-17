@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/16 23:20:45 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/17 13:42:04 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ void					ft_use_heredoc(t_lexer **lex, char **env, int *fd);
 void					ft_check_next_fd(t_lexer *lex, int in, int out,
 							char **env);
 void					ft_norm_herdoc(t_lexer *lex, char **env, char *hold,
-							int fd);
+							int *fd);
 char					*ft_hendel_var(char *val, char **av);
 void					ft_open_red(t_lexer **lex, int *in, char **av,
 							int status);
@@ -177,7 +177,7 @@ char					*ft_norm_hendle_var(char **av, char *val, t_calcul cl);
 int						ft_check_other_var(char *var);
 void					ft_handel_open_error(int in, int out, t_lexer **lex);
 int						ft_fill_herdoc(t_lexer *lex, char **env, char *hold,
-							int fd);
+							int *fd);
 int						count_pipe(t_lexer *lex);
 void					ft_heredoc_first(t_lexer *lex, int *fd, char **env);
 char					**ft_realloc(char *holder, char **str);

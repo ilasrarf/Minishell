@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_status.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:30:24 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/12 15:39:09 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/17 12:32:36 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ int	ft_check_exit_args(char **args)
 		i++;
 	if (i > 2)
 	{
-		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
+		ft_putstr_fd("exit\nminishell: exit: too many arguments\n", 2);
 		g_var->exit_s = 1;
-		return (0);
+		return (1);
 	}
 	else
 	{

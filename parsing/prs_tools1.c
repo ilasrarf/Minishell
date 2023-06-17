@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:12:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/17 11:41:22 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/17 13:42:19 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,15 @@ void	ft_check_next_fd(t_lexer *lex, int in, int out, char **env)
 	}
 }
 
-void	ft_norm_herdoc(t_lexer *lex, char **env, char *hold, int fd)
+void	ft_norm_herdoc(t_lexer *lex, char **env, char *hold, int *fd)
 {
 	char	*str;
 	char	*str1;
 
 	str = NULL;
 	str1 = NULL;
-	g_var->fd_hd = fd;
-	while (lex)
+	g_var->fd_hd = *fd;
+	while (lex && g_var->suspend)
 	{
 		g_var->in_hdc = 1;
 		if (ft_fill_herdoc(lex, env, hold, fd))
@@ -84,7 +84,7 @@ char	*ft_expande(char **env, char *var, int len)
 	i = 0;
 	while (env[i])
 	{
-		if (!ft_strncmp(env[i], var, len))
+		if (!ft_strcmp(env[i], var))
 		{
 			free(var);
 			return (ft_strdup(env[i] + len + 1));

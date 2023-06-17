@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 16:20:43 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/16 23:23:01 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/17 13:42:45 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	ft_close_open_herdoc(char *hold, int *fd)
 	*fd = open(hold, O_RDWR | O_CREAT | O_APPEND, 0777);
 }
 
-int	ft_fill_herdoc(t_lexer *lex, char **env, char *hold, int fd)
+int	ft_fill_herdoc(t_lexer *lex, char **env, char *hold, int *fd)
 {
 	g_var->in_hdc = 1;
 	g_var->str = readline("heredoc>");
@@ -80,16 +80,20 @@ int	ft_fill_herdoc(t_lexer *lex, char **env, char *hold, int fd)
 		g_var->in_hdc = 0;
 		if (g_var->str)
 			ft_free_char(&g_var->str);
-		close(fd);
-		fd = open(hold, O_RDWR | O_CREAT | O_APPEND, 0777);
+		close(*fd);
+		*fd = open(hold, O_RDWR | O_CREAT | O_APPEND, 0777);
 		return (1);
 	}
 	if (!g_var->str)
+	{
+		close(*fd);
+		*fd = -1;
 		return (1);
+	}
 	if (lex && lex->in_quotes == 0 && ft_strchr(g_var->str, '$'))
-		ft_norm_herdoc_norm(env, g_var->str, fd);
+		ft_norm_herdoc_norm(env, g_var->str, *fd);
 	else if (lex && ft_strcmp(g_var->str, lex->word))
-		ft_close_open_herdoc(hold, &fd);
+		ft_close_open_herdoc(hold, fd);
 	if (g_var->str)
 		ft_free_char(&g_var->str);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:16:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/16 23:23:50 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/17 13:41:53 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	ft_use_heredoc(t_lexer **lex, char **env, int *fd)
 		*lex = (*lex)->next;
 	*fd = open(hold, O_RDWR | O_CREAT, 0777);
 	i++;
-	ft_norm_herdoc(*lex, env, hold, *fd);
+	ft_norm_herdoc(*lex, env, hold, fd);
 	free(hold);
 	if (*lex)
 		(*lex) = (*lex)->next;
