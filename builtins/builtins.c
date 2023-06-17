@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 02:48:29 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/17 11:50:47 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/17 12:19:13 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,9 +122,9 @@ int	ft_builtins(t_parser **prs, t_env **env_list)
 				write(1, "exit\n", 5);
 			if ((*prs)->args[1] && !(*prs)->args[2])
 				exit(ft_atoi_exit((*prs)->args[1]));
+			else
+				exit(0);
 		}
-		else
-			exit(0);
 	}
 	else if (ft_norm_buil1(prs, env_list) == 0 && ft_norm_buil2(prs,
 			env_list) == 0)
