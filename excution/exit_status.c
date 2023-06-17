@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_status.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:30:24 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/17 12:32:36 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/17 16:36:52 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,20 @@ int	ft_check_exit_args(char **args)
 		}
 	}
 	return (0);
+}
+
+void	ft_add_lst_cmd(t_env **env_list, t_parser *prs)
+{
+	t_env *hold = *env_list;
+	while (prs->next)
+		prs = prs->next;
+	while (env_list && (*env_list)->next)
+		*env_list = (*env_list)->next;
+	if (*env_list && (*env_list)->name[0] == '_' && !(*env_list)->name[1])
+	{
+		puts("gg");
+		free((*env_list)->value);
+		(*env_list)->value = ft_strdup(prs->args[0]);
+	}
+	*env_list = hold;
 }

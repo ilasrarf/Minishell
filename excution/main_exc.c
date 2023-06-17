@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_exc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:01:38 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/17 11:46:47 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/17 16:20:12 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,6 @@ void	ft_excution(t_parser *pars, char **env, t_env **env_list)
 	while (wait(0) != -1 || errno != ECHILD)
 		;
 	g_var->exc = 1;
+	ft_add_lst_cmd(env_list, pars);
 	close(fd[0]);
 }
