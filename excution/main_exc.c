@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:01:38 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/16 21:08:29 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/17 11:46:47 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,8 @@ void	ft_excution(t_parser *pars, char **env, t_env **env_list)
 			dup2(fd[1], STDOUT_FILENO);
 		if (fd[0] > 2)
 			dup2(fd[0], STDIN_FILENO);
-		// close(fd[0]);
-		// close(fd[1]);
+		close(fd[0]);
+		close(fd[1]);
 		return ;
 	}
 	else

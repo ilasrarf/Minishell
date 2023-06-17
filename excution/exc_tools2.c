@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exc_tools2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 21:49:58 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/16 19:39:46 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/17 11:47:51 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void	ft_dup_built(t_parser *pars, int fd[2])
 int	ft_check_built(t_parser *pars)
 {
 	if (!ft_strcmp(pars->args[0], "echo") || !ft_strcmp(pars->args[0], "ECHO"))
+		return (1);
+	else if (!ft_strcmp(pars->args[0], "exit"))
 		return (1);
 	else if (!ft_strcmp(pars->args[0], "cd") || !ft_strcmp(pars->args[0], "CD"))
 		return (1);
