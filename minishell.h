@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/17 13:42:04 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/17 15:51:06 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,11 @@ void					ft_norm_join_var_il(char **str, char *str1, int i,
 							int j);
 void					ft_norm_handel(void);
 void					ft_close_open_herdoc(char *hold, int *fd);
+void					ft_norm_handel_var(char **env, char *var, char **exp, int j);
+char					*ft_expande(char **env, char *var, int len);
+char					*ft_norm_handel_var2(char **env,char *var, int *i, int *j);
+void					ft_norm_join_var_word(t_lexer **lex, char *str2, char **env, int *j);
+char 					*ft_join_args(t_lexer **lex, char **str, char **env, int i);
 // excution
 void					ft_excution(t_parser *pars, char **env,
 							t_env **env_list);

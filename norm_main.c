@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   norm_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 22:13:26 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/16 19:42:57 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/17 15:52:25 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,21 @@ void	ft_norm_join_var_il(char **str, char *str2, int i, int j)
 	}
 	else
 		str[i] = str2;
+}
+
+char *ft_join_args(t_lexer **lex, char **str, char **env, int i)
+{
+	char *str1;
+
+	
+	if ((*lex)->type == 'v')
+	{
+		str1 = ft_hendel_var((*lex)->word, env);
+		str[i] = ft_strjoin(str[i], str1);
+		free(str1);
+	}
+	else
+		str[i] = ft_strjoin(str[i], (*lex)->word);
+	(*lex) = (*lex)->next;
+	return str[i];
 }

@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 13:43:15 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/16 21:03:49 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/17 15:36:49 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,33 @@ void	ft_kk(t_lexer **lex, t_norm *var, char **env, char **str)
 		if ((*lex) && (*lex)->type == 's')
 			(*lex) = (*lex)->next;
 	}
+}
+
+void	ft_norm_handel_var(char **env, char *var, char **exp, int j)
+{
+	char *hold;
+
+	if (var + j)
+		*exp = ft_strjoin(*exp, var + j);
+	while (var[j] && var[j] != '$')
+		j++;
+	if (var[j] == '$')
+	{
+		hold = *exp;
+		*exp = ft_hendel_var(*exp, env);
+		free(hold);
+	}
+}
+
+char	*ft_norm_handel_var2(char **env,char *var, int *i, int *j)
+{
+	while (var[*j] && (ft_isalnum(var[*j]) || var[*j] == '_'))
+		(*j)++;
+	if (var[*i] == '?')
+	{
+		(*j)++;
+		return (ft_itoa(g_var->exit_s));
+	}
+	else
+		return (ft_expande(env, ft_substr(var, *i, (*j) - (*i)), (*j) - (*i)));
 }

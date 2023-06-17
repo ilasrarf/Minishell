@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:34:49 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/16 21:24:20 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/17 15:52:05 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_norm_herdoc_norm(char **env, char *str, int fd)
 
 void	ft_join_var_word(t_lexer **lex, char **str, char **env, int i)
 {
-	char	*str1;
+	// char	*str1;
 	int		j;
 	char	*str2;
 
@@ -47,15 +47,7 @@ void	ft_join_var_word(t_lexer **lex, char **str, char **env, int i)
 	(*lex) = (*lex)->next;
 	while ((*lex) && ((*lex)->type == 'w' || (*lex)->type == 'v'))
 	{
-		if ((*lex)->type == 'v')
-		{
-			str1 = ft_hendel_var((*lex)->word, env);
-			str[i] = ft_strjoin(str[i], str1);
-			free(str1);
-		}
-		else
-			str[i] = ft_strjoin(str[i], (*lex)->word);
-		(*lex) = (*lex)->next;
+		str[i] = ft_join_args(lex, str, env, i);
 	}
 }
 

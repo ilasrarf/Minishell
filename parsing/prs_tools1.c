@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:12:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/17 13:42:19 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/17 15:28:22 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char	*ft_expande(char **env, char *var, int len)
 	i = 0;
 	while (env[i])
 	{
-		if (!ft_strcmp(env[i], var))
+		if (!ft_strncmp(env[i], var, len))
 		{
 			free(var);
 			return (ft_strdup(env[i] + len + 1));
@@ -110,30 +110,13 @@ char	*ft_hendel_var(char *var, char **env)
 	if (!var[i])
 		return (ft_strdup("$"));
 	j = i;
-	while (var[j] && (ft_isalnum(var[j]) || var[j] == '_'))
-		j++;
-	if (var[i] == '?')
-	{
-		j++;
-		exp = ft_itoa(g_var->exit_s);
-	}
-	else
-		exp = ft_expande(env, ft_substr(var, i, j - i), j - i);
+	exp = ft_norm_handel_var2(env, var, &i, &j);
 	if (i > 1)
 	{
 		hold = exp;
 		exp = ft_strjoin(ft_substr(var, 0, i - 1), exp);
 		free(hold);
 	}
-	if (var + j)
-		exp = ft_strjoin(exp, var + j);
-	while (var[j] && var[j] != '$')
-		j++;
-	if (var[j] == '$')
-	{
-		hold = exp;
-		exp = ft_hendel_var(exp, env);
-		free(hold);
-	}
+	ft_norm_handel_var(env, var, &exp, j);
 	return (exp);
 }

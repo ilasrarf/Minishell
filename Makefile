@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+         #
+#    By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 18:13:02 by ilasrarf          #+#    #+#              #
-#    Updated: 2023/06/17 12:17:44 by aen-naas         ###   ########.fr        #
+#    Updated: 2023/06/17 15:43:33 by ilasrarf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,7 @@ SRC_O =  ${SRC:.c=.o}
 
 NAME = minishell
 CC = cc 
-FLAGS =  -Wall -Werror -Wextra
+FLAGS =  -Wall -Werror -Wextra -fsanitize=address
 RM = rm -rf
 
 
