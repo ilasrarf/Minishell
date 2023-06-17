@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   norm_main2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 13:43:15 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/17 15:36:49 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/17 15:59:18 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_kk(t_lexer **lex, t_norm *var, char **env, char **str)
 
 void	ft_norm_handel_var(char **env, char *var, char **exp, int j)
 {
-	char *hold;
+	char	*hold;
 
 	if (var + j)
 		*exp = ft_strjoin(*exp, var + j);
@@ -54,7 +54,7 @@ void	ft_norm_handel_var(char **env, char *var, char **exp, int j)
 	}
 }
 
-char	*ft_norm_handel_var2(char **env,char *var, int *i, int *j)
+char	*ft_norm_handel_var2(char **env, char *var, int *i, int *j)
 {
 	while (var[*j] && (ft_isalnum(var[*j]) || var[*j] == '_'))
 		(*j)++;
@@ -65,4 +65,20 @@ char	*ft_norm_handel_var2(char **env,char *var, int *i, int *j)
 	}
 	else
 		return (ft_expande(env, ft_substr(var, *i, (*j) - (*i)), (*j) - (*i)));
+}
+
+char	*ft_join_args(t_lexer **lex, char **str, char **env, int i)
+{
+	char	*str1;
+
+	if ((*lex)->type == 'v')
+	{
+		str1 = ft_hendel_var((*lex)->word, env);
+		str[i] = ft_strjoin(str[i], str1);
+		free(str1);
+	}
+	else
+		str[i] = ft_strjoin(str[i], (*lex)->word);
+	(*lex) = (*lex)->next;
+	return (str[i]);
 }
