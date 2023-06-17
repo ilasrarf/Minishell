@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:23:37 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/16 23:15:45 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/16 23:28:09 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,12 +127,4 @@ void	ft_parser(t_lexer *lex, t_parser **prs, char **env)
 	g_var->index = 0;
 	ft_fill_args(lex, prs, env, fd);
 	g_var->index = 0;
-	t_parser *hold = *prs;
-	i = 0;
-	while (hold)
-	{
-		printf("in :%d\n", hold->in_red);
-		hold = hold->next;
-	}
-	
 }

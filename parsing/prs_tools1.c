@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:12:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/16 23:23:59 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/17 11:41:22 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ char	*ft_hendel_var(char *var, char **env)
 	if (!var[i])
 		return (ft_strdup("$"));
 	j = i;
-	while (var[j] && ft_isalnum(var[j]))
+	while (var[j] && (ft_isalnum(var[j]) || var[j] == '_'))
 		j++;
 	if (var[i] == '?')
 	{

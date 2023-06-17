@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 02:48:29 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/16 19:54:32 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/16 23:41:34 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ int	ft_norm_buil1(t_parser **prs, t_env **env_list)
 			"CD"))
 	{
 		g_var->exit_s = 0;
-		ft_handel_cd(prs, env_list);
+		if (!ft_strcmp((*prs)->args[0], "cd"))
+			ft_handel_cd(prs, env_list);
 		return (1);
 	}
 	else if (!ft_strcmp((*prs)->args[0], "pwd") || !ft_strcmp((*prs)->args[0],

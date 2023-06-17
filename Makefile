@@ -6,7 +6,7 @@
 #    By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 18:13:02 by ilasrarf          #+#    #+#              #
-#    Updated: 2023/06/16 23:22:29 by ilasrarf         ###   ########.fr        #
+#    Updated: 2023/06/16 23:27:34 by ilasrarf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,16 +67,12 @@ SRC = minishell.c \
 SRC_O =  ${SRC:.c=.o}
 
 NAME = minishell
-CC = cc -g 
-# -fsanitize=address
+CC = cc 
 FLAGS =  -Wall -Werror -Wextra
 RM = rm -rf
 
 
 all: ${NAME}
-
-# ${NAME}: ${SRC_O}
-# 	${CC}  ${SRC_O} -o ${NAME} -lreadline -L /Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 
 %.o: %.c minishell.h
 	$(CC) $(FLAGS) -I /Users/$(USER)/.brew/opt/readline/include -c $< -o $@
