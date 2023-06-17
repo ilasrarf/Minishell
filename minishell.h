@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/17 16:24:48 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/17 18:10:11 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,10 +234,13 @@ void					ft_kk(t_lexer **lex, t_norm *var, char **env,
 							char **str);
 int						ft_check_built(t_parser *pars);
 void					ft_dup_built(t_parser *pars, int fd[2]);
-void					ft_add_lst_cmd(t_env **env_list, t_parser *prs);
+void					ft_add_lst_cmd(t_env **env_list, t_parser *pars,
+							char **env);
+char					*ft_get_path(char **env);
 // builtins
 
-int						ft_builtins(t_parser **prs, t_env **env_list);
+int						ft_builtins(t_parser **prs, t_env **env_list,
+							char **env);
 void					ft_handel_echo(t_parser **prs);
 int						ft_handel_n(char *str);
 void					ft_handel_env(t_env **env);

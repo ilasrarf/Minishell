@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exc_tools2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 21:49:58 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/17 11:47:51 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/17 17:15:27 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_excve(t_parser *pars, char **env, t_env **env_list)
 	int		i;
 
 	signal(SIGINT, SIG_DFL);
-	i = ft_builtins(&pars, env_list);
+	i = ft_builtins(&pars, env_list, env);
 	if (pars->args[0] && !i)
 	{
 		str = ft_check_path(pars->args[0], env);

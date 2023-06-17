@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 14:33:10 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/16 19:42:26 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/17 18:05:14 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ int	ft_check_num(char *str)
 	i = 0;
 	if (!ft_strlen(str))
 		return (0);
+	if (str[i] == '-' || str[i] == '+')
+		i++;
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))

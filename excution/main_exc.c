@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:01:38 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/17 16:20:12 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/17 17:17:58 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	ft_excution(t_parser *pars, char **env, t_env **env_list)
 	if (!pars->next && ft_check_built(pars))
 	{
 		ft_dup_built(pars, fd);
-		ft_builtins(&pars, env_list);
+		ft_builtins(&pars, env_list, env);
 		if (fd[1] > 2)
 			dup2(fd[1], STDOUT_FILENO);
 		if (fd[0] > 2)
@@ -117,6 +117,6 @@ void	ft_excution(t_parser *pars, char **env, t_env **env_list)
 	while (wait(0) != -1 || errno != ECHILD)
 		;
 	g_var->exc = 1;
-	ft_add_lst_cmd(env_list, pars);
+	ft_add_lst_cmd(env_list, pars, env);
 	close(fd[0]);
 }

@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:30:24 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/17 16:36:52 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/17 18:09:55 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,49 @@ int	ft_check_exit_args(char **args)
 	return (0);
 }
 
-void	ft_add_lst_cmd(t_env **env_list, t_parser *prs)
+char	*ft_get_path_last(t_parser *pars, char **env)
 {
-	t_env *hold = *env_list;
-	while (prs->next)
-		prs = prs->next;
+	char	**res;
+	char	*str;
+	char	*path;
+	int		i;
+
+	i = 0;
+	str = ft_strjoin(ft_strdup("/"), pars->args[0]);
+	res = ft_split(ft_get_path(env), ':');
+	while (res && res[i])
+	{
+		path = ft_strjoin(ft_strdup(res[i]), str);
+		if (!access(path, F_OK))
+			break ;
+		free(path);
+		i++;
+	}
+	free(str);
+	if (res && !res[i])
+		path = NULL;
+	ft_free(res);
+	return (path);
+}
+
+void	ft_add_lst_cmd(t_env **env_list, t_parser *pars, char **env)
+{
+	char	*str;
+	t_env	*hold;
+
+	hold = *env_list;
+	while (pars->next)
+		pars = pars->next;
 	while (env_list && (*env_list)->next)
 		*env_list = (*env_list)->next;
 	if (*env_list && (*env_list)->name[0] == '_' && !(*env_list)->name[1])
 	{
-		puts("gg");
 		free((*env_list)->value);
-		(*env_list)->value = ft_strdup(prs->args[0]);
+		str = ft_get_path_last(pars, env);
+		if (!str)
+			(*env_list)->value = ft_strdup(pars->args[0]);
+		else
+			(*env_list)->value = str;
 	}
 	*env_list = hold;
 }
