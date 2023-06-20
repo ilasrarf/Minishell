@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 16:20:43 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/20 16:14:03 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/20 21:39:25 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	ft_fill_herdoc(t_lexer **lex, char **env, char *hold, int *fd)
 
 void	ft_handel_open_error(int in, int out, t_lexer **lex)
 {
-	if (in == -1 && *lex)
+	if ((in == -1 || out == -1)&& *lex)
 	{
 		while ((*lex)->next)
 		{
@@ -110,6 +110,6 @@ void	ft_handel_open_error(int in, int out, t_lexer **lex)
 			*lex = (*lex)->next;
 		}
 	}
-	else if (out == -1 && (*lex)->word[0] == '/')
+	else if (out == -1)
 		ft_write_error_exc(": Permission denied\n", (*lex)->word);
 }

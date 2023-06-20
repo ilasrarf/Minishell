@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 16:43:23 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/05/24 15:43:06 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/20 20:20:06 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,9 @@ char	**ft_split(char const *s, char c)
 		return (0);
 	res = ft_append(res, str, c, cnt_w);
 	free(str);
+	// int x = 0;
+	// while (res[x])
+	// 	printf("%s\n", res[x]), x++;
+	
 	return (res);
 }

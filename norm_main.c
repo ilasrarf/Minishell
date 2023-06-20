@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 22:13:26 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/17 15:59:25 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/20 20:50:25 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,29 @@ int	ft_exit_main(void)
 int	ft_chrwithe(char *str)
 {
 	int	i;
+	int	cnt;
 
+	cnt = 0;
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
-			return (1);
+		if ((str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+			&& !(str[i + 1] == ' ' || (str[i + 1] >= 9 && str[i + 1] <= 13)))
+			cnt++;
 		i++;
 	}
-	return (0);
+	if (i == 0)
+		return (0);
+	if (!cnt || cnt == 1)
+		return (0);
+	return (cnt);
 }
 
 void	ft_norm_join_var_il(char **str, char *str2, int i, int j)
 {
 	if (str2 && ft_chrwithe(str2) && !j)
 	{
+		printf("%s\n", str2);
 		if (g_var->relock)
 			ft_free(g_var->relock);
 		g_var->relock = ft_realloc(str2, str);

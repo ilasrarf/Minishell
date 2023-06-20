@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:34:49 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/20 14:22:17 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/20 20:48:34 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	ft_join_var_word(t_lexer **lex, char **str, char **env, int i)
 			str2 = NULL;
 		}
 		ft_norm_join_var_il(str, str2, i, j);
+		// exit(0);
 	}
 	else if (*lex)
 		str[i] = ft_strdup((*lex)->word);

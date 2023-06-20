@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/20 14:19:57 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/20 21:56:05 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,8 @@ int	main(int ac, char **av, char **env)
 	g_var = ft_lstnew_var();
 	(void)ac;
 	(void)av;
+	// int fd = open("/dev/urandom", O_RDONLY);
+	// dup2(fd, 0);
 	while (1)
 	{
 		signal(SIGINT, &handel);
