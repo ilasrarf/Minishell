@@ -6,7 +6,7 @@
 #    By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 18:13:02 by ilasrarf          #+#    #+#              #
-#    Updated: 2023/06/17 18:12:46 by aen-naas         ###   ########.fr        #
+#    Updated: 2023/06/19 12:30:22 by aen-naas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,7 @@ SRC_O =  ${SRC:.c=.o}
 
 NAME = minishell
 CC = cc 
-FLAGS =  -Wall -Werror -Wextra
+FLAGS =  -Wall -Werror -Wextra -fsanitize=address
 RM = rm -rf
 
 

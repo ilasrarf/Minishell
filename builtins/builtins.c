@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 02:48:29 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/17 17:15:52 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/20 12:54:01 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ int	ft_norm_buil2(t_parser **prs, t_env **env_list)
 int	ft_builtins(t_parser **prs, t_env **env_list, char **env)
 {
 	ft_add_lst_cmd(env_list, *prs, env);
+	(void)env;
 	if (!ft_strcmp((*prs)->args[0], "exit"))
 	{
 		if ((*prs)->args[1] && !ft_check_num((*prs)->args[1]))

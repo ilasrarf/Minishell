@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:01:38 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/17 17:17:58 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/20 12:52:04 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,28 +25,34 @@ void	ft_handel_dotes(char *cmd)
 	exit(127);
 }
 
-void	ft_print_error(char *cmd)
+void	ft_access_error(char *cmd)
 {
 	DIR	*dir;
 
+	dir = opendir(cmd);
+	if (!ft_strcmp(cmd, ".") || !ft_strcmp(cmd, ".."))
+		ft_handel_dotes(cmd);
+	else if (dir)
+	{
+		ft_write_error_exc(": is a directory\n", cmd);
+		closedir(dir);
+	}
+	else
+		ft_write_error_exc(": Permission denied\n", cmd);
+	exit(126);
+}
+
+void	ft_print_error(char *cmd)
+{
 	if (errno == ENOENT)
 		ft_write_error_exc(" : No such file or directory\n", cmd);
 	else if (errno == EACCES)
+		ft_access_error(cmd);
+	else if (errno == ENOEXEC)
 	{
-		dir = opendir(cmd);
-		if (!ft_strcmp(cmd, ".") || !ft_strcmp(cmd, ".."))
-			ft_handel_dotes(cmd);
-		else if (dir)
-		{
-			ft_write_error_exc(": is a directory\n", cmd);
-			closedir(dir);
-		}
-		else
-			ft_write_error_exc(": Permission denied\n", cmd);
+		perror("minishell: ");
 		exit(126);
 	}
-	else if (errno == ENOEXEC)
-		perror("minishell: ");
 	else
 		perror("minishell: ");
 	exit(127);
@@ -78,17 +84,6 @@ int	ft_pipe(t_parser *pars, char **env, int fd[2], t_env **env_list)
 	close(old);
 	if (!pars->next)
 		waitpid(id, &g_var->exit_s, 0);
-	return (0);
-}
-
-int	ft_check_files(t_parser *pars)
-{
-	while (pars)
-	{
-		if (pars->in_red == -1)
-			return (g_var->exit_s = 1);
-		pars = pars->next;
-	}
 	return (0);
 }
 

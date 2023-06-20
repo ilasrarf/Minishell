@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prs_tools3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 16:20:43 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/17 13:42:45 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/20 12:49:26 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,7 @@ int	ft_fill_herdoc(t_lexer *lex, char **env, char *hold, int *fd)
 		return (1);
 	}
 	if (!g_var->str)
-	{
-		close(*fd);
-		*fd = -1;
 		return (1);
-	}
 	if (lex && lex->in_quotes == 0 && ft_strchr(g_var->str, '$'))
 		ft_norm_herdoc_norm(env, g_var->str, *fd);
 	else if (lex && ft_strcmp(g_var->str, lex->word))

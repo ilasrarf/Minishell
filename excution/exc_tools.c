@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 10:46:04 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/16 19:38:35 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/20 12:40:33 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,12 @@ char	*ft_check_path(char *cmd, char **env)
 	j = 0;
 	while (env[j] && ft_strncmp("PATH=", env[j], 5))
 		j++;
-	if (ft_strchr(cmd, '/') || f_check_if_path(cmd) || !access(cmd, F_OK))
+	if (ft_strchr(cmd, '/') || f_check_if_path(cmd))
 		return (cmd);
 	else
 		path = ft_get_path(env);
+	if (!path && !access(cmd, X_OK))
+		return (cmd);
 	if ((!path && !ft_strchr(cmd, '/')))
 	{
 		ft_write_error_exc(": No such file or directory\n", cmd);
