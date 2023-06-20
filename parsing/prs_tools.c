@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prs_tools.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:16:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/17 13:41:53 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/20 15:39:47 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	ft_use_heredoc(t_lexer **lex, char **env, int *fd)
 		*lex = (*lex)->next;
 	*fd = open(hold, O_RDWR | O_CREAT, 0777);
 	i++;
-	ft_norm_herdoc(*lex, env, hold, fd);
+	ft_norm_herdoc(lex, env, hold, fd);
 	free(hold);
 	if (*lex)
 		(*lex) = (*lex)->next;

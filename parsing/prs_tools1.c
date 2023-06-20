@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:12:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/17 15:57:35 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/20 15:40:05 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_check_next_fd(t_lexer *lex, int in, int out, char **env)
 	}
 }
 
-void	ft_norm_herdoc(t_lexer *lex, char **env, char *hold, int *fd)
+void	ft_norm_herdoc(t_lexer **lex, char **env, char *hold, int *fd)
 {
 	char	*str;
 	char	*str1;
@@ -82,7 +82,7 @@ char	*ft_expande(char **env, char *var, int len)
 	i = 0;
 	while (env[i])
 	{
-		if (!ft_strncmp(env[i], var, len))
+		if (my_strcmp(env[i], var))
 		{
 			free(var);
 			return (ft_strdup(env[i] + len + 1));

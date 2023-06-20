@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/16 23:21:09 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/20 14:19:57 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,15 @@ void	ft_lex_pars(char *str, char **env, t_env **env_list)
 	g_var->fd_hd = 0;
 	ft_lexer(str, &lex);
 	hold = lex;
+	// while (hold)
+	// {
+	// 	printf("word: %s\n", hold->word);
+	// 	printf("type: %c\n", hold->type);
+	// 	printf("in_quotes: %d\n", hold->in_quotes);
+	// 	printf("-----------------\n");
+	// 	hold = hold->next;
+	// }
+	// exit(0);
 	fill_env(env_list, prs, env, in);
 	in++;
 	res = ft_reconver(*env_list);

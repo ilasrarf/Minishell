@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 13:43:15 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/17 15:59:18 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/20 15:22:18 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,16 @@ char	*ft_join_args(t_lexer **lex, char **str, char **env, int i)
 	if ((*lex)->type == 'v')
 	{
 		str1 = ft_hendel_var((*lex)->word, env);
-		str[i] = ft_strjoin(str[i], str1);
+		if (!str[i])
+			str[i] = ft_strdup(str1);
+		else
+			str[i] = ft_strjoin(str[i], str1);
 		free(str1);
 	}
-	else
+	else if (str[i])
 		str[i] = ft_strjoin(str[i], (*lex)->word);
+	else
+		str[i] = ft_strdup((*lex)->word);
 	(*lex) = (*lex)->next;
 	return (str[i]);
 }

@@ -6,7 +6,7 @@
 #    By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 18:13:02 by ilasrarf          #+#    #+#              #
-#    Updated: 2023/06/19 12:30:22 by aen-naas         ###   ########.fr        #
+#    Updated: 2023/06/20 15:54:46 by aen-naas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,9 @@ SRC = minishell.c \
 	  lib/ft_strchr.c \
 	  lib/ft_free.c \
 	  lib/ft_atoi.c \
+	  lib/my_strcmp.c \
 	  lib/ft_white_split.c \
+	  parsing/ft_prs_tools.c \
 	  parsing/prs_tools.c \
 	  parsing/prs_tools1.c \
 	  parsing/prs_tools2.c \
@@ -68,7 +70,8 @@ SRC_O =  ${SRC:.c=.o}
 
 NAME = minishell
 CC = cc 
-FLAGS =  -Wall -Werror -Wextra -fsanitize=address
+FLAGS =  -Wall -Werror -Wextra 
+# -fsanitize=address
 RM = rm -rf
 
 

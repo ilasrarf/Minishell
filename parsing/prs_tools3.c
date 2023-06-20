@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 16:20:43 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/20 12:49:26 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/20 16:14:03 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,13 @@ int	ft_norm_fill_args(t_lexer **lex, char **env, char **str, t_norm *var)
 		ft_fill_heredoc_fm(&(*lex), &var->in, &var->out, env);
 	if ((*lex) && (*lex)->type == 'h')
 	{
-		if (*lex)
-			*lex = (*lex)->next;
+		*lex = (*lex)->next;
 		if ((*lex) && (*lex)->type == 's')
 			*lex = (*lex)->next;
 		if (var->in > 2 && var->in != var->fd[g_var->index])
 			close(var->in);
 		var->in = var->fd[g_var->index];
-		if (*lex)
+		while ((*lex) && ((*lex)->type == 'v' || (*lex)->type == 'w'))
 			*lex = (*lex)->next;
 	}
 	if ((*lex) && ((*lex)->type == 'v' || (*lex)->type == 'w'))
@@ -71,12 +70,17 @@ void	ft_close_open_herdoc(char *hold, int *fd)
 	*fd = open(hold, O_RDWR | O_CREAT | O_APPEND, 0777);
 }
 
-int	ft_fill_herdoc(t_lexer *lex, char **env, char *hold, int *fd)
+int	ft_fill_herdoc(t_lexer **lex, char **env, char *hold, int *fd)
 {
+	static char *del;
 	g_var->in_hdc = 1;
 	g_var->str = readline("heredoc>");
-	if (lex && !ft_strcmp(g_var->str, lex->word))
+	if (!del)
+		del = ft_get_delemiter(lex);
+	if (!ft_strcmp(g_var->str, del))
 	{
+		free(del);
+		del = NULL;
 		g_var->in_hdc = 0;
 		if (g_var->str)
 			ft_free_char(&g_var->str);
@@ -85,10 +89,10 @@ int	ft_fill_herdoc(t_lexer *lex, char **env, char *hold, int *fd)
 		return (1);
 	}
 	if (!g_var->str)
-		return (1);
-	if (lex && lex->in_quotes == 0 && ft_strchr(g_var->str, '$'))
+		return (free(del), del = NULL, 1);
+	if ((*lex) && (*lex)->in_quotes == 0 && ft_strchr(g_var->str, '$'))
 		ft_norm_herdoc_norm(env, g_var->str, *fd);
-	else if (lex && ft_strcmp(g_var->str, lex->word))
+	else if ((*lex) && ft_strcmp(g_var->str, (*lex)->word))
 		ft_close_open_herdoc(hold, fd);
 	if (g_var->str)
 		ft_free_char(&g_var->str);
