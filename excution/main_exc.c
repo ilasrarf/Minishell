@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:01:38 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/21 21:53:01 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/21 23:32:47 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	ft_print_error(char *cmd)
 {
 	if (errno == ENOENT)
 	{
-		ft_write_error_exc(" : No such file or directory\n", cmd);
-		exit(1);
+		perror("minishell: ");
+		exit(127);
 	}
 	else if (errno == EACCES)
 		ft_access_error(cmd);
@@ -58,7 +58,7 @@ void	ft_print_error(char *cmd)
 	}
 	else
 		perror("minishell: ");
-	exit(127);
+	exit(1);
 }
 
 int	ft_pipe(t_parser *pars, char **env, int fd[2], t_env **env_list)
@@ -114,6 +114,7 @@ void	ft_excution(t_parser *pars, char **env, t_env **env_list)
 		ft_exc_loop(pars, env, fd, env_list);
 	while (wait(0) != -1 || errno != ECHILD)
 		;
+	ft_status();
 	g_var->exc = 1;
 	ft_add_lst_cmd(env_list, pars, env);
 	close(fd[0]);
