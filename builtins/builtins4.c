@@ -6,7 +6,7 @@
 /*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 20:24:53 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/13 22:53:19 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/21 17:19:57 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,26 @@ void	add_new_to_env(char *str, t_env **env)
 void	add_old_to_env(char *str, t_env **env)
 {
 	int		i;
+	char	*alloc;
 	t_env	*tmp;
 
 	tmp = *env;
 	i = 0;
 	while (str[i] && str[i] != '=' && str[i] != '+')
 		i++;
+	alloc = ft_substr(str, 0, i);
 	if (!ft_strchr(str, '='))
+	{
+		free(alloc);
 		return ;
+	}
 	while ((*env))
 	{
-		if (!ft_strncmp((*env)->name, str, i))
+		if (!ft_strcmp((*env)->name, alloc))
 			ft_norm_export(str, i, env);
 		(*env) = (*env)->next;
 	}
+	free(alloc);
 	(*env) = tmp;
 }
 
