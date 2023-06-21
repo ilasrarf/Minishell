@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_exc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:01:38 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/21 23:32:47 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/22 00:02:48 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,7 @@ void	ft_excution(t_parser *pars, char **env, t_env **env_list)
 	{
 		ft_dup_built(pars, fd);
 		ft_builtins(&pars, env_list, env);
-		if (fd[1] > 2)
-			dup2(fd[1], STDOUT_FILENO);
-		if (fd[0] > 2)
-			dup2(fd[0], STDIN_FILENO);
+		ft_dup_red_for_built(fd);
 		close(fd[0]);
 		close(fd[1]);
 		return ;

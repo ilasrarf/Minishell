@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prs_tools1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:12:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/21 22:52:06 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/22 00:00:33 by ilasrarf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,24 +73,6 @@ int	ft_check_other_var(char *var)
 	if (var[i] == '$')
 		return (1);
 	return (0);
-}
-
-char	*ft_expande(char **env, char *var, int len)
-{
-	int	i;
-
-	i = 0;
-	while (env[i])
-	{
-		if (my_strcmp(env[i], var))
-		{
-			free(var);
-			return (ft_strdup(env[i] + len + 1));
-		}
-		i++;
-	}
-	free(var);
-	return (ft_strdup(""));
 }
 
 char	*join_befor_var(char *exp, char *var, int i)
