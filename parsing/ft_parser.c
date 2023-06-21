@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:23:37 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/20 22:42:25 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:12:37 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,13 +118,27 @@ void	ft_parser(t_lexer *lex, t_parser **prs, char **env)
 		}
 		return ;
 	}
-	i = count_pipe(lex);
+	i = count_pipe(lex) + 1;
 	lex1 = lex;
 	fd = malloc(sizeof(int) * i);
-	g_var->fd = fd;
+	// g_var->fd = fd;
+	// printf("%d\n", i);
+	// exit(0);
 	*prs = NULL;
 	ft_heredoc_first(lex1, fd, env);
 	g_var->index = 0;
 	ft_fill_args(lex, prs, env, fd);
 	g_var->index = 0;
+	// i = 0;
+	// while (*prs)
+	// {
+	// 	while ((*prs)->args && (*prs)->args[i])
+	// 		printf("%s\n", (*prs)->args[i]), i++;
+	// 	printf("in %d\n", (*prs)->in_red);
+	// 	i = (*prs)->in_red;
+	// 	printf("out %d\n", (*prs)->out_red);
+	// 	(*prs) = (*prs)->next;
+	// }
+	// ft_putstr_fd("hhhhhh\n",  i);
+	// exit(0);
 }

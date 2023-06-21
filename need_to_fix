@@ -1,0 +1,17 @@
+hello world
+||||||||
+
+heredoc not cating
+
+export PATH=""
+ls //exit status
+
+export --TEST=123
+
+
+>| echo sure
+
+export USER="@?/"
+env | grep USER
+
+echo $'HOME'

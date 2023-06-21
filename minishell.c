@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/20 21:56:05 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/21 12:03:42 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	ft_lex_pars(char *str, char **env, t_env **env_list)
 {
 	char		**res;
 	t_lexer		*lex;
-	t_lexer		*hold;
 	static int	in;
 	t_parser	*prs;
 
@@ -49,26 +48,19 @@ void	ft_lex_pars(char *str, char **env, t_env **env_list)
 	g_var->suspend = 1;
 	g_var->fd_hd = 0;
 	ft_lexer(str, &lex);
-	hold = lex;
-	// while (hold)
-	// {
-	// 	printf("word: %s\n", hold->word);
-	// 	printf("type: %c\n", hold->type);
-	// 	printf("in_quotes: %d\n", hold->in_quotes);
-	// 	printf("-----------------\n");
-	// 	hold = hold->next;
-	// }
-	// exit(0);
+	g_var->quot_checker = 0;
 	fill_env(env_list, prs, env, in);
 	in++;
 	res = ft_reconver(*env_list);
 	free(str);
 	ft_parser(lex, &prs, res);
-	free(g_var->fd);
 	if (prs && g_var->suspend)
 		ft_excution(prs, res, env_list);
 	if (prs)
+	{
+		free(g_var->fd);
 		ft_lstclear(&prs);
+	}
 	ft_free(res);
 	if (lex)
 		ft_lstclear_lex(&lex);

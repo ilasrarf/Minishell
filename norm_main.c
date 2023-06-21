@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 22:13:26 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/20 20:50:25 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:30:20 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void	ft_norm_join_var_il(char **str, char *str2, int i, int j)
 {
 	if (str2 && ft_chrwithe(str2) && !j)
 	{
-		printf("%s\n", str2);
 		if (g_var->relock)
 			ft_free(g_var->relock);
 		g_var->relock = ft_realloc(str2, str);

@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 16:20:43 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/20 21:39:25 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/21 12:02:46 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,9 @@ int	ft_fill_herdoc(t_lexer **lex, char **env, char *hold, int *fd)
 	}
 	if (!g_var->str)
 		return (free(del), del = NULL, 1);
-	if ((*lex) && (*lex)->in_quotes == 0 && ft_strchr(g_var->str, '$'))
+	if (!g_var->quot_checker && ft_strchr(g_var->str, '$'))
 		ft_norm_herdoc_norm(env, g_var->str, *fd);
-	else if ((*lex) && ft_strcmp(g_var->str, (*lex)->word))
+	else if (ft_strcmp(g_var->str, del))
 		ft_close_open_herdoc(hold, fd);
 	if (g_var->str)
 		ft_free_char(&g_var->str);

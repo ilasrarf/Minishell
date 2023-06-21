@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 21:14:50 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/20 15:41:10 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:09:54 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,18 @@ void	ft_heredoc_first(t_lexer *lex, int *fd, char **env)
 	i = 0;
 	while (lex)
 	{
-		if (lex && lex->type == 'p')
-			i++;
 		if (lex && lex->type == 'h')
 		{
 			if (fd[i])
 				close(fd[i]);
 			ft_use_heredoc(&lex, env, &fd[i]);
 		}
-		if (lex && lex->type != 'h')
+		if (lex && (lex->type != 'h'))
+		{
+			if (lex->type == 'p')
+				i++;
 			lex = lex->next;
+		}
 	}
 }
 
