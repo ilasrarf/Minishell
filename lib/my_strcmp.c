@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:12:12 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/20 14:16:00 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/21 15:48:34 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	my_strcmp(char *s1, char *s2)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	if (!s1 || !s2)
 		return (0);

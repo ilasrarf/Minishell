@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 15:31:31 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/21 15:39:12 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/21 15:48:47 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_get_delemiter(t_lexer **lex)
 {
-	char *del;
+	char	*del;
 
 	del = ft_strdup((*lex)->word);
 	if ((*lex)->in_quotes)

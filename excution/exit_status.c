@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:30:24 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/20 22:16:35 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/21 15:48:37 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void	ft_add_lst_cmd(t_env **env_list, t_parser *pars, char **env)
 	t_env	*hold;
 
 	hold = *env_list;
-
 	if (!pars->args || !pars->args[0])
 		return ;
 	while (pars->next)

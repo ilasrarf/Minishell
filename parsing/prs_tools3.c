@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 16:20:43 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/21 15:26:21 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/21 15:48:12 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ void	ft_close_open_herdoc(char *hold, int *fd)
 
 int	ft_fill_herdoc(t_lexer **lex, char **env, char *hold, int *fd)
 {
-	static char *del;
+	static char	*del;
+
 	g_var->in_hdc = 1;
 	g_var->str = readline("heredoc>");
 	if (!del)
@@ -101,7 +102,7 @@ int	ft_fill_herdoc(t_lexer **lex, char **env, char *hold, int *fd)
 
 void	ft_handel_open_error(int in, int out, t_lexer **lex)
 {
-	if ((in == -1 || out == -1)&& *lex)
+	if ((in == -1 || out == -1) && *lex)
 	{
 		while ((*lex)->next)
 		{
