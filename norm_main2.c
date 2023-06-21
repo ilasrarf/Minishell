@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 13:43:15 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/21 14:54:20 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/21 21:48:21 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_norm_handel_var(char **env, char *var, char **exp, int j)
 	if (var[j] == '$')
 	{
 		hold = *exp;
-		*exp = ft_hendel_var(NULL ,*exp, env);
+		*exp = ft_hendel_var(NULL, *exp, env);
 		free(hold);
 	}
 }

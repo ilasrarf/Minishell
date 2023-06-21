@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 22:13:26 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/21 18:20:10 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/21 21:49:31 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,17 @@ int	ft_exit_main(void)
 
 int	ft_chrwithe(char *str1)
 {
-	int	i;
-	int	cnt;
-	char *str;
+	int		i;
+	int		cnt;
+	char	*str;
+
 	cnt = 0;
 	i = 0;
-	
 	str = ft_my_strtrim_w(str1);
 	while (str[i])
 	{
-		if ((str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
-			&& !(str[i + 1] == ' ' || (str[i + 1] >= 9 && str[i + 1] <= 13)))
+		if ((str[i] == ' ' || (str[i] >= 9 && str[i] <= 13)) && !(str[i
+					+ 1] == ' ' || (str[i + 1] >= 9 && str[i + 1] <= 13)))
 			cnt++;
 		i++;
 	}

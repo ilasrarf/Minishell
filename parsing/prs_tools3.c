@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 16:20:43 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/21 15:48:12 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/21 21:46:21 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,7 @@ int	ft_fill_herdoc(t_lexer **lex, char **env, char *hold, int *fd)
 		del = ft_get_delemiter(lex);
 	if (!ft_strcmp(g_var->str, del))
 	{
-		free(del);
-		del = NULL;
+		ft_free_and_null(&del);
 		g_var->in_hdc = 0;
 		if (g_var->str)
 			ft_free_char(&g_var->str);

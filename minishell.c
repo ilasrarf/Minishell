@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:09:07 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/21 15:49:00 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/21 21:51:42 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,8 @@ void	ft_lex_pars(char *str, char **env, t_env **env_list)
 
 	prs = NULL;
 	lex = NULL;
-	g_var->suspend = 1;
-	g_var->fd_hd = 0;
+	ft_asigen_global();
 	ft_lexer(str, &lex);
-	g_var->quot_checker = 0;
 	fill_env(env_list, prs, env, in);
 	in++;
 	res = ft_reconver(*env_list);

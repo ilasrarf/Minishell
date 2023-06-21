@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:12:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/21 15:48:17 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/21 22:52:06 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,23 @@ char	*ft_expande(char **env, char *var, int len)
 	return (ft_strdup(""));
 }
 
+char	*join_befor_var(char *exp, char *var, int i)
+{
+	char	*hold;
+
+	hold = exp;
+	if (var[i - 1] == '$' && !var[i])
+		exp = ft_strjoin(ft_substr(var, 0, i), exp);
+	else
+		exp = ft_strjoin(ft_substr(var, 0, i - 1), exp);
+	free(hold);
+	return (exp);
+}
+
 char	*ft_hendel_var(t_lexer *lex, char *var, char **env)
 {
 	int		i;
 	char	*exp;
-	char	*hold;
 	int		j;
 
 	i = 0;
@@ -113,14 +125,7 @@ char	*ft_hendel_var(t_lexer *lex, char *var, char **env)
 	j = i;
 	exp = ft_norm_handel_var2(env, var, &i, &j);
 	if (i > 1)
-	{
-		hold = exp;
-		if (var[i - 1] == '$' && !var[i])
-			exp = ft_strjoin(ft_substr(var, 0, i), exp);
-		else
-			exp = ft_strjoin(ft_substr(var, 0, i - 1), exp);
-		free(hold);
-	}
+		exp = join_befor_var(exp, var, i);
 	ft_norm_handel_var(env, var, &exp, j);
 	return (exp);
 }

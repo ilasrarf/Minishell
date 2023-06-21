@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:23:37 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/21 17:54:41 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/21 22:51:30 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	ft_parser(t_lexer *lex, t_parser **prs, char **env)
 		}
 		return ;
 	}
-	i = count_pipe(lex);
+	i = count_pipe(lex) + 1;
 	lex1 = lex;
 	fd = malloc(sizeof(int) * i);
 	g_var->fd = fd;

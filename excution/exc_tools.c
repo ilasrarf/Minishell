@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 10:46:04 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/21 19:35:16 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/21 21:48:19 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,6 @@ char	*ft_check_path(char *cmd, char **env)
 	if (!path && !access(cmd, X_OK))
 		return (cmd);
 	else if ((!path && !ft_strchr(cmd, '/')))
-		return cmd;
+		return (cmd);
 	return (ft_norm_check_path(cmd, path));
 }

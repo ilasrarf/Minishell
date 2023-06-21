@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 14:47:12 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/03 23:13:51 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/21 21:52:47 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,17 @@ void	ft_free_char(char **str)
 {
 	free(*str);
 	*str = NULL;
+}
+
+void	ft_free_and_null(char **del)
+{
+	free(*del);
+	*del = NULL;
+}
+
+void	ft_asigen_global(void)
+{
+	g_var->suspend = 1;
+	g_var->fd_hd = 0;
+	g_var->quot_checker = 0;
 }

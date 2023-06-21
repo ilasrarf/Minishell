@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/21 18:18:19 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/21 21:52:37 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,9 @@ void					ft_free_char(char **str);
 char					**ft_split_white(char const *s);
 int						ft_chrwithe(char *str);
 int						my_strcmp(char *s1, char *s2);
+void					ft_free_and_null(char **del);
 char					*ft_my_strtrim_w(const char *s1);
+void					ft_asigen_global(void);
 // parsing
 void					ft_parser(t_lexer *lex, t_parser **prs, char **env);
 int						ft_fill_args(t_lexer *lex, t_parser **prs, char **env,
