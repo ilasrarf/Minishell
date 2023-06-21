@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:01:38 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/21 15:49:19 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/21 18:34:31 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ void	ft_access_error(char *cmd)
 void	ft_print_error(char *cmd)
 {
 	if (errno == ENOENT)
+	{
 		ft_write_error_exc(" : No such file or directory\n", cmd);
+		exit(1);
+	}
 	else if (errno == EACCES)
 		ft_access_error(cmd);
 	else if (errno == ENOEXEC)

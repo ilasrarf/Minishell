@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:23:37 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/21 15:48:26 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/21 17:54:41 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,11 +109,6 @@ void	ft_parser(t_lexer *lex, t_parser **prs, char **env)
 	int		i;
 	int		*fd;
 
-	i = count_pipe(lex);
-	lex1 = lex;
-	fd = malloc(sizeof(int) * i);
-	g_var->fd = fd;
-	*prs = NULL;
 	if (!lex || !ft_check_syntax(lex) || !ft_check_in_out_snt(lex))
 	{
 		if (!ft_check_syntax(lex))
@@ -123,6 +118,11 @@ void	ft_parser(t_lexer *lex, t_parser **prs, char **env)
 		}
 		return ;
 	}
+	i = count_pipe(lex);
+	lex1 = lex;
+	fd = malloc(sizeof(int) * i);
+	g_var->fd = fd;
+	*prs = NULL;
 	ft_heredoc_first(lex1, fd, env);
 	g_var->index = 0;
 	ft_fill_args(lex, prs, env, fd);
