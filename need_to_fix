@@ -1,8 +1,6 @@
 hello world
 ||||||||
 
-heredoc not cating
-
 export PATH=""
 ls //exit status
 

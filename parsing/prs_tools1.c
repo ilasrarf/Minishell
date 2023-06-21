@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:12:02 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/20 21:38:21 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/21 15:46:16 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_check_next_fd(t_lexer *lex, int in, int out, char **env)
 		ft_write_error_exc(": No such file or directory\n", (lex)->word);
 	if (in == -3 || out == -3)
 	{
-		str = ft_hendel_var(lex->word, env);
+		str = ft_hendel_var(lex ,lex->word, env);
 		ft_write_error_exc(": No such file or directory\n", str);
 		free(str);
 	}
@@ -93,7 +93,7 @@ char	*ft_expande(char **env, char *var, int len)
 	return (ft_strdup(""));
 }
 
-char	*ft_hendel_var(char *var, char **env)
+char	*ft_hendel_var(t_lexer *lex, char *var, char **env)
 {
 	int		i;
 	char	*exp;
@@ -102,6 +102,8 @@ char	*ft_hendel_var(char *var, char **env)
 
 	i = 0;
 	j = 0;
+	if (var[i] == '$' && !var[i+1] && lex && lex->next && lex->next->in_quotes)
+		return ft_strdup("");
 	while (var[i] && var[i] != '$')
 		i++;
 	i++;
@@ -112,7 +114,10 @@ char	*ft_hendel_var(char *var, char **env)
 	if (i > 1)
 	{
 		hold = exp;
-		exp = ft_strjoin(ft_substr(var, 0, i - 1), exp);
+		if (var[i - 1]== '$' && !var[i] )
+			exp = ft_strjoin(ft_substr(var, 0, i), exp);
+		else
+			exp = ft_strjoin(ft_substr(var, 0, i - 1), exp);
 		free(hold);
 	}
 	ft_norm_handel_var(env, var, &exp, j);

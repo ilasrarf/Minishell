@@ -6,7 +6,7 @@
 /*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 16:20:43 by aen-naas          #+#    #+#             */
-/*   Updated: 2023/06/21 12:02:46 by aen-naas         ###   ########.fr       */
+/*   Updated: 2023/06/21 15:26:21 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_open_red(t_lexer **lex, int *fd, char **av, int status)
 		*fd = open((*lex)->word, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	else
 	{
-		str = ft_hendel_var((*lex)->word, av);
+		str = ft_hendel_var(*lex, (*lex)->word, av);
 		if (!status)
 			*fd = open(str, O_RDONLY, 0777);
 		else if (status == 1)
