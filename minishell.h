@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilasrarf <ilasrarf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aen-naas <aen-naas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:59:09 by ilasrarf          #+#    #+#             */
-/*   Updated: 2023/06/22 00:03:57 by ilasrarf         ###   ########.fr       */
+/*   Updated: 2023/06/22 13:15:10 by aen-naas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,7 +243,7 @@ void					ft_dup_built(t_parser *pars, int fd[2]);
 void					ft_add_lst_cmd(t_env **env_list, t_parser *pars,
 							char **env);
 char					*ft_get_path(char **env);
-void					ft_dup_built(int fd[2]);
+void					ft_dup_red_for_built(int fd[2]);
 // builtins
 
 int						ft_builtins(t_parser **prs, t_env **env_list,
